@@ -34,6 +34,11 @@ android {
     buildFeatures {
         viewBinding true
     }
+    packagingOptions {
+        resources {
+            excludes += ['META-INF/LICENSE.md', 'META-INF/LICENSE-notice.md']
+        }
+    }
 }
 
 dependencies {
@@ -42,8 +47,19 @@ dependencies {
     implementation 'com.google.android.material:material:1.10.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
-    // Kotlin Coroutines
+    // Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
+
+    // ViewModel + StateFlow
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
+    implementation 'androidx.activity:activity-ktx:1.8.2'
+
+    // MediaPipe LLM Inference (Gemma 4 on-device)
+    implementation 'com.google.mediapipe:tasks-genai:0.10.14'
+
+    // JSON parsing
+    implementation 'com.google.code.gson:gson:2.10.1'
 
     // Room Database
     def room_version = "2.6.0"
@@ -51,10 +67,8 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
-    // ExecuTorch Inference (Placeholder versions - assumes local AARs or PyTorch nightly)
-    // implementation 'org.pytorch:executorch:0.1.0'
-
     testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.mockito:mockito-core:5.8.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
