@@ -1,41 +1,77 @@
 package com.gemma.triage.inference
 
+import android.content.Context
+import com.google.gson.Gson
+import com.google.mediapipe.tasks.genai.llminference.LlmInference
+import com.google.mediapipe.tasks.genai.llminference.LlmInferenceOptions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-/**
- * Interface and implementation for the Gemma model inference.
- * In production, this would bridge to ExecuTorch JNI to run the .pte model.
- */
-class GemmaInferenceEngine {
+class GemmaInferenceEngine(private val context: Context) {
 
-    private var isModelLoaded = false
+    private var llmInference: LlmInference? = null
 
     suspend fun loadModel(modelPath: String): Boolean = withContext(Dispatchers.IO) {
-        // Load the ExecuTorch .pte model
-        // Example: mModule = org.pytorch.executorch.Module.load(modelPath)
-        isModelLoaded = true
-        return@withContext true
+        val options = LlmInferenceOptions.builder()
+            .setModelPath(modelPath)
+            .setMaxTokens(512)
+            .setTopK(40)
+            .setTemperature(0.1f)
+            .setRandomSeed(42)
+            .build()
+        llmInference = LlmInference.createFromOptions(context, options)
+        true
     }
 
-    suspend fun runInference(prompt: String): String = withContext(Dispatchers.IO) {
-        if (!isModelLoaded) {
-            throw IllegalStateException("Model not loaded")
+    suspend fun runTriageInference(patientDescription: String): TriageResult =
+        withContext(Dispatchers.IO) {
+            val inference = llmInference
+                ?: throw IllegalStateException("Model not loaded. Call loadModel() first.")
+            val prompt = PromptBuilder.buildPrompt(context, patientDescription)
+            val rawOutput = inference.generateResponse(prompt)
+            parseTriageResultFromJson(rawOutput)
         }
-        
-        // Placeholder for actual execution:
-        // val inputTensor = org.pytorch.executorch.Tensor.fromBlob(...)
-        // val outputTensor = mModule.forward(org.pytorch.executorch.IValue.from(inputTensor)).toTensor()
-        // return decodeOutput(outputTensor)
 
-        // Mock output for the sake of structure
-        return@withContext """
-            {
-                "triageCode": "RED",
-                "confidence": 0.95,
-                "reasoning": "Patient has difficulty breathing and chest pain, indicating immediate life-threatening conditions.",
-                "recommendedActions": ["Administer oxygen", "Prepare for immediate transport"]
+    suspend fun runFollowUpInference(prompt: String): String = withContext(Dispatchers.IO) {
+        val inference = llmInference
+            ?: throw IllegalStateException("Model not loaded.")
+        val raw = inference.generateResponse(prompt)
+        val thinkEnd = raw.indexOf("</thinking>")
+        if (thinkEnd != -1) raw.substring(thinkEnd + 11).trim() else raw.trim()
+    }
+
+    fun release() {
+        llmInference?.close()
+        llmInference = null
+    }
+
+    companion object {
+        private val gson = Gson()
+
+        fun parseTriageResultFromJson(rawOutput: String): TriageResult {
+            val jsonStart = rawOutput.indexOf('{')
+            val jsonEnd = rawOutput.lastIndexOf('}') + 1
+            if (jsonStart == -1 || jsonEnd <= jsonStart) {
+                return TriageResult(TriageCode.UNKNOWN, 0.0, "Model output contained no JSON")
             }
-        """.trimIndent()
+            return try {
+                val jsonStr = rawOutput.substring(jsonStart, jsonEnd)
+                val raw = gson.fromJson(jsonStr, RawTriageResult::class.java)
+                TriageResult(
+                    triageCode = try { TriageCode.valueOf(raw.triageCode.uppercase()) }
+                                 catch (e: IllegalArgumentException) { TriageCode.UNKNOWN },
+                    confidence = raw.confidence.coerceIn(0.0, 1.0),
+                    reasoning = raw.reasoning,
+                    spokenSummary = raw.spokenSummary.ifBlank { raw.reasoning.take(120) },
+                    immediateSteps = raw.immediateSteps,
+                    monitoringChecklist = raw.monitoringChecklist,
+                    warningSigns = raw.warningSigns,
+                    smsPayload = raw.smsPayload.take(160),
+                    recommendedActions = raw.recommendedActions
+                )
+            } catch (e: Exception) {
+                TriageResult(TriageCode.UNKNOWN, 0.0, "JSON parse error: ${e.message}")
+            }
+        }
     }
 }

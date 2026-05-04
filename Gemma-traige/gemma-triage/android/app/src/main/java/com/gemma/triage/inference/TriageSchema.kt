@@ -1,20 +1,29 @@
 package com.gemma.triage.inference
 
-/**
- * Data classes representing the structured JSON output from Gemma.
- */
-
 data class TriageResult(
     val triageCode: TriageCode,
     val confidence: Double,
     val reasoning: String,
-    val recommendedActions: List<String>
+    val spokenSummary: String = "",
+    val immediateSteps: List<String> = emptyList(),
+    val monitoringChecklist: List<String> = emptyList(),
+    val warningSigns: List<String> = emptyList(),
+    val smsPayload: String = "",
+    val recommendedActions: List<String> = emptyList()
 )
 
 enum class TriageCode {
-    RED,
-    YELLOW,
-    GREEN,
-    BLACK,
-    UNKNOWN
+    RED, YELLOW, GREEN, BLACK, UNKNOWN
 }
+
+data class RawTriageResult(
+    val triageCode: String = "UNKNOWN",
+    val confidence: Double = 0.0,
+    val reasoning: String = "",
+    val spokenSummary: String = "",
+    val immediateSteps: List<String> = emptyList(),
+    val monitoringChecklist: List<String> = emptyList(),
+    val warningSigns: List<String> = emptyList(),
+    val smsPayload: String = "",
+    val recommendedActions: List<String> = emptyList()
+)
