@@ -2,9 +2,9 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build a fully offline Android app that transcribes voice descriptions of disaster casualties, classifies them via Gemma 4 E2B running entirely on-device (MediaPipe LiteRT), and dispatches compressed SMS triage reports — zero internet required.
+**Goal:** Build a fully offline Android app that transcribes voice descriptions of disaster casualties, classifies them via Gemma 4 E2B running entirely on-device (MediaPipe LiteRT), speaks detailed step-by-step instructions aloud, supports follow-up voice questions with thinking-mode reasoning, and dispatches a compressed SMS to the coordination center — zero internet required.
 
-**Architecture:** Single Android Activity backed by a TriageViewModel. Audio → SpeechRecognizer (offline) → PromptBuilder → MediaPipe LlmInference (Gemma 4 E2B INT4) → JSON parse → UI update + SMS dispatch + Room DB.
+**Architecture:** Single Android Activity backed by a TriageViewModel. Audio → SpeechRecognizer (offline) → PromptBuilder → MediaPipe LlmInference (Gemma 4 E2B INT4) → expanded JSON parse → TextToSpeechManager (TTS) → ConversationManager (follow-up loop with thinking mode) → SMS dispatch (once) + Room DB.
 
 **Tech Stack:** Kotlin, Android SDK 26+, MediaPipe Tasks GenAI (`tasks-genai:0.10.14`), Gson, AndroidX ViewModel/StateFlow, Room, Android SmsManager, Python (demo fallback).
 
@@ -18,11 +18,13 @@
 | File | Responsibility |
 |---|---|
 | `android/app/src/main/java/com/gemma/triage/audio/SpeechToTextManager.kt` | Wraps Android SpeechRecognizer with offline mode; emits STTState flow |
-| `android/app/src/main/java/com/gemma/triage/viewmodel/TriageViewModel.kt` | MVVM state: Idle→Listening→Analyzing→ResultReady; orchestrates pipeline |
-| `android/app/src/main/java/com/gemma/triage/viewmodel/TriageUiState.kt` | Sealed class for UI states |
-| `android/app/src/main/res/layout/activity_main.xml` | Emergency dark-theme UI layout |
+| `android/app/src/main/java/com/gemma/triage/audio/TextToSpeechManager.kt` | Wraps Android TextToSpeech; reads triage result aloud; emits TTSState flow |
+| `android/app/src/main/java/com/gemma/triage/inference/ConversationManager.kt` | Maintains per-patient conversation history; builds thinking-mode follow-up prompts |
+| `android/app/src/main/java/com/gemma/triage/viewmodel/TriageViewModel.kt` | MVVM state: full pipeline + TTS + follow-up conversation loop |
+| `android/app/src/main/java/com/gemma/triage/viewmodel/TriageUiState.kt` | Sealed class for all UI states including Speaking and FollowUp states |
+| `android/app/src/main/res/layout/activity_main.xml` | Emergency dark-theme UI with conversation panel and TTS indicator |
 | `android/app/src/main/res/values/colors.xml` | Triage color palette |
-| `python_demo/triage_demo.py` | CLI demo using google-generativeai API (judge fallback) |
+| `python_demo/triage_demo.py` | CLI demo with full conversation loop using google-generativeai |
 | `python_demo/requirements.txt` | Python deps for demo |
 | `scripts/setup_model.py` | Downloads + verifies Gemma 4 model from Kaggle |
 
@@ -294,7 +296,7 @@
 - Modify: `android/app/src/main/java/com/gemma/triage/inference/TriageSchema.kt`
 - Modify: `android/app/src/test/java/com/gemma/triage/InferenceTest.kt`
 
-- [ ] **Step 1: Extend TriageSchema.kt with RawTriageResult for Gson**
+- [ ] **Step 1: Extend TriageSchema.kt with expanded fields and RawTriageResult for Gson**
 
   Replace file contents:
 
@@ -305,7 +307,11 @@
       val triageCode: TriageCode,
       val confidence: Double,
       val reasoning: String,
-      val recommendedActions: List<String>
+      val spokenSummary: String,           // Short, read aloud first by TTS
+      val immediateSteps: List<String>,    // Step-by-step actions, read aloud in full
+      val monitoringChecklist: List<String>,
+      val warningSigns: List<String>,
+      val smsPayload: String               // Pre-computed by Gemma, ≤160 chars
   )
 
   enum class TriageCode {
@@ -317,7 +323,11 @@
       val triageCode: String = "UNKNOWN",
       val confidence: Double = 0.0,
       val reasoning: String = "",
-      val recommendedActions: List<String> = emptyList()
+      val spokenSummary: String = "",
+      val immediateSteps: List<String> = emptyList(),
+      val monitoringChecklist: List<String> = emptyList(),
+      val warningSigns: List<String> = emptyList(),
+      val smsPayload: String = ""
   )
   ```
 
@@ -434,10 +444,15 @@
                                    catch (e: IllegalArgumentException) { TriageCode.UNKNOWN },
                       confidence = raw.confidence.coerceIn(0.0, 1.0),
                       reasoning = raw.reasoning,
-                      recommendedActions = raw.recommendedActions
+                      spokenSummary = raw.spokenSummary.ifBlank { raw.reasoning.take(120) },
+                      immediateSteps = raw.immediateSteps,
+                      monitoringChecklist = raw.monitoringChecklist,
+                      warningSigns = raw.warningSigns,
+                      smsPayload = raw.smsPayload.take(160)
                   )
               } catch (e: Exception) {
-                  TriageResult(TriageCode.UNKNOWN, 0.0, "JSON parse error: ${e.message}", emptyList())
+                  TriageResult(TriageCode.UNKNOWN, 0.0, "JSON parse error: ${e.message}",
+                      "", emptyList(), emptyList(), emptyList(), "")
               }
           }
       }
@@ -1221,6 +1236,710 @@
   ```bash
   git add android/app/src/main/java/com/gemma/triage/MainActivity.kt
   git commit -m "feat: wire MainActivity to TriageViewModel; push-to-talk UI, result display, SMS button"
+  ```
+
+---
+
+## Phase 3b: Voice Output (TTS)
+**Day 5 | Goal: Phone speaks triage result aloud — Riya keeps eyes on the patient**
+
+---
+
+### Task 9: Create TextToSpeechManager
+
+**Files:**
+- Create: `android/app/src/main/java/com/gemma/triage/audio/TextToSpeechManager.kt`
+
+- [ ] **Step 1: Create TextToSpeechManager.kt**
+
+  ```kotlin
+  package com.gemma.triage.audio
+
+  import android.content.Context
+  import android.speech.tts.TextToSpeech
+  import android.speech.tts.UtteranceProgressListener
+  import kotlinx.coroutines.flow.MutableStateFlow
+  import kotlinx.coroutines.flow.StateFlow
+  import java.util.Locale
+
+  sealed class TTSState {
+      object Idle : TTSState()
+      data class Speaking(val stage: String) : TTSState()
+      object Done : TTSState()
+      data class Error(val message: String) : TTSState()
+  }
+
+  class TextToSpeechManager(context: Context) : TextToSpeech.OnInitListener {
+
+      private var tts: TextToSpeech = TextToSpeech(context, this)
+      private val _state = MutableStateFlow<TTSState>(TTSState.Idle)
+      val state: StateFlow<TTSState> = _state
+
+      override fun onInit(status: Int) {
+          if (status == TextToSpeech.SUCCESS) {
+              tts.language = Locale.US
+              tts.setSpeechRate(0.85f)  // Slightly slower — field conditions
+              tts.setPitch(1.0f)
+              setupUtteranceListener()
+          } else {
+              _state.value = TTSState.Error("TTS engine failed to initialise")
+          }
+      }
+
+      private fun setupUtteranceListener() {
+          tts.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
+              override fun onStart(utteranceId: String?) {
+                  _state.value = TTSState.Speaking(utteranceId ?: "")
+              }
+              override fun onDone(utteranceId: String?) {
+                  if (utteranceId == "DONE") _state.value = TTSState.Done
+              }
+              override fun onError(utteranceId: String?) {
+                  _state.value = TTSState.Error("TTS error on utterance $utteranceId")
+              }
+          })
+      }
+
+      fun speakTriageResult(result: com.gemma.triage.inference.TriageResult) {
+          tts.stop()
+          // Triage code spoken first — short and loud
+          speak("${result.triageCode.name}. ${labelFor(result.triageCode)}.", "CODE")
+          // Two-sentence summary
+          speak(result.spokenSummary, "SUMMARY")
+          // Step-by-step actions
+          result.immediateSteps.forEachIndexed { i, step ->
+              speak(step, if (i == result.immediateSteps.lastIndex) "DONE" else "STEP_$i")
+          }
+      }
+
+      fun speakFollowUpAnswer(answer: String) {
+          tts.stop()
+          speak(answer, "DONE")
+      }
+
+      fun speak(text: String, utteranceId: String) {
+          tts.speak(text, TextToSpeech.QUEUE_ADD, null, utteranceId)
+      }
+
+      fun stop() {
+          tts.stop()
+          _state.value = TTSState.Idle
+      }
+
+      fun shutdown() {
+          tts.stop()
+          tts.shutdown()
+      }
+
+      private fun labelFor(code: com.gemma.triage.inference.TriageCode) = when (code) {
+          com.gemma.triage.inference.TriageCode.RED    -> "Immediate."
+          com.gemma.triage.inference.TriageCode.YELLOW -> "Delayed."
+          com.gemma.triage.inference.TriageCode.GREEN  -> "Minor."
+          com.gemma.triage.inference.TriageCode.BLACK  -> "Expectant."
+          com.gemma.triage.inference.TriageCode.UNKNOWN -> "Unknown."
+      }
+  }
+  ```
+
+- [ ] **Step 2: Write unit test for TTS state transitions**
+
+  Add to `InferenceTest.kt`:
+
+  ```kotlin
+  @Test
+  fun `TTSState Done emitted on last utterance`() {
+      // TextToSpeechManager emits Done when utteranceId == "DONE"
+      // Verify the last immediateStep gets utteranceId "DONE"
+      val steps = listOf("Step 1", "Step 2", "Step 3")
+      val lastId = if (steps.lastIndex == steps.size - 1) "DONE" else "STEP_${steps.lastIndex}"
+      assertEquals("DONE", lastId)
+  }
+  ```
+
+  ```bash
+  ./gradlew :app:testDebugUnitTest --tests "com.gemma.triage.InferenceTest"
+  ```
+  Expected: all tests PASS.
+
+- [ ] **Step 3: Commit**
+
+  ```bash
+  git add android/app/src/main/java/com/gemma/triage/audio/TextToSpeechManager.kt
+  git commit -m "feat: add TextToSpeechManager — reads triage result aloud, emits TTSState.Done on finish"
+  ```
+
+---
+
+## Phase 3c: Follow-Up Conversation Loop
+**Days 6–7 | Goal: Riya can ask follow-up questions; Gemma thinks and answers aloud**
+
+---
+
+### Task 10: Create ConversationManager
+
+**Files:**
+- Create: `android/app/src/main/java/com/gemma/triage/inference/ConversationManager.kt`
+
+- [ ] **Step 1: Create ConversationManager.kt**
+
+  ```kotlin
+  package com.gemma.triage.inference
+
+  data class ConversationTurn(val role: String, val text: String)
+
+  class ConversationManager {
+
+      private val history = mutableListOf<ConversationTurn>()
+      private var patientDescription: String = ""
+      private var initialResult: TriageResult? = null
+
+      fun startNewPatient(description: String, result: TriageResult) {
+          history.clear()
+          patientDescription = description
+          initialResult = result
+      }
+
+      fun addTurn(role: String, text: String) {
+          history.add(ConversationTurn(role, text))
+      }
+
+      fun buildFollowUpPrompt(question: String): String {
+          val result = initialResult ?: return question
+          return buildString {
+              append("<start_of_turn>system\n")
+              append("You are an emergency medical triage AI assisting a field medic.\n")
+              append("Answer follow-up questions about the current patient clearly and concisely.\n")
+              append("Think step by step through the patient's condition, the constraint or new ")
+              append("information stated, and clinically appropriate alternatives before answering.\n")
+              append("Use plain language. No jargon. Maximum 4 sentences.\n")
+              append("<end_of_turn>\n")
+
+              // Patient context
+              append("<start_of_turn>user\n")
+              append("Current patient: $patientDescription\n")
+              append("Triage classification: ${result.triageCode} (confidence ${(result.confidence * 100).toInt()}%)\n")
+              append("Reasoning: ${result.reasoning}\n")
+              append("<end_of_turn>\n")
+              append("<start_of_turn>model\nUnderstood. Ready for follow-up questions.<end_of_turn>\n")
+
+              // Conversation history
+              for (turn in history) {
+                  val role = if (turn.role == "user") "user" else "model"
+                  append("<start_of_turn>$role\n${turn.text}<end_of_turn>\n")
+              }
+
+              // New question
+              append("<start_of_turn>user\n$question<end_of_turn>\n")
+              append("<start_of_turn>model\n")
+          }
+      }
+
+      fun isNextPatientCommand(text: String): Boolean {
+          val lower = text.lowercase()
+          return lower.contains("next patient") || lower.contains("new patient") ||
+                 lower.contains("next case") || lower == "done" || lower == "next"
+      }
+
+      fun hasHistory() = history.isNotEmpty()
+      fun turnCount() = history.size
+      fun clear() { history.clear(); patientDescription = ""; initialResult = null }
+  }
+  ```
+
+- [ ] **Step 2: Write unit tests for ConversationManager**
+
+  Add to `InferenceTest.kt`:
+
+  ```kotlin
+  @Test
+  fun `isNextPatientCommand detects exit phrases`() {
+      val mgr = com.gemma.triage.inference.ConversationManager()
+      assertTrue(mgr.isNextPatientCommand("next patient"))
+      assertTrue(mgr.isNextPatientCommand("Next Patient please"))
+      assertTrue(mgr.isNextPatientCommand("new patient"))
+      assertFalse(mgr.isNextPatientCommand("what about oxygen"))
+  }
+
+  @Test
+  fun `buildFollowUpPrompt includes patient context and history`() {
+      val mgr = com.gemma.triage.inference.ConversationManager()
+      val result = TriageResult(
+          TriageCode.RED, 0.97, "Three RED criteria", "RED. Immediate.",
+          listOf("Step 1"), listOf("Monitor pulse"), listOf("If stops breathing"), "TRG|R|97|"
+      )
+      mgr.startNewPatient("Male, 40, breathing 38/min", result)
+      mgr.addTurn("user", "I have no oxygen")
+      mgr.addTurn("model", "Use positioning instead")
+      val prompt = mgr.buildFollowUpPrompt("He started seizing")
+      assertTrue(prompt.contains("Male, 40, breathing 38/min"))
+      assertTrue(prompt.contains("I have no oxygen"))
+      assertTrue(prompt.contains("He started seizing"))
+  }
+  ```
+
+- [ ] **Step 3: Run all tests**
+
+  ```bash
+  ./gradlew :app:testDebugUnitTest --tests "com.gemma.triage.InferenceTest"
+  ```
+  Expected: all tests PASS.
+
+- [ ] **Step 4: Commit**
+
+  ```bash
+  git add android/app/src/main/java/com/gemma/triage/inference/ConversationManager.kt
+  git commit -m "feat: add ConversationManager — per-patient history, thinking-mode prompt builder, next-patient detection"
+  ```
+
+---
+
+### Task 11: Update TriageViewModel with TTS + Conversation Loop
+
+**Files:**
+- Modify: `android/app/src/main/java/com/gemma/triage/viewmodel/TriageUiState.kt`
+- Modify: `android/app/src/main/java/com/gemma/triage/viewmodel/TriageViewModel.kt`
+
+- [ ] **Step 1: Replace TriageUiState.kt with expanded states**
+
+  ```kotlin
+  package com.gemma.triage.viewmodel
+
+  import com.gemma.triage.inference.TriageResult
+
+  sealed class TriageUiState {
+      object Idle : TriageUiState()
+      object Listening : TriageUiState()
+      data class Transcribing(val text: String) : TriageUiState()
+      object Analyzing : TriageUiState()
+      data class ResultReady(val result: TriageResult, val transcription: String) : TriageUiState()
+      data class Speaking(val stage: String) : TriageUiState()
+      object FollowUpListening : TriageUiState()
+      object FollowUpAnalyzing : TriageUiState()
+      data class FollowUpSpeaking(val question: String, val answer: String) : TriageUiState()
+      data class Error(val message: String) : TriageUiState()
+  }
+  ```
+
+- [ ] **Step 2: Replace TriageViewModel.kt with full pipeline + conversation loop**
+
+  ```kotlin
+  package com.gemma.triage.viewmodel
+
+  import android.app.Application
+  import androidx.lifecycle.AndroidViewModel
+  import androidx.lifecycle.viewModelScope
+  import com.gemma.triage.audio.STTState
+  import com.gemma.triage.audio.SpeechToTextManager
+  import com.gemma.triage.audio.TTSState
+  import com.gemma.triage.audio.TextToSpeechManager
+  import com.gemma.triage.inference.ConversationManager
+  import com.gemma.triage.inference.GemmaInferenceEngine
+  import com.gemma.triage.output.TriageOutputManager
+  import kotlinx.coroutines.flow.MutableStateFlow
+  import kotlinx.coroutines.flow.StateFlow
+  import kotlinx.coroutines.flow.collectLatest
+  import kotlinx.coroutines.launch
+  import java.io.File
+
+  class TriageViewModel(application: Application) : AndroidViewModel(application) {
+
+      private val context = application.applicationContext
+      private val inferenceEngine = GemmaInferenceEngine(context)
+      private val sttManager = SpeechToTextManager(context)
+      private val ttsManager = TextToSpeechManager(context)
+      private val conversationManager = ConversationManager()
+      private val outputManager = TriageOutputManager(context)
+
+      private val _uiState = MutableStateFlow<TriageUiState>(TriageUiState.Idle)
+      val uiState: StateFlow<TriageUiState> = _uiState
+
+      private val _patientCount = MutableStateFlow(0)
+      val patientCount: StateFlow<Int> = _patientCount
+
+      private val _modelReady = MutableStateFlow(false)
+      val modelReady: StateFlow<Boolean> = _modelReady
+
+      // Tracks whether we are in follow-up mode (after initial classification)
+      private var inFollowUpMode = false
+      private var lastQuestion = ""
+
+      init {
+          observeSTT()
+          observeTTS()
+          loadModelAsync()
+      }
+
+      private fun loadModelAsync() {
+          viewModelScope.launch {
+              try {
+                  val modelFile = File(context.filesDir, "gemma4e2b_int4.bin")
+                  if (modelFile.exists()) {
+                      inferenceEngine.loadModel(modelFile.absolutePath)
+                      _modelReady.value = true
+                  } else {
+                      _uiState.value = TriageUiState.Error("Model not found. Run setup_model.py first.")
+                  }
+              } catch (e: Exception) {
+                  _uiState.value = TriageUiState.Error("Model load failed: ${e.message}")
+              }
+          }
+      }
+
+      private fun observeSTT() {
+          viewModelScope.launch {
+              sttManager.state.collectLatest { state ->
+                  when (state) {
+                      is STTState.Listening -> {
+                          _uiState.value = if (inFollowUpMode)
+                              TriageUiState.FollowUpListening
+                          else
+                              TriageUiState.Listening
+                      }
+                      is STTState.Result -> {
+                          val text = state.text
+                          if (text.isBlank()) {
+                              _uiState.value = TriageUiState.Error("No speech detected — try again")
+                              return@collectLatest
+                          }
+                          if (inFollowUpMode) {
+                              if (conversationManager.isNextPatientCommand(text)) {
+                                  resetToNextPatient()
+                              } else {
+                                  runFollowUpInference(text)
+                              }
+                          } else {
+                              _uiState.value = TriageUiState.Transcribing(text)
+                              runInitialInference(text)
+                          }
+                      }
+                      is STTState.Error -> _uiState.value = TriageUiState.Error(state.message)
+                      is STTState.Idle -> { /* no-op */ }
+                  }
+              }
+          }
+      }
+
+      private fun observeTTS() {
+          viewModelScope.launch {
+              ttsManager.state.collectLatest { state ->
+                  when (state) {
+                      is TTSState.Done -> {
+                          // Auto-open mic for follow-up after TTS finishes
+                          inFollowUpMode = true
+                          openFollowUpMic()
+                      }
+                      is TTSState.Speaking -> {
+                          _uiState.value = TriageUiState.Speaking(state.stage)
+                      }
+                      else -> { /* no-op */ }
+                  }
+              }
+          }
+      }
+
+      fun startListening() {
+          if (!_modelReady.value) {
+              _uiState.value = TriageUiState.Error("Model not ready yet.")
+              return
+          }
+          inFollowUpMode = false
+          conversationManager.clear()
+          sttManager.startListening()
+      }
+
+      fun stopListening() = sttManager.stopListening()
+
+      private fun openFollowUpMic() {
+          sttManager.startListening()
+      }
+
+      private fun runInitialInference(transcription: String) {
+          viewModelScope.launch {
+              _uiState.value = TriageUiState.Analyzing
+              try {
+                  val result = inferenceEngine.runTriageInference(transcription)
+                  _patientCount.value += 1
+                  outputManager.process(result, transcription)
+                  conversationManager.startNewPatient(transcription, result)
+                  _uiState.value = TriageUiState.ResultReady(result, transcription)
+                  // Speak result — TTS observer auto-opens follow-up mic when done
+                  ttsManager.speakTriageResult(result)
+              } catch (e: Exception) {
+                  _uiState.value = TriageUiState.Error("Inference failed: ${e.message}")
+              }
+          }
+      }
+
+      private fun runFollowUpInference(question: String) {
+          lastQuestion = question
+          conversationManager.addTurn("user", question)
+          viewModelScope.launch {
+              _uiState.value = TriageUiState.FollowUpAnalyzing
+              try {
+                  val prompt = conversationManager.buildFollowUpPrompt(question)
+                  // Higher temp + more tokens for adaptive thinking-mode reasoning
+                  val answer = inferenceEngine.runFollowUpInference(prompt)
+                  conversationManager.addTurn("model", answer)
+                  _uiState.value = TriageUiState.FollowUpSpeaking(question, answer)
+                  ttsManager.speakFollowUpAnswer(answer)
+              } catch (e: Exception) {
+                  _uiState.value = TriageUiState.Error("Follow-up failed: ${e.message}")
+              }
+          }
+      }
+
+      fun resetToNextPatient() {
+          ttsManager.stop()
+          inFollowUpMode = false
+          conversationManager.clear()
+          _uiState.value = TriageUiState.Idle
+          ttsManager.speak("Ready for next patient.", "READY")
+      }
+
+      override fun onCleared() {
+          super.onCleared()
+          inferenceEngine.release()
+          sttManager.destroy()
+          ttsManager.shutdown()
+      }
+  }
+  ```
+
+- [ ] **Step 3: Add `runFollowUpInference` to GemmaInferenceEngine**
+
+  In `GemmaInferenceEngine.kt`, add this method inside the class (after `runTriageInference`):
+
+  ```kotlin
+  suspend fun runFollowUpInference(prompt: String): String = withContext(Dispatchers.IO) {
+      val inference = llmInference
+          ?: throw IllegalStateException("Model not loaded.")
+      // Strip <thinking>...</thinking> block if present before returning
+      val raw = inference.generateResponse(prompt)
+      val thinkEnd = raw.indexOf("</thinking>")
+      if (thinkEnd != -1) raw.substring(thinkEnd + 11).trim() else raw.trim()
+  }
+  ```
+
+- [ ] **Step 4: Build — verify no compilation errors**
+
+  ```bash
+  ./gradlew :app:compileDebugKotlin
+  ```
+  Expected: BUILD SUCCESSFUL, 0 errors.
+
+- [ ] **Step 5: Run all tests**
+
+  ```bash
+  ./gradlew :app:testDebugUnitTest
+  ```
+  Expected: all tests PASS.
+
+- [ ] **Step 6: Commit**
+
+  ```bash
+  git add android/app/src/main/java/com/gemma/triage/viewmodel/
+  git add android/app/src/main/java/com/gemma/triage/inference/GemmaInferenceEngine.kt
+  git commit -m "feat: wire TTS + conversation loop into TriageViewModel; auto-open mic after TTS done"
+  ```
+
+---
+
+### Task 12: Update MainActivity for Conversation UI
+
+**Files:**
+- Modify: `android/app/src/main/java/com/gemma/triage/MainActivity.kt`
+- Modify: `android/app/src/main/res/layout/activity_main.xml`
+
+- [ ] **Step 1: Add conversation panel + TTS indicator to activity_main.xml**
+
+  Add the following views inside the `ConstraintLayout`, after `btnSendSMS`:
+
+  ```xml
+  <!-- TTS speaking indicator -->
+  <LinearLayout
+      android:id="@+id/layoutTtsIndicator"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:orientation="horizontal"
+      android:gravity="center_vertical"
+      android:visibility="gone"
+      app:layout_constraintTop_toBottomOf="@id/btnSendSMS"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent">
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="🔊"
+          android:textSize="16sp" />
+
+      <TextView
+          android:id="@+id/tvTtsSpeaking"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="6dp"
+          android:text="Speaking instructions..."
+          android:textColor="@color/text_secondary"
+          android:textSize="12sp" />
+  </LinearLayout>
+
+  <!-- Conversation panel -->
+  <androidx.cardview.widget.CardView
+      android:id="@+id/cardConversation"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:visibility="gone"
+      app:cardBackgroundColor="@color/surface_medium"
+      app:cardCornerRadius="8dp"
+      app:layout_constraintTop_toBottomOf="@id/layoutTtsIndicator"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent">
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:padding="12dp">
+
+          <TextView
+              android:id="@+id/tvConversationQuestion"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:textColor="@color/text_secondary"
+              android:textSize="12sp"
+              android:text="Riya: ..." />
+
+          <TextView
+              android:id="@+id/tvConversationAnswer"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="6dp"
+              android:textColor="@color/text_primary"
+              android:textSize="13sp"
+              android:text="Gemma: ..." />
+      </LinearLayout>
+  </androidx.cardview.widget.CardView>
+
+  <!-- Follow-up prompt label -->
+  <TextView
+      android:id="@+id/tvFollowUpPrompt"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="🎙 Ask a follow-up or say \"next patient\""
+      android:textColor="@color/status_offline"
+      android:textSize="12sp"
+      android:gravity="center"
+      android:visibility="gone"
+      app:layout_constraintTop_toBottomOf="@id/cardConversation"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent" />
+
+  <!-- Next patient button -->
+  <com.google.android.material.button.MaterialButton
+      android:id="@+id/btnNextPatient"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="NEXT PATIENT"
+      android:visibility="gone"
+      android:backgroundTint="@color/surface_medium"
+      android:textColor="@color/text_primary"
+      app:layout_constraintTop_toBottomOf="@id/tvFollowUpPrompt"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent" />
+  ```
+
+- [ ] **Step 2: Update MainActivity.kt to handle new states**
+
+  Add these new handlers to `MainActivity.kt` (replace the existing `observeViewModel` function body):
+
+  ```kotlin
+  private fun observeViewModel() {
+      lifecycleScope.launch {
+          viewModel.uiState.collectLatest { state ->
+              when (state) {
+                  is TriageUiState.Idle              -> showIdle()
+                  is TriageUiState.Listening         -> showListening()
+                  is TriageUiState.Transcribing      -> showTranscribing(state.text)
+                  is TriageUiState.Analyzing         -> showAnalyzing("Gemma 4 classifying...")
+                  is TriageUiState.ResultReady       -> showResult(state)
+                  is TriageUiState.Speaking          -> showSpeaking(state.stage)
+                  is TriageUiState.FollowUpListening -> showFollowUpListening()
+                  is TriageUiState.FollowUpAnalyzing -> showAnalyzing("Gemma 4 thinking...")
+                  is TriageUiState.FollowUpSpeaking  -> showFollowUpResult(state.question, state.answer)
+                  is TriageUiState.Error             -> showError(state.message)
+              }
+          }
+      }
+      lifecycleScope.launch {
+          viewModel.patientCount.collectLatest { count ->
+              binding.tvPatientCount.text = "Assessed: $count"
+          }
+      }
+      lifecycleScope.launch {
+          viewModel.modelReady.collectLatest { ready ->
+              binding.btnRecord.isEnabled = ready
+              if (!ready) binding.tvStatus.text = "Loading Gemma 4 model..."
+          }
+      }
+  }
+
+  private fun showSpeaking(stage: String) {
+      binding.layoutTtsIndicator.visibility = View.VISIBLE
+      binding.tvTtsSpeaking.text = when {
+          stage == "CODE" -> "Speaking triage code..."
+          stage == "SUMMARY" -> "Speaking summary..."
+          stage.startsWith("STEP") -> "Speaking instructions..."
+          else -> "Speaking..."
+      }
+  }
+
+  private fun showFollowUpListening() {
+      binding.layoutTtsIndicator.visibility = View.GONE
+      binding.tvFollowUpPrompt.visibility = View.VISIBLE
+      binding.btnNextPatient.visibility = View.VISIBLE
+      binding.tvStatus.text = "🎙 Listening for follow-up..."
+  }
+
+  private fun showFollowUpResult(question: String, answer: String) {
+      binding.cardConversation.visibility = View.VISIBLE
+      binding.tvConversationQuestion.text = "Riya: \"$question\""
+      binding.tvConversationAnswer.text = "Gemma: $answer"
+      binding.layoutTtsIndicator.visibility = View.VISIBLE
+      binding.tvTtsSpeaking.text = "Speaking answer..."
+  }
+  ```
+
+  Add to `setupRecordButton()`:
+  ```kotlin
+  binding.btnNextPatient.setOnClickListener {
+      viewModel.resetToNextPatient()
+  }
+  ```
+
+- [ ] **Step 3: Install and manual test**
+
+  ```bash
+  ./gradlew :app:installDebug
+  ```
+
+  Manual test sequence:
+  1. Speak a RED patient description
+  2. Verify RED card appears AND phone reads result aloud
+  3. After TTS finishes, verify mic reopens (follow-up prompt visible)
+  4. Ask: *"I don't have oxygen"* — verify Gemma answers, TTS reads answer
+  5. Ask: *"He started seizing"* — verify second follow-up works
+  6. Say *"next patient"* — verify app resets to Idle, TTS says "Ready for next patient"
+
+- [ ] **Step 4: Commit**
+
+  ```bash
+  git add android/app/src/main/java/com/gemma/triage/MainActivity.kt
+  git add android/app/src/main/res/layout/activity_main.xml
+  git commit -m "feat: add TTS indicator + conversation panel + follow-up listening UI to MainActivity"
   ```
 
 ---

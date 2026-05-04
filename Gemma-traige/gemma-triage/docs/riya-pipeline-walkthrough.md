@@ -5,11 +5,13 @@
 
 ## The Scenario
 
-> 3:14 AM. Riya finds a man half-buried in rubble. She can't feel a radial pulse. He's breathing but fast, and won't respond when she calls his name. 14 patients already tagged. Phone in airplane mode. Zero bars.
+> 3:14 AM. Riya finds a man half-buried in rubble. She has a $700 Android phone, a first-aid kit, and four exhausted volunteers. No signal bars. No oxygen tank on hand. 14 patients already tagged. She needs to classify this patient, get spoken instructions she can act on immediately, and be able to ask follow-up questions as the situation changes — all without looking at a screen.
 
 ---
 
-## Step 1 — Button Press → ViewModel
+## Phase A — Initial Triage
+
+### Step 1 — Button Press → ViewModel
 
 Riya holds down the **RECORD** button.
 
@@ -19,11 +21,11 @@ Riya holds down the **RECORD** button.
 MotionEvent.ACTION_DOWN -> viewModel.startListening()
 ```
 
-`TriageViewModel.startListening()` first checks the model is loaded, then resets state to `Idle` and fires the speech recognizer.
+`TriageViewModel.startListening()` checks the model is ready, resets state to `Idle`, then fires the speech recognizer.
 
 ---
 
-## Step 2 — Voice Capture → Android Speech Engine
+### Step 2 — Voice Capture → Android Speech Engine
 
 `SpeechToTextManager.startListening()` opens Android's `SpeechRecognizer` with one critical flag:
 
@@ -31,7 +33,7 @@ MotionEvent.ACTION_DOWN -> viewModel.startListening()
 putExtra(RecognizerIntent.EXTRA_PREFER_OFFLINE, true)
 ```
 
-This routes audio through the **locally-installed English speech model** — no Google servers involved. The mic captures 16kHz PCM audio (the same format `AudioCaptureManager` uses), and the OS VAD (voice activity detection) automatically trims silence.
+The mic captures 16kHz PCM audio. No Google servers contacted. No network activity.
 
 Riya speaks:
 > *"Male, approximately 40 years old. Breathing 38 times per minute. Radial pulse is absent. Not following my commands."*
@@ -40,9 +42,9 @@ She releases the button — `ACTION_UP` → `viewModel.stopListening()` — and 
 
 ---
 
-## Step 3 — Text Emitted → ViewModel Pipeline
+### Step 3 — Text Emitted → ViewModel Pipeline
 
-`onResults()` fires inside `SpeechToTextManager`:
+`onResults()` fires:
 
 ```kotlin
 _state.value = STTState.Result(
@@ -50,240 +52,336 @@ _state.value = STTState.Result(
 )
 ```
 
-The `TriageViewModel` is `collectLatest`-ing that StateFlow. It sees `STTState.Result`, checks the text isn't blank, then:
+`TriageViewModel` observes `STTState.Result`, emits `TriageUiState.Transcribing(text)`, then immediately calls `runInference(transcription)` → emits `TriageUiState.Analyzing`.
 
-```
-UI State: Transcribing("Male, approximately 40 years old...")
-     ↓
-runInference(transcription) called
-     ↓
-UI State: Analyzing
-```
-
-On Riya's screen: the text she spoke appears verbatim, then the progress bar and *"Gemma 4 analyzing..."* pulse into view.
+On Riya's screen: her words appear, then the progress bar pulses — *"Gemma 4 analyzing..."*
 
 ---
 
-## Step 4 — Prompt Construction
+### Step 4 — Prompt Construction
 
-`GemmaInferenceEngine.runTriageInference()` calls `PromptBuilder.buildPrompt(context, patientDescription)`.
+`PromptBuilder.buildPrompt(context, patientDescription)` assembles three sections:
 
-The builder assembles three sections:
-
-**Section A — System prompt** (loaded from `assets/prompts/system_prompt.txt`):
-
+**Section A — System prompt** (from `assets/prompts/system_prompt.txt`):
 ```
-You are a certified emergency medical triage AI operating under the START protocol...
-RED (Immediate): Resp >30/min, absent radial pulse, altered mental status...
-Respond with valid JSON ONLY.
+You are a certified emergency medical triage AI using the START protocol.
+RED: resp >30/min, absent radial pulse, altered mental status.
+Return valid JSON matching the full schema including immediateSteps,
+monitoringChecklist, warningSigns, spokenSummary, smsPayload.
 ```
 
-**Section B — 2 random few-shot examples** (sampled from `few_shot_examples.json`'s 13 cases). For example:
+**Section B — 2 random few-shot examples** from `few_shot_examples.json` — shows Gemma the exact expanded JSON format with all fields populated.
 
+**Section C — Riya's patient**, wrapped in Gemma chat template:
 ```
-<user>  Analyze this patient: Young woman, breathing 38 times a minute...
-<model> {"triageCode":"RED","confidence":0.97,"reasoning":"Respiratory rate >30/min..."}
-```
-
-**Section C — Riya's actual patient:**
-
-```
-<user>  Analyze this patient: Male, approximately 40 years old. Breathing 38 times per minute...
-<model>   ← Gemma writes here
-```
-
-The Gemma chat template wraps everything:
-
-```
-<start_of_turn>system
-[START protocol rules]
-<end_of_turn>
 <start_of_turn>user
-[example 1 patient]
-<end_of_turn>
-<start_of_turn>model
-[example 1 JSON]
-<end_of_turn>
-<start_of_turn>user
-Analyze this patient: Male, 40, breathing 38/min, absent radial pulse...
+Analyze this patient: Male, approximately 40 years old...
 <end_of_turn>
 <start_of_turn>model
 ```
 
-The few-shot examples + low temperature (0.1) train Gemma's response format in-context, so it reliably produces JSON rather than prose.
-
 ---
 
-## Step 5 — On-Device Inference (The Core)
+### Step 5 — On-Device Inference (The Core)
 
 ```kotlin
 val rawOutput = llmInference.generateResponse(prompt)
 ```
 
-This call **never leaves the phone.** MediaPipe's `LlmInference` engine:
+**No network. No API. Nothing leaves the phone.**
 
-1. **Loads the prompt tokens** into the INT4-quantized Gemma 4 E2B model (~1.3GB in device RAM)
-2. **Runs GPU-accelerated forward passes** via OpenGL ES on the phone's GPU
-3. **Autoregressively generates tokens** one at a time until it produces a complete JSON object or hits the 512-token cap
-4. **Returns raw text** — typically within 2–4 seconds on a mid-range Android
+MediaPipe LlmInference loads the prompt into the INT4-quantized Gemma 4 E2B model (~1.3GB in device RAM) and runs GPU-accelerated inference via OpenGL ES.
 
-Gemma internally applies START logic:
+Gemma applies START logic internally:
 
-| Criterion | Patient Finding | Decision |
+| Criterion | Finding | Decision |
 |---|---|---|
 | Respiratory rate | 38/min | >30 threshold → **RED** |
 | Radial pulse | Absent | Perfusion failure → **RED** |
 | Mental status | Not following commands | Altered → **RED** |
 
-Raw output from Gemma:
+Gemma generates the full expanded JSON (~2–4 seconds):
 
 ```json
 {
   "triageCode": "RED",
   "confidence": 0.97,
-  "reasoning": "Three RED criteria met: respiratory rate 38/min exceeds 30/min threshold, absent radial pulse indicates perfusion failure, altered mental status (not following commands). Immediate life-saving intervention required.",
-  "recommendedActions": [
-    "Secure airway immediately",
-    "Control any external hemorrhage",
-    "IV access — two large-bore cannulas",
-    "Priority transport — do not delay"
-  ]
+  "reasoning": "Three RED criteria met: respiratory rate 38/min exceeds threshold, absent radial pulse indicates perfusion failure, altered mental status confirmed.",
+  "spokenSummary": "RED. Immediate. This patient has three critical signs and needs intervention right now.",
+  "immediateSteps": [
+    "Step 1: Tilt his head back and lift the chin — open the airway. Look for chest rise.",
+    "Step 2: Apply firm direct pressure to any visible bleeding with both hands. Do not let go.",
+    "Step 3: Keep him completely still — assume spinal injury until proven otherwise.",
+    "Step 4: Have someone prepare for immediate evacuation transport."
+  ],
+  "monitoringChecklist": [
+    "Recheck radial pulse every 60 seconds.",
+    "If breathing rate drops below 8 or rises above 45 — reassess immediately.",
+    "Watch for skin turning pale or blue — this means worsening shock."
+  ],
+  "warningSigns": [
+    "If breathing stops: give one rescue breath every 5 seconds.",
+    "If he becomes completely unresponsive: shout for help and reassess tag."
+  ],
+  "smsPayload": "TRG|R|97|Open airway;Direct pressure;Spinal precaution;Evacuate"
 }
 ```
 
 ---
 
-## Step 6 — JSON Parsing → TriageResult
+### Step 6 — JSON Parsing → TriageResult
 
-`GemmaInferenceEngine.parseTriageResultFromJson()` handles the raw string:
+`GemmaInferenceEngine.parseTriageResultFromJson()`:
 
-1. Finds the first `{` and last `}` — strips any model preamble text
-2. `Gson.fromJson()` deserializes into `RawTriageResult` (String fields)
-3. Converts `"RED"` string → `TriageCode.RED` enum via `TriageCode.valueOf()`
-4. Clamps confidence to `[0.0, 1.0]`
-5. Returns a typed `TriageResult`
-
-If Gemma produced malformed JSON (rare with few-shot + low temp), it returns `TriageCode.UNKNOWN` with the raw output as the reasoning — never crashes.
+1. Finds the first `{` and last `}` — strips any preamble text
+2. Gson deserializes into `RawTriageResult`
+3. `"RED"` → `TriageCode.RED` enum
+4. Confidence clamped to `[0.0, 1.0]`
+5. Returns typed `TriageResult` with all fields populated
 
 ---
 
-## Step 7 — Output Fan-Out
+### Step 7 — Output Fan-Out (SMS fires once, here)
 
 `TriageOutputManager.process(result, transcription)` runs on `Dispatchers.IO`:
 
-### 7a — Room Database (Audit Trail)
-
+**7a — Room Database**
 ```kotlin
 db.triageDao().insert(TriageRecord(
-    timestamp         = System.currentTimeMillis(),  // 3:14:33 AM
+    timestamp          = System.currentTimeMillis(),
     patientDescription = "Male, approximately 40...",
-    triageCode        = "RED",
-    confidence        = 0.97,
-    isTransmitted     = false
+    triageCode         = "RED",
+    confidence         = 0.97,
+    isTransmitted      = true
 ))
 ```
 
-Every triage decision is persisted locally. If Riya's phone is later recovered from mud, the full session audit trail is intact.
-
-### 7b — SMS Compression → Dispatch
-
-`SMSFormatter.formatForSMS(result)` compresses the result to 160 characters:
-
+**7b — SMS (pre-computed by Gemma, sent once)**
 ```
-TRG|R|97|Secure airway immediately;Control any external hemorrh;IV access
+TRG|R|97|Open airway;Direct pressure;Spinal precaution;Evacuate
 ```
+`QueueManager` dispatches via `SmsManager.sendTextMessage()` → satellite modem → Coordinator HQ 200 km away.
 
-Format: `TRG | code initial | confidence% | actions (max 20 chars each, semicolon-delimited)`
-
-`QueueManager.enqueue(sms)` attempts `SmsManager.sendTextMessage()` to the coordinator number. If the satellite modem isn't responding, it queues with retry logic (exponential backoff, max 3 attempts).
+**The conversation that follows never touches SMS. This fires once and is done.**
 
 ---
 
-## Step 8 — UI Update
+### Step 8 — UI Update
 
-`TriageViewModel` emits `TriageUiState.ResultReady(result, transcription)`.
-
-`MainActivity` renders:
+`TriageViewModel` emits `TriageUiState.ResultReady`. `MainActivity` renders:
 
 ```
-┌─────────────────────────────────┐
-│        RED — IMMEDIATE          │  ← #D32F2F red, 28sp bold
-│          Confidence: 97%        │
-│─────────────────────────────────│
-│ Three RED criteria met: resp    │
-│ rate 38/min, absent radial      │
-│ pulse, altered mental status.   │
-│                                 │
-│ 1. Secure airway immediately    │
-│ 2. Control external hemorrhage  │
-│ 3. IV access — two large-bore   │
-│ 4. Priority transport           │
-└─────────────────────────────────┘
-      [ DISPATCH VIA SMS ]
-
-Patients Assessed: 15
+┌─────────────────────────────────────────┐
+│           RED — IMMEDIATE               │  ← #D32F2F red
+│             Confidence: 97%             │
+│─────────────────────────────────────────│
+│ Three RED criteria met: resp 38/min,    │
+│ absent radial pulse, altered MS.        │
+│─────────────────────────────────────────│
+│ IMMEDIATE STEPS                         │
+│ 1. Tilt head back, lift chin. Chest     │
+│    rise?                                │
+│ 2. Direct pressure on bleeding.         │
+│    Both hands. Don't let go.            │
+│ 3. Keep still — assume spinal.          │
+│ 4. Prepare immediate evacuation.        │
+│─────────────────────────────────────────│
+│ MONITOR                                 │
+│ • Radial pulse every 60s               │
+│ • Resp drops <8 or rises >45: reassess │
+│ • Pale/blue skin = worsening shock     │
+└─────────────────────────────────────────┘
+  [ 🔊 Speaking... ] [ NEXT PATIENT ]
 ```
 
-Total time from button release to result on screen: **~4 seconds.**
-Zero bytes sent to any server. Zero network calls made.
+---
+
+## Phase B — Voice Output (Hands-Free Instructions)
+
+### Step 9 — TTS Reads the Result Aloud
+
+`TextToSpeechManager.speak()` fires immediately after `ResultReady`. No button needed.
+
+The phone speaks in this sequence — Riya does not need to look at the screen:
+
+> **"RED. IMMEDIATE."** ← loud, short, first
+>
+> *"This patient has three critical signs and needs intervention right now."* ← `spokenSummary`
+>
+> *"Step 1: Tilt his head back and lift the chin — open the airway. Look for chest rise."*
+> *"Step 2: Apply firm direct pressure to any visible bleeding with both hands. Do not let go."*
+> *"Step 3: Keep him completely still — assume spinal injury until proven otherwise."*
+> *"Step 4: Have someone prepare for immediate evacuation transport."*
+
+Speech rate: 0.85× (slightly slower than default for field noise conditions).
+
+`TTSState.Done` is emitted when the last step finishes speaking.
+
+---
+
+## Phase C — Follow-Up Conversation Loop
+
+### Step 10 — Mic Auto-Opens for Follow-Up
+
+`TriageViewModel` observes `TTSState.Done` → auto-emits `TriageUiState.FollowUpListening`.
+
+The mic opens automatically. The UI shows:
+
+```
+🎙  Ask a follow-up question or say "next patient"
+```
+
+Riya doesn't tap anything. She just speaks.
+
+---
+
+### Step 11 — Riya's First Follow-Up Question
+
+> *"I don't have oxygen. What else can I do?"*
+
+`SpeechRecognizer` returns text. `ConversationManager.buildFollowUpPrompt()` assembles:
+
+```
+[Original patient context]
+Male, approximately 40 years old. Breathing 38 times per minute...
+
+[Initial classification]
+triageCode: RED | confidence: 0.97
+reasoning: Three RED criteria met...
+
+[Conversation so far]
+(empty — first follow-up)
+
+[Thinking scaffolding]
+Think step by step through the patient's current condition,
+the specific constraint or new information stated,
+and what clinical alternatives are available.
+Then give a clear, actionable answer in plain language.
+
+[New question]
+Riya: I don't have oxygen. What else can I do?
+```
+
+Temperature raised to `0.3f`. MaxTokens raised to `768` — follow-ups need more reasoning space.
+
+---
+
+### Step 12 — Gemma Thinks, Then Answers
+
+Gemma runs in **thinking mode** — it reasons internally before responding:
+
+```
+<thinking>
+Patient: RED — absent pulse, resp 38/min, altered MS.
+Constraint: No oxygen available.
+Oxygen alternatives:
+- Positioning: Head-tilt chin-lift maximises airway patency → passive oxygenation
+- Rescue breathing: If rate deteriorates, mouth-to-mouth provides ~16% O2
+- Recovery position: If unconscious but breathing, lateral position maintains airway
+- The absent radial pulse is the bigger concern — suggests haemorrhagic shock
+  → positioning (legs elevated if no spinal concern) improves venous return
+Primary answer: airway position + rescue breathing as backup + shock positioning
+</thinking>
+
+Without oxygen, your main tool is position. Keep his head tilted back and chin 
+lifted at all times — this maximises how much air reaches his lungs passively. 
+If his breathing rate drops below 8, start mouth-to-mouth: one slow breath every 
+5 seconds. Also, if there's no spinal concern, elevate his legs about 30 
+centimetres — this pushes blood back toward his heart and buys time against shock.
+```
+
+The `<thinking>` block is stripped before TTS. Only the final answer is spoken.
+
+---
+
+### Step 13 — TTS Reads the Answer Aloud
+
+> *"Without oxygen, your main tool is position. Keep his head tilted back and chin lifted at all times — this maximises how much air reaches his lungs passively. If his breathing rate drops below 8, start mouth-to-mouth: one slow breath every 5 seconds. Also, if there's no spinal concern, elevate his legs about 30 centimetres — this pushes blood back toward his heart and buys time against shock."*
+
+UI conversation panel updates:
+
+```
+─────────────────────────────────────────
+Riya:  "I don't have oxygen. What else?"
+Gemma: "Without oxygen, your main tool
+        is position. Keep head tilted..."
+─────────────────────────────────────────
+```
+
+Mic re-opens automatically. Loop continues.
+
+---
+
+### Step 14 — Second Follow-Up (Situation Changes)
+
+> *"He just started seizing."*
+
+`ConversationManager` now includes the full exchange history in the next prompt. Gemma sees:
+- The original RED classification
+- The oxygen constraint answer
+- The new development: seizure
+
+Gemma thinks through: *seizure on a RED patient, possible TBI or hypoxia-induced, resource-limited setting...*
+
+Response:
+> *"Seizure alert. Do not restrain him — let the seizure run. Clear any hard objects away from his body and time it on your watch. If it goes beyond 2 minutes, that is a critical escalation — flag him for the next available transport regardless of queue position. After the seizure stops, immediately recheck his airway — seizures often cause the tongue to block the throat."*
+
+---
+
+### Step 15 — Exit: Next Patient
+
+Riya says *"next patient"* aloud — the STT detects the keyword.
+
+`TriageViewModel`:
+- Clears conversation history
+- Increments patient count to 15
+- Resets to `TriageUiState.Idle`
+- TTS: *"Ready for next patient."*
 
 ---
 
 ## Complete Flow at a Glance
 
 ```
+━━━ PHASE A: INITIAL TRIAGE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 Riya presses RECORD
-        │
-        ▼
-MainActivity (ACTION_DOWN)
-        │
-        ▼
-TriageViewModel.startListening()
-        │
-        ▼
-SpeechToTextManager
-  → Android SpeechRecognizer (OFFLINE, EXTRA_PREFER_OFFLINE=true)
-  → VAD detects speech end on button release
-  → STTState.Result("Male, 40, breathing 38/min, absent pulse, altered MS")
-        │
-        ▼
-TriageViewModel.runInference(text)
-  → UI: Analyzing (progress bar visible)
-        │
-        ▼
-PromptBuilder.buildPrompt(context, text)
-  → system_prompt.txt    — START protocol rules + JSON schema
-  → few_shot_examples.json — 2 random in-context examples
-  → Gemma chat template assembled
-        │
-        ▼
-MediaPipe LlmInference.generateResponse(prompt)
-  → Gemma 4 E2B INT4  (~1.3GB, on-device GPU via OpenGL ES)
-  → 2–4 seconds, no network activity
-  → Raw JSON string output
-        │
-        ▼
-GemmaInferenceEngine.parseTriageResultFromJson()
-  → Strip preamble, extract JSON
-  → Gson deserialize → TriageCode.RED enum
-  → TriageResult(RED, 0.97, reasoning, actions[])
-        │
-        ├─────────────────────────────────────┐
-        ▼                                     ▼
-Room Database                          SMSFormatter
-TriageRecord inserted                  "TRG|R|97|Secure airway..."
-(local audit trail, encrypted)                │
-                                       QueueManager
-                                       SmsManager.sendTextMessage()
-                                       → Satellite modem → Coordinator HQ
-        │
-        ▼
-TriageViewModel → TriageUiState.ResultReady
-        │
-        ▼
-MainActivity
-  → RED card (#D32F2F), confidence 97%, reasoning, 4 actions
-  → Patient count increments to 15
+  → SpeechToTextManager (offline STT, EXTRA_PREFER_OFFLINE=true)
+  → "Male, 40, breathing 38/min, absent pulse, won't follow commands"
+  → PromptBuilder: system_prompt + 2 few-shot examples + patient
+  → MediaPipe LlmInference (Gemma 4 E2B INT4, on-device GPU, ~3s)
+  → Expanded JSON: triageCode + spokenSummary + immediateSteps
+                   + monitoringChecklist + warningSigns + smsPayload
+  → TriageOutputManager:
+      ├─ Room DB: TriageRecord inserted          (audit trail)
+      └─ smsPayload → QueueManager → SmsManager → Satellite → HQ
+                                                  ↑ FIRES ONCE ONLY
+
+━━━ PHASE B: VOICE OUTPUT ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  → TextToSpeechManager.speak():
+      "RED. IMMEDIATE."
+      spokenSummary (2 sentences)
+      immediateSteps (4 steps, plain language)
+  → TTSState.Done emitted
+
+━━━ PHASE C: CONVERSATION LOOP (repeats until "next patient") ━━━
+
+  → Mic auto-opens → FollowUpListening
+  → Riya speaks follow-up question
+  → ConversationManager.buildFollowUpPrompt():
+      original patient + classification + history + thinking scaffolding
+  → GemmaInferenceEngine (temp 0.3f, 768 tokens, thinking mode)
+  → Plain text answer (thinking block stripped)
+  → ConversationManager stores exchange in history
+  → TextToSpeechManager.speak(answer)
+  → Mic auto-opens again → loop
+
+  EXIT: "next patient" keyword OR NEXT PATIENT button
+    → conversation history cleared
+    → patient count +1
+    → Idle state
+    → TTS: "Ready for next patient."
 ```
 
 ---
@@ -292,14 +390,17 @@ MainActivity
 
 | Metric | Value |
 |---|---|
-| Time from button release to result | ~4 seconds |
+| Initial triage inference time | ~3 seconds |
+| Follow-up inference time | ~4–6 seconds (thinking mode) |
 | Model size on disk | ~1.3 GB (INT4 quantized) |
-| Network bytes transmitted | 0 |
-| SMS payload size | ≤ 160 characters |
-| Inference temperature | 0.1 (near-deterministic) |
-| Few-shot examples in prompt | 2 (randomly sampled from 13) |
-| Room DB records this session | 15 (one per patient) |
+| Network bytes during session | 0 |
+| SMS payload size | ≤ 160 characters (once per patient) |
+| Initial triage temperature | 0.1 (near-deterministic) |
+| Follow-up temperature | 0.3 (adaptive reasoning) |
+| Conversation history scope | Current patient only (cleared on next patient) |
+| Riya's phone | $700 Android |
+| Signal bars required | 0 |
 
 ---
 
-*No internet. No API call. No cloud. Gemma 4 runs entirely on a $200 Android phone — in a rubble field, at 3 AM, with zero signal bars.*
+*No internet. No cloud. No server. Gemma 4 runs on a $700 Android phone in a rubble field. It classifies, speaks the instructions aloud, listens to follow-up questions, thinks through constraints, and keeps talking Riya through the patient until she says "next patient" — all at 3 AM, with zero signal bars.*
