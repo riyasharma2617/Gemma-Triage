@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.gemma.triage.app-mergeDebugResources-38:/values-watch-v21/values-watch-v21.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\priya\\.gradle\\caches\\8.14.2\\transforms\\fc23c02beea48fc21ee3a9461bb4cc43\\transformed\\appcompat-1.7.0\\res\\values-watch-v21\\values-watch-v21.xml",
+                    "from": {
+                        "startLines": "2,6,10",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,271,499",
+                        "endLines": "5,9,13",
+                        "endColumns": "12,12,12",
+                        "endOffsets": "266,494,724"
+                    }
+                }
+            ]
+        }
+    ]
+}

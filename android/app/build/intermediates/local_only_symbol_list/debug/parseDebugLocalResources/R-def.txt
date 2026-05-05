@@ -1,0 +1,35 @@
+R_DEF: Internal format may change without notice
+local
+color accent_blue
+color background_dark
+color on_surface
+color on_surface_secondary
+color surface
+color triage_black
+color triage_green
+color triage_red
+color triage_unknown
+color triage_yellow
+id btnNextPatient
+id btnStartTriage
+id cardResult
+id scrollConversation
+id tvConfidence
+id tvConversation
+id tvPatientCount
+id tvReasoning
+id tvSpeaking
+id tvStatus
+id tvSteps
+id tvTriageCode
+layout activity_main
+raw noise_sample
+string app_name
+string btn_next_patient
+string btn_start_triage
+string status_analyzing
+string status_follow_up
+string status_idle
+string status_listening
+string status_model_loading
+string status_speaking

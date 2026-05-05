@@ -1,0 +1,186 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.gemma.triage"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="26"
+9        android:targetSdkVersion="35" />
+10
+11    <!-- Permissions for Disaster Triage System -->
+12    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+12-->S:\Gemma-Triage\android\app\src\main\AndroidManifest.xml:6:5-71
+12-->S:\Gemma-Triage\android\app\src\main\AndroidManifest.xml:6:22-68
+13    <uses-permission android:name="android.permission.SEND_SMS" />
+13-->S:\Gemma-Triage\android\app\src\main\AndroidManifest.xml:7:5-67
+13-->S:\Gemma-Triage\android\app\src\main\AndroidManifest.xml:7:22-64
+14    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+14-->S:\Gemma-Triage\android\app\src\main\AndroidManifest.xml:8:5-75
+14-->S:\Gemma-Triage\android\app\src\main\AndroidManifest.xml:8:22-72
+15
+16    <!-- Optional: location might be useful for dispatching -->
+17    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+17-->S:\Gemma-Triage\android\app\src\main\AndroidManifest.xml:11:5-79
+17-->S:\Gemma-Triage\android\app\src\main\AndroidManifest.xml:11:22-76
+18    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+18-->S:\Gemma-Triage\android\app\src\main\AndroidManifest.xml:12:5-81
+18-->S:\Gemma-Triage\android\app\src\main\AndroidManifest.xml:12:22-78
+19
+20    <permission
+20-->[androidx.core:core:1.13.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\1a66ea6d14be732353727b57aa019475\transformed\core-1.13.0\AndroidManifest.xml:22:5-24:47
+21        android:name="com.gemma.triage.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+21-->[androidx.core:core:1.13.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\1a66ea6d14be732353727b57aa019475\transformed\core-1.13.0\AndroidManifest.xml:23:9-81
+22        android:protectionLevel="signature" />
+22-->[androidx.core:core:1.13.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\1a66ea6d14be732353727b57aa019475\transformed\core-1.13.0\AndroidManifest.xml:24:9-44
+23
+24    <uses-permission android:name="com.gemma.triage.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" /> <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
+24-->[androidx.core:core:1.13.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\1a66ea6d14be732353727b57aa019475\transformed\core-1.13.0\AndroidManifest.xml:26:5-97
+24-->[androidx.core:core:1.13.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\1a66ea6d14be732353727b57aa019475\transformed\core-1.13.0\AndroidManifest.xml:26:22-94
+25    <!-- <uses-sdk android:minSdkVersion="14"/> -->
+26    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+26-->[com.google.android.datatransport:transport-backend-cct:3.1.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\d6b9c1189b362e883e66792d181dd764\transformed\transport-backend-cct-3.1.0\AndroidManifest.xml:25:5-79
+26-->[com.google.android.datatransport:transport-backend-cct:3.1.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\d6b9c1189b362e883e66792d181dd764\transformed\transport-backend-cct-3.1.0\AndroidManifest.xml:25:22-76
+27    <uses-permission android:name="android.permission.INTERNET" />
+27-->[com.google.android.datatransport:transport-backend-cct:3.1.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\d6b9c1189b362e883e66792d181dd764\transformed\transport-backend-cct-3.1.0\AndroidManifest.xml:26:5-67
+27-->[com.google.android.datatransport:transport-backend-cct:3.1.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\d6b9c1189b362e883e66792d181dd764\transformed\transport-backend-cct-3.1.0\AndroidManifest.xml:26:22-64
+28
+29    <application
+29-->S:\Gemma-Triage\android\app\src\main\AndroidManifest.xml:14:5-27:19
+30        android:allowBackup="true"
+30-->S:\Gemma-Triage\android\app\src\main\AndroidManifest.xml:15:9-35
+31        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+31-->[androidx.core:core:1.13.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\1a66ea6d14be732353727b57aa019475\transformed\core-1.13.0\AndroidManifest.xml:28:18-86
+32        android:debuggable="true"
+33        android:extractNativeLibs="false"
+34        android:label="@string/app_name"
+34-->S:\Gemma-Triage\android\app\src\main\AndroidManifest.xml:16:9-41
+35        android:supportsRtl="true"
+35-->S:\Gemma-Triage\android\app\src\main\AndroidManifest.xml:17:9-35
+36        android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+36-->S:\Gemma-Triage\android\app\src\main\AndroidManifest.xml:18:9-65
+37        <activity
+37-->S:\Gemma-Triage\android\app\src\main\AndroidManifest.xml:19:9-26:20
+38            android:name="com.gemma.triage.MainActivity"
+38-->S:\Gemma-Triage\android\app\src\main\AndroidManifest.xml:20:13-41
+39            android:exported="true" >
+39-->S:\Gemma-Triage\android\app\src\main\AndroidManifest.xml:21:13-36
+40            <intent-filter>
+40-->S:\Gemma-Triage\android\app\src\main\AndroidManifest.xml:22:13-25:29
+41                <action android:name="android.intent.action.MAIN" />
+41-->S:\Gemma-Triage\android\app\src\main\AndroidManifest.xml:23:17-69
+41-->S:\Gemma-Triage\android\app\src\main\AndroidManifest.xml:23:25-66
+42
+43                <category android:name="android.intent.category.LAUNCHER" />
+43-->S:\Gemma-Triage\android\app\src\main\AndroidManifest.xml:24:17-77
+43-->S:\Gemma-Triage\android\app\src\main\AndroidManifest.xml:24:27-74
+44            </intent-filter>
+45        </activity>
+46
+47        <provider
+47-->[androidx.emoji2:emoji2:1.3.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\2254f18dbc80024b0032ccc2ce807d66\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
+48            android:name="androidx.startup.InitializationProvider"
+48-->[androidx.emoji2:emoji2:1.3.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\2254f18dbc80024b0032ccc2ce807d66\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
+49            android:authorities="com.gemma.triage.androidx-startup"
+49-->[androidx.emoji2:emoji2:1.3.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\2254f18dbc80024b0032ccc2ce807d66\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
+50            android:exported="false" >
+50-->[androidx.emoji2:emoji2:1.3.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\2254f18dbc80024b0032ccc2ce807d66\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
+51            <meta-data
+51-->[androidx.emoji2:emoji2:1.3.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\2254f18dbc80024b0032ccc2ce807d66\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+52                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+52-->[androidx.emoji2:emoji2:1.3.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\2254f18dbc80024b0032ccc2ce807d66\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
+53                android:value="androidx.startup" />
+53-->[androidx.emoji2:emoji2:1.3.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\2254f18dbc80024b0032ccc2ce807d66\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
+54            <meta-data
+54-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\5d09e7bbbf88d152bdbb44e55306238a\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:29:13-31:52
+55                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+55-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\5d09e7bbbf88d152bdbb44e55306238a\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:30:17-78
+56                android:value="androidx.startup" />
+56-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\5d09e7bbbf88d152bdbb44e55306238a\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:31:17-49
+57            <meta-data
+57-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\priya\.gradle\caches\8.14.2\transforms\434babf5c407551c2d5efaa855abec1a\transformed\profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
+58                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+58-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\priya\.gradle\caches\8.14.2\transforms\434babf5c407551c2d5efaa855abec1a\transformed\profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
+59                android:value="androidx.startup" />
+59-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\priya\.gradle\caches\8.14.2\transforms\434babf5c407551c2d5efaa855abec1a\transformed\profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
+60        </provider>
+61
+62        <service
+62-->[androidx.room:room-runtime:2.6.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\b354513e5d6ac9e5f86c4b21c8787f37\transformed\room-runtime-2.6.0\AndroidManifest.xml:24:9-28:63
+63            android:name="androidx.room.MultiInstanceInvalidationService"
+63-->[androidx.room:room-runtime:2.6.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\b354513e5d6ac9e5f86c4b21c8787f37\transformed\room-runtime-2.6.0\AndroidManifest.xml:25:13-74
+64            android:directBootAware="true"
+64-->[androidx.room:room-runtime:2.6.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\b354513e5d6ac9e5f86c4b21c8787f37\transformed\room-runtime-2.6.0\AndroidManifest.xml:26:13-43
+65            android:exported="false" />
+65-->[androidx.room:room-runtime:2.6.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\b354513e5d6ac9e5f86c4b21c8787f37\transformed\room-runtime-2.6.0\AndroidManifest.xml:27:13-37
+66
+67        <receiver
+67-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\priya\.gradle\caches\8.14.2\transforms\434babf5c407551c2d5efaa855abec1a\transformed\profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
+68            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+68-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\priya\.gradle\caches\8.14.2\transforms\434babf5c407551c2d5efaa855abec1a\transformed\profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
+69            android:directBootAware="false"
+69-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\priya\.gradle\caches\8.14.2\transforms\434babf5c407551c2d5efaa855abec1a\transformed\profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
+70            android:enabled="true"
+70-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\priya\.gradle\caches\8.14.2\transforms\434babf5c407551c2d5efaa855abec1a\transformed\profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
+71            android:exported="true"
+71-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\priya\.gradle\caches\8.14.2\transforms\434babf5c407551c2d5efaa855abec1a\transformed\profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
+72            android:permission="android.permission.DUMP" >
+72-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\priya\.gradle\caches\8.14.2\transforms\434babf5c407551c2d5efaa855abec1a\transformed\profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
+73            <intent-filter>
+73-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\priya\.gradle\caches\8.14.2\transforms\434babf5c407551c2d5efaa855abec1a\transformed\profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
+74                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+74-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\priya\.gradle\caches\8.14.2\transforms\434babf5c407551c2d5efaa855abec1a\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
+74-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\priya\.gradle\caches\8.14.2\transforms\434babf5c407551c2d5efaa855abec1a\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
+75            </intent-filter>
+76            <intent-filter>
+76-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\priya\.gradle\caches\8.14.2\transforms\434babf5c407551c2d5efaa855abec1a\transformed\profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
+77                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+77-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\priya\.gradle\caches\8.14.2\transforms\434babf5c407551c2d5efaa855abec1a\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
+77-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\priya\.gradle\caches\8.14.2\transforms\434babf5c407551c2d5efaa855abec1a\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
+78            </intent-filter>
+79            <intent-filter>
+79-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\priya\.gradle\caches\8.14.2\transforms\434babf5c407551c2d5efaa855abec1a\transformed\profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
+80                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+80-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\priya\.gradle\caches\8.14.2\transforms\434babf5c407551c2d5efaa855abec1a\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
+80-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\priya\.gradle\caches\8.14.2\transforms\434babf5c407551c2d5efaa855abec1a\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
+81            </intent-filter>
+82            <intent-filter>
+82-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\priya\.gradle\caches\8.14.2\transforms\434babf5c407551c2d5efaa855abec1a\transformed\profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
+83                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+83-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\priya\.gradle\caches\8.14.2\transforms\434babf5c407551c2d5efaa855abec1a\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
+83-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\priya\.gradle\caches\8.14.2\transforms\434babf5c407551c2d5efaa855abec1a\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:25-92
+84            </intent-filter>
+85        </receiver>
+86
+87        <service
+87-->[com.google.android.datatransport:transport-backend-cct:3.1.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\d6b9c1189b362e883e66792d181dd764\transformed\transport-backend-cct-3.1.0\AndroidManifest.xml:29:9-35:19
+88            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+88-->[com.google.android.datatransport:transport-backend-cct:3.1.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\d6b9c1189b362e883e66792d181dd764\transformed\transport-backend-cct-3.1.0\AndroidManifest.xml:30:13-103
+89            android:exported="false" >
+89-->[com.google.android.datatransport:transport-backend-cct:3.1.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\d6b9c1189b362e883e66792d181dd764\transformed\transport-backend-cct-3.1.0\AndroidManifest.xml:31:13-37
+90            <meta-data
+90-->[com.google.android.datatransport:transport-backend-cct:3.1.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\d6b9c1189b362e883e66792d181dd764\transformed\transport-backend-cct-3.1.0\AndroidManifest.xml:32:13-34:39
+91                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+91-->[com.google.android.datatransport:transport-backend-cct:3.1.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\d6b9c1189b362e883e66792d181dd764\transformed\transport-backend-cct-3.1.0\AndroidManifest.xml:33:17-94
+92                android:value="cct" />
+92-->[com.google.android.datatransport:transport-backend-cct:3.1.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\d6b9c1189b362e883e66792d181dd764\transformed\transport-backend-cct-3.1.0\AndroidManifest.xml:34:17-36
+93        </service>
+94        <service
+94-->[com.google.android.datatransport:transport-runtime:3.1.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\b90b74a4c4b777fac9bbd4dff1d36eef\transformed\transport-runtime-3.1.0\AndroidManifest.xml:26:9-30:19
+95            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+95-->[com.google.android.datatransport:transport-runtime:3.1.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\b90b74a4c4b777fac9bbd4dff1d36eef\transformed\transport-runtime-3.1.0\AndroidManifest.xml:27:13-117
+96            android:exported="false"
+96-->[com.google.android.datatransport:transport-runtime:3.1.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\b90b74a4c4b777fac9bbd4dff1d36eef\transformed\transport-runtime-3.1.0\AndroidManifest.xml:28:13-37
+97            android:permission="android.permission.BIND_JOB_SERVICE" >
+97-->[com.google.android.datatransport:transport-runtime:3.1.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\b90b74a4c4b777fac9bbd4dff1d36eef\transformed\transport-runtime-3.1.0\AndroidManifest.xml:29:13-69
+98        </service>
+99
+100        <receiver
+100-->[com.google.android.datatransport:transport-runtime:3.1.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\b90b74a4c4b777fac9bbd4dff1d36eef\transformed\transport-runtime-3.1.0\AndroidManifest.xml:32:9-34:40
+101            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+101-->[com.google.android.datatransport:transport-runtime:3.1.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\b90b74a4c4b777fac9bbd4dff1d36eef\transformed\transport-runtime-3.1.0\AndroidManifest.xml:33:13-132
+102            android:exported="false" />
+102-->[com.google.android.datatransport:transport-runtime:3.1.0] C:\Users\priya\.gradle\caches\8.14.2\transforms\b90b74a4c4b777fac9bbd4dff1d36eef\transformed\transport-runtime-3.1.0\AndroidManifest.xml:34:13-37
+103    </application>
+104
+105</manifest>
