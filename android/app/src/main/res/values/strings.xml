@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Gemma Triage</string>
+    <string name="btn_start_triage">Start Triage</string>
+    <string name="btn_next_patient">Next Patient</string>
+    <string name="status_idle">Ready — tap to begin triage</string>
+    <string name="status_listening">Listening…</string>
+    <string name="status_analyzing">Analyzing…</string>
+    <string name="status_speaking">Speaking result…</string>
+    <string name="status_follow_up">Follow-up mode — ask a question</string>
+    <string name="status_model_loading">Loading model…</string>
+</resources>
