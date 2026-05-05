@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Triage palette -->
+    <color name="triage_red">#D32F2F</color>
+    <color name="triage_yellow">#F9A825</color>
+    <color name="triage_green">#388E3C</color>
+    <color name="triage_black">#212121</color>
+    <color name="triage_unknown">#757575</color>
+    <!-- UI chrome -->
+    <color name="background_dark">#121212</color>
+    <color name="surface">#1E1E1E</color>
+    <color name="on_surface">#FFFFFF</color>
+    <color name="on_surface_secondary">#B0B0B0</color>
+    <color name="accent_blue">#1565C0</color>
+</resources>

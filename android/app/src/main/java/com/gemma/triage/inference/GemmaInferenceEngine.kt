@@ -3,7 +3,6 @@ package com.gemma.triage.inference
 import android.content.Context
 import com.google.gson.Gson
 import com.google.mediapipe.tasks.genai.llminference.LlmInference
-import com.google.mediapipe.tasks.genai.llminference.LlmInferenceOptions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -12,7 +11,7 @@ class GemmaInferenceEngine(private val context: Context) {
     private var llmInference: LlmInference? = null
 
     suspend fun loadModel(modelPath: String): Boolean = withContext(Dispatchers.IO) {
-        val options = LlmInferenceOptions.builder()
+        val options = LlmInference.LlmInferenceOptions.builder()
             .setModelPath(modelPath)
             .setMaxTokens(512)
             .setTopK(40)
