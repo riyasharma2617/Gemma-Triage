@@ -23,7 +23,7 @@ class TriageViewModel(application: Application) : AndroidViewModel(application) 
     private val sttManager = SpeechToTextManager(context)
     private val ttsManager = TextToSpeechManager(context)
     private val conversationManager = ConversationManager()
-    private val outputManager = TriageOutputManager(context)
+    private val outputManager = TriageOutputManager.create(context)
 
     private val _uiState = MutableStateFlow<TriageUiState>(TriageUiState.Idle)
     val uiState: StateFlow<TriageUiState> = _uiState

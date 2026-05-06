@@ -10,10 +10,12 @@ class QueueManager(
     private val pending = ArrayDeque<TriageResult>()
     private val failed = ArrayDeque<TriageResult>()
 
+    @Synchronized
     fun enqueue(result: TriageResult) {
         pending.addLast(result)
     }
 
+    @Synchronized
     fun processQueue() {
         val toSend = pending.toList()
         pending.clear()
@@ -26,12 +28,14 @@ class QueueManager(
                 } else {
                     SmsManager.getDefault().sendTextMessage(coordinatorPhone, null, sms, null, null)
                 }
+                // TODO: signal successful transmission back to DB to set isTransmitted=true
             } catch (e: Exception) {
                 failed.addLast(result)
             }
         }
     }
 
+    @Synchronized
     fun retryFailed() {
         val toRetry = failed.toList()
         failed.clear()
