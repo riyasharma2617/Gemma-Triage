@@ -7,8 +7,9 @@ import androidx.room.PrimaryKey
 data class TriageRecord(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val timestamp: Long,
-    val patientDescription: String,
     val triageCode: String,
     val confidence: Double,
+    val transcription: String,
+    val smsPayload: String,
     val isTransmitted: Boolean = false
 )

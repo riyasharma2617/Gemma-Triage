@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.parcelize")
+    id("kotlin-kapt")
 }
 
 android {
@@ -70,7 +71,7 @@ dependencies {
     // Room (audit trail DB)
     implementation("androidx.room:room-runtime:2.6.0")
     implementation("androidx.room:room-ktx:2.6.0")
-    annotationProcessor("androidx.room:room-compiler:2.6.0")
+    kapt("androidx.room:room-compiler:2.6.0")
 
     // Unit tests
     testImplementation("junit:junit:4.13.2")
