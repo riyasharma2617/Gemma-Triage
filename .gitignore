@@ -1,0 +1,48 @@
+# ─── Android build artifacts ───────────────────────────────────────────────
+android/.gradle/
+android/app/build/
+android/build/
+*.apk
+*.aab
+*.ap_
+
+# ─── Android Studio / IntelliJ ─────────────────────────────────────────────
+.idea/
+*.iml
+*.iws
+*.ipr
+.DS_Store
+captures/
+.externalNativeBuild/
+.cxx/
+
+# ─── Local Android config ──────────────────────────────────────────────────
+local.properties
+android/local.properties
+
+# ─── Keystore / secrets ────────────────────────────────────────────────────
+*.jks
+*.keystore
+*.p12
+
+# ─── Python ────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+.eggs/
+
+# ─── Model files (too large for git) ───────────────────────────────────────
+*.bin
+*.pte
+*.gguf
+*.ggml
+model_cache/
+
+# ─── Misc ──────────────────────────────────────────────────────────────────
+*.log
+.env
