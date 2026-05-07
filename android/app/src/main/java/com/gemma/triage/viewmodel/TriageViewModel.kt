@@ -10,6 +10,9 @@ import com.gemma.triage.audio.TextToSpeechManager
 import com.gemma.triage.inference.ConversationManager
 import com.gemma.triage.inference.GemmaInferenceEngine
 import com.gemma.triage.output.TriageOutputManager
+import com.gemma.triage.storage.AppDatabase
+import com.gemma.triage.storage.models.TriageRecord
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -24,6 +27,7 @@ class TriageViewModel(application: Application) : AndroidViewModel(application) 
     private val ttsManager = TextToSpeechManager(context)
     private val conversationManager = ConversationManager()
     private val outputManager = TriageOutputManager.create(context)
+    private val db = AppDatabase.getDatabase(context)
 
     private val _uiState = MutableStateFlow<TriageUiState>(TriageUiState.Idle)
     val uiState: StateFlow<TriageUiState> = _uiState
@@ -34,6 +38,9 @@ class TriageViewModel(application: Application) : AndroidViewModel(application) 
     private val _modelReady = MutableStateFlow(false)
     val modelReady: StateFlow<Boolean> = _modelReady
 
+    private val _history = MutableStateFlow<List<TriageRecord>>(emptyList())
+    val history: StateFlow<List<TriageRecord>> = _history
+
     private var inFollowUpMode = false
     private var lastQuestion = ""
 
@@ -41,12 +48,19 @@ class TriageViewModel(application: Application) : AndroidViewModel(application) 
         observeSTT()
         observeTTS()
         loadModelAsync()
+        loadHistory()
+    }
+
+    private fun loadHistory() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _history.value = db.triageDao().getAllRecords()
+        }
     }
 
     private fun loadModelAsync() {
         viewModelScope.launch {
             try {
-                val modelFile = File(context.filesDir, "gemma4e2b_int4.bin")
+                val modelFile = File(context.filesDir, "gemma2-2b-it-cpu-int8.task")
                 if (modelFile.exists()) {
                     inferenceEngine.loadModel(modelFile.absolutePath)
                     _modelReady.value = true
@@ -132,6 +146,7 @@ class TriageViewModel(application: Application) : AndroidViewModel(application) 
                 conversationManager.startNewPatient(transcription, result)
                 _uiState.value = TriageUiState.ResultReady(result, transcription)
                 ttsManager.speakTriageResult(result)
+                loadHistory()
             } catch (e: Exception) {
                 _uiState.value = TriageUiState.Error("Inference failed: ${e.message}")
             }

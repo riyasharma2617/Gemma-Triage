@@ -10,6 +10,7 @@ data class TriageRecord(
     val triageCode: String,
     val confidence: Double,
     val transcription: String,
+    val immediateSteps: String,
     val smsPayload: String,
     val isTransmitted: Boolean = false
 )

@@ -23,8 +23,9 @@ class TriageOutputManager(
             triageCode = result.triageCode.name,
             confidence = result.confidence,
             transcription = transcription,
+            immediateSteps = result.immediateSteps.joinToString("\n"),
             smsPayload = SMSFormatter.formatForSMS(result),
-            isTransmitted = false // Known limitation: updated to true only when DB callback is wired up
+            isTransmitted = false
         )
         dbWriter(record)
         queueManager.enqueue(result)

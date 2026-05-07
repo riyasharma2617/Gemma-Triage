@@ -18,7 +18,7 @@ interface TriageDao {
     suspend fun getAllRecords(): List<TriageRecord>
 }
 
-@Database(entities = [TriageRecord::class], version = 1)
+@Database(entities = [TriageRecord::class], version = 2)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun triageDao(): TriageDao
 
@@ -32,7 +32,9 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "triage_database"
-                ).build()
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 instance
             }
