@@ -14,9 +14,6 @@ class GemmaInferenceEngine(private val context: Context) {
         val options = LlmInference.LlmInferenceOptions.builder()
             .setModelPath(modelPath)
             .setMaxTokens(512)
-            .setTopK(40)
-            .setTemperature(0.1f)
-            .setRandomSeed(42)
             .build()
         llmInference = LlmInference.createFromOptions(context, options)
         true
@@ -48,13 +45,22 @@ class GemmaInferenceEngine(private val context: Context) {
         private val gson = Gson()
 
         fun parseTriageResultFromJson(rawOutput: String): TriageResult {
+            // Find JSON: if raw output contains '{...}', extract it (handles preamble).
+            // If no '{' found, assume model was pre-seeded with '{' and prepend it.
             val jsonStart = rawOutput.indexOf('{')
             val jsonEnd = rawOutput.lastIndexOf('}') + 1
-            if (jsonStart == -1 || jsonEnd <= jsonStart) {
-                return TriageResult(TriageCode.UNKNOWN, 0.0, "Model output contained no JSON")
+            val (text, start) = if (jsonStart != -1 && jsonEnd > jsonStart) {
+                Pair(rawOutput, jsonStart)
+            } else {
+                val candidate = "{$rawOutput"
+                Pair(candidate, 0)
+            }
+            val end = text.lastIndexOf('}') + 1
+            if (end <= start) {
+                return TriageResult(TriageCode.UNKNOWN, 0.0, "Model output contained no JSON: $rawOutput")
             }
             return try {
-                val jsonStr = rawOutput.substring(jsonStart, jsonEnd)
+                val jsonStr = text.substring(start, end)
                 val raw = gson.fromJson(jsonStr, RawTriageResult::class.java)
                 TriageResult(
                     triageCode = try { TriageCode.valueOf(raw.triageCode.uppercase()) }
