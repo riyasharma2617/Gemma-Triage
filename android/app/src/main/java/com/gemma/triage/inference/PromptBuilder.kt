@@ -20,7 +20,7 @@ object PromptBuilder {
             append("<start_of_turn>user\n")
             append("Analyze this patient: $patientDescription")
             append("\n<end_of_turn>\n")
-            append("<start_of_turn>model\n")
+            append("<start_of_turn>model\n{")
         }
     }
 
@@ -28,7 +28,7 @@ object PromptBuilder {
         val json = loadAsset(context, "prompts/few_shot_examples.json")
         val type = object : TypeToken<List<Map<String, Any>>>() {}.type
         val examples: List<Map<String, Any>> = gson.fromJson(json, type)
-        val selected = examples.shuffled().take(2)
+        val selected = examples.shuffled().take(1)
         return buildString {
             for (example in selected) {
                 append("<start_of_turn>user\nAnalyze this patient: ${example["input"]}<end_of_turn>\n")
