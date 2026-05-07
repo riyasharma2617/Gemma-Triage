@@ -9,4 +9,12 @@
     <string name="status_speaking">Speaking result…</string>
     <string name="status_follow_up">Follow-up mode — ask a question</string>
     <string name="status_model_loading">Loading model…</string>
+    <string name="label_patients_triaged">Patients triaged: %d</string>
+    <string name="label_no_history">No patients triaged yet.</string>
+    <string name="label_patients_today">%d patient(s) today</string>
+    <string name="label_transcription">Transcription</string>
+    <string name="label_steps">Immediate Steps</string>
+    <string name="label_sms">SMS Payload</string>
+    <string name="label_sms_sent">SMS sent</string>
+    <string name="label_sms_pending">Pending</string>
 </resources>
