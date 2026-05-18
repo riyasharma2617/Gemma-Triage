@@ -34,6 +34,7 @@ Within seconds, the app responds aloud:
 > *"RED. Immediate life threat. Control bleeding, airway positioning, flag for immediate transport."*
 
 The verdict is also:
+
 - Color-coded on screen (RED / YELLOW / GREEN / BLACK)
 - Logged to an encrypted on-device audit trail
 - Compressed into a 160-character SMS payload ready to dispatch when signal returns
@@ -68,6 +69,7 @@ The project is organized as a sequential pipeline. Each stage has a clear input 
 We built **496 curated training examples** and **100 held-out test cases**, covering all four START triage outcomes (RED, YELLOW, GREEN, BLACK) across a range of MCI scenarios: vehicle collisions, explosions, building collapses, crush injuries, burns, and drowning.
 
 Each example is a realistic spoken patient description paired with a structured JSON output containing:
+
 - Triage code and confidence score
 - Clinical reasoning citing specific START criteria
 - Immediate action steps
@@ -83,6 +85,7 @@ Class distribution was intentionally imbalanced to match real MCI statistics: RE
 Before fine-tuning, we evaluated `google/gemma-4-E2B-it` on our test set with our system prompt. This step exists to answer one question: **does fine-tuning actually help?**
 
 We measured:
+
 - Triage code accuracy per class
 - JSON compliance rate
 - Parse error types (`MALFORMED_JSON`, `MISSING_KEY`, `INVALID_CODE`)
@@ -109,6 +112,7 @@ Configuration is centralized in `pipeline_config.json` — no hyperparameters ar
 ### Stage 4 — Fine-Tuned Evaluation (`04_evaluate_finetuned/`)
 
 We ran the identical evaluation suite from Stage 2 on the fine-tuned model and compared:
+
 - Delta F1 on RED and BLACK (success threshold: F1 ≥ 0.92 for both)
 - Delta JSON compliance rate (target: zero parse errors on test set)
 - Confidence calibration
@@ -129,7 +133,7 @@ INT4 quantization reduces the ~4 GB merged model to ~1 GB on disk, making it pra
 Built in Kotlin with the MediaPipe LLM Inference API, the app implements the full pipeline:
 
 | Component | Technology |
-|---|---|
+| --- | --- |
 | On-device inference | MediaPipe `tasks-genai` + LiteRT |
 | Speech recognition | Android `SpeechRecognizer` (offline) |
 | Text-to-speech | Android `TextToSpeech` |
@@ -145,7 +149,7 @@ The inference engine runs on a **dedicated single-threaded executor** to prevent
 
 ## Project Structure
 
-```
+```text
 gemma-triage/
 ├── 01_data/                    ← Dataset creation and validation
 │   ├── curated/                ← 496 training examples (JSONL)
@@ -271,7 +275,7 @@ pytest tests/
 ## Permissions
 
 | Permission | Why |
-|---|---|
+| --- | --- |
 | `RECORD_AUDIO` | Voice input from first responder |
 | `SEND_SMS` | Dispatch compressed triage payload when signal returns |
 | `READ_PHONE_STATE` | SMS routing and SIM selection |
@@ -283,10 +287,12 @@ No `INTERNET` permission. No data leaves the device during triage.
 
 ## Contributors
 
-| Name | Role |
-|---|---|
-| **Riya Sharma** | ML pipeline — dataset design, fine-tuning, model evaluation, LiteRT conversion |
-| **Priyanshu Arya** | Android engineering — inference integration, speech pipeline, UI, SMS system |
+| Name | Expertise | Contributions |
+| --- | --- | --- |
+| **Riya Sharma** | AI / ML Engineer | Dataset design, QLoRA fine-tuning, model evaluation, LiteRT conversion pipeline |
+| **Priyanshu Arya** | AI / ML Expert + Android Engineer | Data collection, fine-tuning pipeline, model integration, Android app (Vibe Coded) — speech pipeline, UI, SMS system, inference engine |
+
+> **Vibe Coding:** The entire Android application was designed and built by Priyanshu using AI-assisted development — rapidly prototyping, iterating, and shipping production-grade Kotlin code with the help of LLM tooling throughout the build process.
 
 ---
 
@@ -295,6 +301,7 @@ No `INTERNET` permission. No data leaves the device during triage.
 **Competition:** [Gemma 4 Good Hackathon](https://www.kaggle.com/competitions/gemma-4-good) by Google & Kaggle
 
 **Tracks:**
+
 - Global Resilience Track
 - LiteRT Special Prize
 
