@@ -14,6 +14,9 @@ class GemmaInferenceEngine(private val context: Context) {
         val options = LlmInference.LlmInferenceOptions.builder()
             .setModelPath(modelPath)
             .setMaxTokens(512)
+            .setTopK(1)          // greedy decoding — deterministic triage outputs
+            .setTemperature(0.1f)
+            .setRandomSeed(42)   // reproducible across runs on same device
             .build()
         llmInference = LlmInference.createFromOptions(context, options)
         true

@@ -60,17 +60,32 @@ class TriageViewModel(application: Application) : AndroidViewModel(application) 
     private fun loadModelAsync() {
         viewModelScope.launch {
             try {
-                val modelFile = File(context.filesDir, "gemma2-2b-it-cpu-int8.task")
-                if (modelFile.exists()) {
+                val modelFile = resolveModelFile()
+                if (modelFile != null) {
                     inferenceEngine.loadModel(modelFile.absolutePath)
                     _modelReady.value = true
                 } else {
-                    _uiState.value = TriageUiState.Error("Model not found. Run setup_model.py first.")
+                    _uiState.value = TriageUiState.Error(
+                        "Model not found in ${context.filesDir}. Run: python scripts/setup_model.py"
+                    )
                 }
             } catch (e: Exception) {
                 _uiState.value = TriageUiState.Error("Model load failed: ${e.message}")
             }
         }
+    }
+
+    // Try candidate filenames in priority order so the app works regardless of
+    // which model version was pushed via ADB.
+    private fun resolveModelFile(): File? {
+        val candidates = listOf(
+            "gemma4e2b_int4.task",       // Gemma 4 E2B INT4 (target)
+            "gemma4e2b_int4.bin",        // legacy naming
+            "gemma2-2b-it-cpu-int8.task" // Gemma 2 fallback for dev
+        )
+        return candidates
+            .map { File(context.filesDir, it) }
+            .firstOrNull { it.exists() }
     }
 
     private fun observeSTT() {

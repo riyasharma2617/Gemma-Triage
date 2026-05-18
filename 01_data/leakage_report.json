@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "id_overlap": [],
+  "failures": [],
+  "warnings": [
+    {
+      "test_id": "T172",
+      "train_id": "T152",
+      "score": 0.7037,
+      "check": "rouge"
+    },
+    {
+      "test_id": "T203",
+      "train_id": "T156",
+      "score": 0.8,
+      "check": "rouge"
+    },
+    {
+      "test_id": "T295",
+      "train_id": "T359",
+      "score": 0.7013,
+      "check": "rouge"
+    },
+    {
+      "test_id": "T312",
+      "train_id": "T343",
+      "score": 0.75,
+      "check": "rouge"
+    },
+    {
+      "test_id": "T374",
+      "train_id": "T423",
+      "score": 0.7692,
+      "check": "rouge"
+    },
+    {
+      "test_id": "T385",
+      "train_id": "T434",
+      "score": 0.7273,
+      "check": "rouge"
+    },
+    {
+      "test_id": "T387",
+      "train_id": "T356",
+      "score": 0.7436,
+      "check": "rouge"
+    }
+  ],
+  "checked_at": "2026-05-12T09:15:00.000000Z"
+}

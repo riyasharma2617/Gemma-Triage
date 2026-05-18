@@ -1,48 +1,52 @@
-# ─── Android build artifacts ───────────────────────────────────────────────
-android/.gradle/
-android/app/build/
-android/build/
-*.apk
-*.aab
-*.ap_
-
-# ─── Android Studio / IntelliJ ─────────────────────────────────────────────
-.idea/
-*.iml
-*.iws
-*.ipr
-.DS_Store
-captures/
-.externalNativeBuild/
-.cxx/
-
-# ─── Local Android config ──────────────────────────────────────────────────
-local.properties
-android/local.properties
-
-# ─── Keystore / secrets ────────────────────────────────────────────────────
-*.jks
-*.keystore
-*.p12
-
-# ─── Python ────────────────────────────────────────────────────────────────
+# Python
 __pycache__/
 *.py[cod]
 *.pyo
 .venv/
 venv/
 env/
+.env
 *.egg-info/
 dist/
-.eggs/
+build/
+.pytest_cache/
 
-# ─── Model files (too large for git) ───────────────────────────────────────
+# Model files (too large for git — use setup_model.py + ADB)
+model_cache/
+*.task
+*.tflite
 *.bin
 *.pte
 *.gguf
 *.ggml
-model_cache/
+lora_adapters/
+merged_model/
 
-# ─── Misc ──────────────────────────────────────────────────────────────────
-*.log
-.env
+# Kaggle / HuggingFace credentials
+kaggle.json
+.kaggle/
+
+# Android build
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+android/.kotlin/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Claude Code internals (not project files)
+.claude/
+.mcp.json
+CLAUDE.md
+docs/superpowers/

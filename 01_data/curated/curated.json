@@ -1,0 +1,3474 @@
+[
+    {
+        "id": "T001",
+        "description": "Adult male, struck by vehicle. Breathing 34 breaths/min, radial pulse absent, cap refill 4 seconds, follows commands.",
+        "expected_code": "RED",
+        "reasoning": "Respiratory rate greater than 30/min indicates immediate category; absent radial pulse and delayed cap refill confirm poor perfusion.",
+        "source": "curated"
+    },
+    {
+        "id": "T002",
+        "description": "Adult female, building collapse survivor. Walking independently with minor arm laceration and stable breathing.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory patients are categorized as GREEN in START triage.",
+        "source": "curated"
+    },
+    {
+        "id": "T003",
+        "description": "Child, 8 years old. Apneic after airway repositioning. No detectable pulse.",
+        "expected_code": "BLACK",
+        "reasoning": "No respirations after airway repositioning indicates deceased/expectant category.",
+        "source": "curated"
+    },
+    {
+        "id": "T004",
+        "description": "Adult male with crush injury. Respiratory rate 22/min, radial pulse present, cap refill 1 second, unable to follow commands.",
+        "expected_code": "RED",
+        "reasoning": "Failure to follow simple commands classifies patient as RED despite otherwise stable vitals.",
+        "source": "curated"
+    },
+    {
+        "id": "T005",
+        "description": "Adult female with smoke inhalation. Breathing 28/min, radial pulse weak, cap refill 3 seconds, confused and disoriented.",
+        "expected_code": "RED",
+        "reasoning": "Delayed cap refill and altered mental status indicate immediate intervention required.",
+        "source": "curated"
+    },
+    {
+        "id": "T006",
+        "description": "Teenage male with fractured ankle. Sitting upright, breathing 20/min, obeys commands, radial pulse present.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory but stable patient without immediate life threats is categorized as YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T007",
+        "description": "Adult female found unconscious after explosion. Breathing restored after airway repositioning at 18/min.",
+        "expected_code": "RED",
+        "reasoning": "Patients who resume breathing after airway repositioning are categorized as RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T008",
+        "description": "Adult male with chest trauma. Respiratory rate 10/min, radial pulse absent, cap refill 5 seconds, unable to answer questions.",
+        "expected_code": "RED",
+        "reasoning": "Absent radial pulse, delayed perfusion, and altered mental status require immediate care.",
+        "source": "curated"
+    },
+    {
+        "id": "T009",
+        "description": "Adult female with superficial burns on both arms. Walking and talking normally.",
+        "expected_code": "GREEN",
+        "reasoning": "Walking wounded patients are classified as GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T010",
+        "description": "Adult male trapped under debris. Respiratory rate 32/min, follows commands, pulse present.",
+        "expected_code": "RED",
+        "reasoning": "Respiratory rate above 30/min independently classifies patient as RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T011",
+        "description": "Elderly female with hip fracture. Breathing 24/min, cap refill 1 second, obeys commands but unable to walk.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable vitals with delayed mobility needs categorize patient as YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T012",
+        "description": "Adult male exposed to chemical spill. No respirations even after airway repositioning.",
+        "expected_code": "BLACK",
+        "reasoning": "Persistent apnea after airway intervention indicates BLACK category.",
+        "source": "curated"
+    },
+    {
+        "id": "T013",
+        "description": "Young adult female with abdominal wound. Breathing 26/min, radial pulse present, cap refill 2 seconds, answers questions appropriately.",
+        "expected_code": "YELLOW",
+        "reasoning": "Patient is stable without immediate airway, breathing, perfusion, or mental status compromise.",
+        "source": "curated"
+    },
+    {
+        "id": "T014",
+        "description": "Adult male with traumatic brain injury. Breathing 18/min, pulse present, repeatedly confused and unable to follow commands.",
+        "expected_code": "RED",
+        "reasoning": "Inability to follow commands indicates altered mental status requiring immediate attention.",
+        "source": "curated"
+    },
+    {
+        "id": "T015",
+        "description": "Child, 10 years old, with leg laceration. Walking independently and crying loudly.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory pediatric patient with stable airway and circulation is GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T016",
+        "description": "Adult female with severe bleeding from thigh injury. Respiratory rate 24/min, weak radial pulse, cap refill 4 seconds.",
+        "expected_code": "RED",
+        "reasoning": "Signs of poor perfusion and possible shock require immediate intervention.",
+        "source": "curated"
+    },
+    {
+        "id": "T017",
+        "description": "Adult male complaining of severe back pain after collapse. Breathing 20/min, pulse strong, alert and oriented, unable to walk due to pain.",
+        "expected_code": "YELLOW",
+        "reasoning": "Patient is stable but non-ambulatory, fitting delayed treatment category.",
+        "source": "curated"
+    },
+    {
+        "id": "T018",
+        "description": "Adult female with penetrating chest wound. Respiratory rate 38/min, follows commands weakly.",
+        "expected_code": "RED",
+        "reasoning": "Respiratory distress with rate above 30/min requires immediate treatment.",
+        "source": "curated"
+    },
+    {
+        "id": "T019",
+        "description": "Adult male with facial burns. Breathing 16/min, pulse present, cap refill 1 second, ambulatory.",
+        "expected_code": "GREEN",
+        "reasoning": "Patient is ambulatory with stable airway and circulation.",
+        "source": "curated"
+    },
+    {
+        "id": "T020",
+        "description": "Adult female found after earthquake. Breathing 14/min, radial pulse absent, cap refill 5 seconds, unable to respond coherently.",
+        "expected_code": "RED",
+        "reasoning": "Poor perfusion and altered mental status indicate immediate life-threatening condition.",
+        "source": "curated"
+    },
+    {
+        "id": "T021",
+        "description": "Adult male with blast injury to chest. Respiratory rate 36/min, weak radial pulse, confused speech.",
+        "expected_code": "RED",
+        "reasoning": "Respiratory rate above 30/min and altered mental status indicate immediate priority.",
+        "source": "curated"
+    },
+    {
+        "id": "T022",
+        "description": "Adult female with sprained wrist after evacuation. Walking without assistance and speaking clearly.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory patient with minor injury is classified as GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T023",
+        "description": "Adult male pinned under debris. Not breathing initially, begins breathing at 20/min after airway repositioning.",
+        "expected_code": "RED",
+        "reasoning": "Breathing restored after airway repositioning automatically classifies patient as RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T024",
+        "description": "Elderly male with suspected spinal injury. Respiratory rate 24/min, pulse strong, follows commands but unable to move legs.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable airway, breathing, circulation, and mental status place patient in delayed category.",
+        "source": "curated"
+    },
+    {
+        "id": "T025",
+        "description": "Child, 6 years old, severe burns to torso. Respiratory rate 40/min, crying weakly.",
+        "expected_code": "RED",
+        "reasoning": "Severe respiratory distress and critical injuries require immediate intervention.",
+        "source": "curated"
+    },
+    {
+        "id": "T026",
+        "description": "Adult female found unconscious after flooding. No respirations after airway repositioning.",
+        "expected_code": "BLACK",
+        "reasoning": "No spontaneous breathing after airway maneuver indicates BLACK category.",
+        "source": "curated"
+    },
+    {
+        "id": "T027",
+        "description": "Adult male with open forearm fracture. Breathing 18/min, pulse present, alert, unable to walk due to pain.",
+        "expected_code": "YELLOW",
+        "reasoning": "Patient is stable but non-ambulatory and requires delayed care.",
+        "source": "curated"
+    },
+    {
+        "id": "T028",
+        "description": "Adult female with penetrating abdominal trauma. Respiratory rate 29/min, cap refill 4 seconds, follows commands.",
+        "expected_code": "RED",
+        "reasoning": "Delayed capillary refill indicates poor perfusion requiring immediate treatment.",
+        "source": "curated"
+    },
+    {
+        "id": "T029",
+        "description": "Teenage male with head laceration. Walking independently, alert and oriented.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory patient with stable condition is GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T030",
+        "description": "Adult male with crush syndrome. Respiratory rate 12/min, radial pulse absent, unable to follow commands.",
+        "expected_code": "RED",
+        "reasoning": "Absent radial pulse and inability to follow commands indicate severe shock or brain injury.",
+        "source": "curated"
+    },
+    {
+        "id": "T031",
+        "description": "Adult female with fractured pelvis. Breathing 22/min, radial pulse present, cap refill 1 second, alert but cannot stand.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable vital signs with inability to ambulate classify patient as YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T032",
+        "description": "Adult male exposed to toxic gas. Respiratory rate 42/min, cyanotic lips, confused.",
+        "expected_code": "RED",
+        "reasoning": "Severe respiratory distress and altered mental status require immediate care.",
+        "source": "curated"
+    },
+    {
+        "id": "T033",
+        "description": "Child, 9 years old, trapped during collapse. No respirations and no pulse detected.",
+        "expected_code": "BLACK",
+        "reasoning": "No breathing after repositioning and absent pulse indicate deceased category.",
+        "source": "curated"
+    },
+    {
+        "id": "T034",
+        "description": "Adult female with ankle fracture. Sitting upright, breathing normally, obeying commands, unable to walk.",
+        "expected_code": "YELLOW",
+        "reasoning": "Patient is stable but not ambulatory, fitting delayed care category.",
+        "source": "curated"
+    },
+    {
+        "id": "T035",
+        "description": "Adult male with severe facial trauma. Respiratory rate 31/min, follows commands weakly.",
+        "expected_code": "RED",
+        "reasoning": "Respiratory rate greater than 30/min classifies patient as RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T036",
+        "description": "Adult female with minor cuts and bruises after train accident. Walking and assisting others.",
+        "expected_code": "GREEN",
+        "reasoning": "Walking wounded are categorized as GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T037",
+        "description": "Adult male with severe hemorrhage from arm amputation. Respiratory rate 26/min, cap refill 5 seconds.",
+        "expected_code": "RED",
+        "reasoning": "Critical bleeding and poor perfusion require immediate intervention.",
+        "source": "curated"
+    },
+    {
+        "id": "T038",
+        "description": "Adult female with smoke inhalation. Breathing 20/min, pulse strong, alert, unable to walk due to dizziness.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable airway and circulation but non-ambulatory status classify patient as YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T039",
+        "description": "Adult male with severe head injury. Respiratory rate 16/min, pulse present, does not respond to verbal commands.",
+        "expected_code": "RED",
+        "reasoning": "Inability to follow commands indicates altered mental status requiring immediate care.",
+        "source": "curated"
+    },
+    {
+        "id": "T040",
+        "description": "Adult female rescued from debris. Walking slowly with superficial abrasions and stable breathing.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory patient with minor injuries is classified as GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T041",
+        "description": "Male, approximately 45 years old. Found lying near overturned bus. Gasping respirations at 38/min, skin pale and clammy, unable to answer simple questions.",
+        "expected_code": "RED",
+        "reasoning": "Respiratory distress and altered mental status indicate immediate intervention.",
+        "source": "curated"
+    },
+    {
+        "id": "T042",
+        "description": "Young woman walking away from explosion scene holding her left arm. Alert, talking clearly, small bleeding cut on forearm.",
+        "expected_code": "GREEN",
+        "reasoning": "Patient is ambulatory with only minor injuries.",
+        "source": "curated"
+    },
+    {
+        "id": "T043",
+        "description": "Construction worker trapped under concrete slab. Not breathing initially; after airway repositioning begins breathing at 24/min.",
+        "expected_code": "RED",
+        "reasoning": "Breathing restored after airway repositioning requires RED categorization.",
+        "source": "curated"
+    },
+    {
+        "id": "T044",
+        "description": "Teenage boy with visible tibia fracture. Conscious, breathing 20/min, radial pulse strong, repeatedly asks where he is.",
+        "expected_code": "RED",
+        "reasoning": "Confusion and inability to maintain orientation indicate altered mental status.",
+        "source": "curated"
+    },
+    {
+        "id": "T045",
+        "description": "Adult female seated on curb after train derailment. Complains of chest pain but breathing normal, follows all commands, cannot walk due to pain.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable vitals but non-ambulatory condition indicates delayed treatment.",
+        "source": "curated"
+    },
+    {
+        "id": "T046",
+        "description": "Child around 5 years old pulled from rubble. No breathing after head tilt maneuver. No spontaneous movement.",
+        "expected_code": "BLACK",
+        "reasoning": "Persistent apnea after airway repositioning classifies as BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T047",
+        "description": "Middle-aged male with burns covering both arms. Walking independently and shouting for help.",
+        "expected_code": "GREEN",
+        "reasoning": "Walking wounded patients are classified GREEN initially.",
+        "source": "curated"
+    },
+    {
+        "id": "T048",
+        "description": "Woman found unconscious near chemical spill. Respiratory rate 8/min, weak radial pulse, does not open eyes to voice.",
+        "expected_code": "RED",
+        "reasoning": "Severely depressed respirations and altered mental status require immediate care.",
+        "source": "curated"
+    },
+    {
+        "id": "T049",
+        "description": "Male cyclist struck by debris. Respiratory rate 26/min, cap refill 1 second, alert, severe leg pain preventing walking.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable patient unable to ambulate falls into delayed category.",
+        "source": "curated"
+    },
+    {
+        "id": "T050",
+        "description": "Adult male with penetrating neck injury. Breathing 44/min with noisy respirations and cyanosis.",
+        "expected_code": "RED",
+        "reasoning": "Critical airway compromise and respiratory rate above 30/min indicate RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T051",
+        "description": "Woman carrying child while evacuating apartment fire. Minor soot on face, speaking normally, ambulatory.",
+        "expected_code": "GREEN",
+        "reasoning": "Patient is ambulatory and stable.",
+        "source": "curated"
+    },
+    {
+        "id": "T052",
+        "description": "Older male with crushed pelvis. Respiratory rate 18/min, absent radial pulse, cap refill 5 seconds.",
+        "expected_code": "RED",
+        "reasoning": "Poor perfusion signs indicate shock requiring immediate treatment.",
+        "source": "curated"
+    },
+    {
+        "id": "T053",
+        "description": "College student sitting against wall after explosion. Awake, breathing 22/min, pulse present, unable to stand because of ankle deformity.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable but non-ambulatory patient requires delayed care.",
+        "source": "curated"
+    },
+    {
+        "id": "T054",
+        "description": "Unresponsive adult female recovered from river flooding. No respirations after airway repositioning.",
+        "expected_code": "BLACK",
+        "reasoning": "No breathing after airway intervention classifies patient as BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T055",
+        "description": "Adult male limping away from collapsed building with superficial scalp wound and stable breathing.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory patient with minor trauma is GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T056",
+        "description": "Female approximately 30 years old. Breathing 32/min after blast exposure, follows commands but skin cool and pale.",
+        "expected_code": "RED",
+        "reasoning": "Respiratory rate above 30/min requires RED classification.",
+        "source": "curated"
+    },
+    {
+        "id": "T057",
+        "description": "Child found crying beside vehicle collision. Small arm abrasion, walking independently toward responders.",
+        "expected_code": "GREEN",
+        "reasoning": "Walking pediatric patient is categorized GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T058",
+        "description": "Adult female with open femur fracture. Respiratory rate 24/min, radial pulse present, obeys commands, unable to move safely.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable vitals but significant injury preventing ambulation indicates YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T059",
+        "description": "Male trapped in smoke-filled room. Respiratory rate 35/min, confused responses, soot around mouth.",
+        "expected_code": "RED",
+        "reasoning": "Respiratory distress and altered mentation require immediate attention.",
+        "source": "curated"
+    },
+    {
+        "id": "T060",
+        "description": "Adult female sitting calmly after stadium stampede. Reports mild wrist pain and can walk without difficulty.",
+        "expected_code": "GREEN",
+        "reasoning": "Minor injury with ability to ambulate places patient in GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T061",
+        "description": "Male with severe abdominal bleeding after industrial accident. Cap refill 6 seconds, confused, breathing 28/min.",
+        "expected_code": "RED",
+        "reasoning": "Delayed perfusion and altered mental status indicate shock.",
+        "source": "curated"
+    },
+    {
+        "id": "T062",
+        "description": "Elderly woman complaining of hip pain after earthquake. Alert, radial pulse strong, breathing 20/min, unable to stand.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable but non-ambulatory patient fits delayed category.",
+        "source": "curated"
+    },
+    {
+        "id": "T063",
+        "description": "Adult male pulled from burning vehicle. Apneic even after airway repositioning.",
+        "expected_code": "BLACK",
+        "reasoning": "Persistent apnea after airway repositioning indicates BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T064",
+        "description": "Young adult female assisting others during evacuation despite cuts to both knees.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory and functional patient is GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T065",
+        "description": "Adult male with penetrating chest wound. Respirations shallow at 39/min, cannot state his name.",
+        "expected_code": "RED",
+        "reasoning": "High respiratory rate and inability to answer appropriately indicate RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T066",
+        "description": "Child with displaced shoulder injury. Crying, breathing normally, unable to walk because trapped leg is painful.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable pediatric patient with mobility limitation requires delayed care.",
+        "source": "curated"
+    },
+    {
+        "id": "T067",
+        "description": "Adult woman with minor facial lacerations walking toward triage area asking for family members.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory patient with minor injuries is GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T068",
+        "description": "Factory worker unconscious after toxic inhalation. Breathing 14/min but no radial pulse palpable.",
+        "expected_code": "RED",
+        "reasoning": "Absent radial pulse indicates severe perfusion compromise.",
+        "source": "curated"
+    },
+    {
+        "id": "T069",
+        "description": "Adult male with spinal tenderness after roof collapse. Alert, breathing 18/min, pulse present, unable to ambulate safely.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable condition but delayed mobility places patient in YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T070",
+        "description": "Unresponsive child recovered after blast. No breathing despite airway repositioning and stimulation.",
+        "expected_code": "BLACK",
+        "reasoning": "No respirations after intervention indicates BLACK category.",
+        "source": "curated"
+    },
+    {
+        "id": "T071",
+        "description": "Adult male with small hand burns waving responders over while walking independently.",
+        "expected_code": "GREEN",
+        "reasoning": "Walking wounded are GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T072",
+        "description": "Female trapped in elevator after explosion. Respiratory rate 33/min, cap refill 4 seconds, anxious and disoriented.",
+        "expected_code": "RED",
+        "reasoning": "Respiratory distress and poor perfusion indicate RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T073",
+        "description": "Adult male with fractured clavicle. Sitting upright, alert, breathing 21/min, cannot lift arm but ambulates slowly.",
+        "expected_code": "GREEN",
+        "reasoning": "Patient remains ambulatory and stable.",
+        "source": "curated"
+    },
+    {
+        "id": "T074",
+        "description": "Adult female with severe crush injury to lower leg. Pulse weak, cap refill 5 seconds, follows commands.",
+        "expected_code": "RED",
+        "reasoning": "Poor perfusion signs require immediate intervention.",
+        "source": "curated"
+    },
+    {
+        "id": "T075",
+        "description": "Teenage girl with possible pelvic fracture. Breathing normal, alert, unable to stand or walk.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable but non-ambulatory patient fits delayed category.",
+        "source": "curated"
+    },
+    {
+        "id": "T076",
+        "description": "Adult male with blast lung injury. Respiratory rate 41/min and coughing blood.",
+        "expected_code": "RED",
+        "reasoning": "Critical respiratory compromise requires immediate treatment.",
+        "source": "curated"
+    },
+    {
+        "id": "T077",
+        "description": "Middle-aged woman with bruised shoulder walking steadily through triage checkpoint.",
+        "expected_code": "GREEN",
+        "reasoning": "Minor ambulatory injury is categorized GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T078",
+        "description": "Adult male semi-conscious after motorcycle crash. Breathing 18/min, unable to obey commands.",
+        "expected_code": "RED",
+        "reasoning": "Inability to follow commands indicates altered mental status.",
+        "source": "curated"
+    },
+    {
+        "id": "T079",
+        "description": "Young male athlete with dislocated knee. Alert, breathing 20/min, strong pulse, cannot walk.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable patient requiring delayed orthopedic management.",
+        "source": "curated"
+    },
+    {
+        "id": "T080",
+        "description": "Adult female rescued from collapsed tunnel. Not breathing after airway repositioning.",
+        "expected_code": "BLACK",
+        "reasoning": "Persistent apnea places patient in BLACK category.",
+        "source": "curated"
+    },
+    {
+        "id": "T081",
+        "description": "Adult male with scalp abrasion and dusty clothing walking toward aid station unaided.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory patient with minor trauma is GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T082",
+        "description": "Adult female with severe asthma attack after smoke exposure. Respiratory rate 37/min, struggling to speak full sentences.",
+        "expected_code": "RED",
+        "reasoning": "Severe respiratory distress requires immediate care.",
+        "source": "curated"
+    },
+    {
+        "id": "T083",
+        "description": "Older male seated beside roadway after bus collision. Alert, breathing 19/min, complains of severe back pain and cannot stand.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable but non-ambulatory condition indicates delayed treatment.",
+        "source": "curated"
+    },
+    {
+        "id": "T084",
+        "description": "Adult male unconscious beneath debris pile. No respirations after airway repositioning.",
+        "expected_code": "BLACK",
+        "reasoning": "No spontaneous breathing after intervention indicates BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T085",
+        "description": "Adult female with small cuts to forehead helping move supplies during evacuation.",
+        "expected_code": "GREEN",
+        "reasoning": "Patient is ambulatory and minimally injured.",
+        "source": "curated"
+    },
+    {
+        "id": "T086",
+        "description": "Male with severe facial burns. Respiratory rate 34/min, confused and unable to follow simple instructions.",
+        "expected_code": "RED",
+        "reasoning": "Respiratory distress and altered mentation indicate RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T087",
+        "description": "Child sitting quietly with suspected arm fracture. Breathing normally, follows commands, unable to walk due to leg pain.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable child requiring delayed treatment.",
+        "source": "curated"
+    },
+    {
+        "id": "T088",
+        "description": "Adult male with abrasions to both hands jogging toward responders after earthquake.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory status classifies patient as GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T089",
+        "description": "Adult female with penetrating abdominal trauma. Respiratory rate 27/min, absent radial pulse, lethargic responses.",
+        "expected_code": "RED",
+        "reasoning": "Perfusion failure and altered responsiveness require immediate care.",
+        "source": "curated"
+    },
+    {
+        "id": "T090",
+        "description": "Male with closed femur fracture. Awake, breathing 18/min, cap refill 2 seconds, unable to stand.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable but unable to ambulate indicates YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T091",
+        "description": "He was hit by a falling beam and is lying on the ground. He is breathing very fast, around 35 breaths a minute, and his wrist pulse feels very faint.",
+        "expected_code": "RED",
+        "reasoning": "RR>30 and weak pulse indicate immediate priority.",
+        "source": "curated"
+    },
+    {
+        "id": "T092",
+        "description": "Young mum holding her baby after a building collapse, covered in dust. She says her chest feels tight and she is breathing very fast (like 42 breaths a minute) and coughing a lot.",
+        "expected_code": "RED",
+        "reasoning": "RR>30 indicates immediate intervention needed.",
+        "source": "curated"
+    },
+    {
+        "id": "T093",
+        "description": "An elderly neighbour fell out of a tree. He says he can't feel anything below his waist, but he's breathing normally and answering questions.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable breathing and mental status but suspected spinal injury needs delayed care.",
+        "source": "curated"
+    },
+    {
+        "id": "T094",
+        "description": "A little boy at a carnival scraped his knee. He\u2019s crying but walking away and otherwise seems fine.",
+        "expected_code": "GREEN",
+        "reasoning": "Walking wounded are GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T095",
+        "description": "Teenage boy on the sports field has a chunk of flesh missing from his arm. He\u2019s breathing hard but still running and waving at people.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory patient with injury is GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T096",
+        "description": "A lab worker is on the ground after a gas canister explosion. He wasn\u2019t breathing at first, but then he started gasping for air.",
+        "expected_code": "RED",
+        "reasoning": "Breathing resumed after airway compromise, so patient is RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T097",
+        "description": "A little girl is choking on food and passed out. Even after we tilted her head, she still isn\u2019t breathing at all.",
+        "expected_code": "BLACK",
+        "reasoning": "No breathing after airway repositioning = BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T098",
+        "description": "A man with a chest injury from an explosion is breathing fine, but he won\u2019t answer simple questions properly.",
+        "expected_code": "RED",
+        "reasoning": "Not following commands indicates RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T099",
+        "description": "Kid tried to stand up from rubble but wobbled and said he feels short of breath.",
+        "expected_code": "YELLOW",
+        "reasoning": "He\u2019s conscious and can move, not immediate life threat, so YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T100",
+        "description": "A woman with a head wound after a crash is breathing very slowly, about 10 breaths a minute, with a steady pulse.",
+        "expected_code": "RED",
+        "reasoning": "Very slow breathing indicates respiratory failure, RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T101",
+        "description": "A man fell and he\u2019s breathing okay. But he\u2019s acting confused and shouting random answers when we ask him things.",
+        "expected_code": "RED",
+        "reasoning": "Altered mental status and not following commands = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T102",
+        "description": "An elderly man collapsed. He\u2019s breathing normally at 12, but he won\u2019t speak clearly and his wrist pulse is very weak.",
+        "expected_code": "RED",
+        "reasoning": "Weak pulse (shock) and altered mental status = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T103",
+        "description": "A little boy has eyes open and is breathing normally after a crash, but he only responds to pain and doesn\u2019t talk when we shout at him.",
+        "expected_code": "RED",
+        "reasoning": "Cannot follow commands (responds only to pain) = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T104",
+        "description": "Man with a gunshot wound in his leg is walking to safety with help. He\u2019s breathing 18, alert, but says he can\u2019t stand on that leg.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable vitals but non-ambulatory = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T105",
+        "description": "A teen girl is lying on the pavement after a scare, breathing 24, very pale. She\u2019s asleep and doesn\u2019t wake up to voice or pain.",
+        "expected_code": "RED",
+        "reasoning": "Unresponsive (not following commands) with shock signs = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T106",
+        "description": "Man covered in cuts is sprinting and shouting that he\u2019s okay.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory, minor injuries = GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T107",
+        "description": "Woman crying from eye irritation after a chemical spill, but she\u2019s breathing fine and rubbing her eyes.",
+        "expected_code": "GREEN",
+        "reasoning": "Stable and ambulatory (minor issue) = GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T108",
+        "description": "Mother just rescued her child from drowning; the child is breathing at 16, is pinking up and seems fine.",
+        "expected_code": "GREEN",
+        "reasoning": "Stable breathing and alert = GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T109",
+        "description": "An elderly woman with chest injuries from a collision is breathing very shallow, maybe 9 breaths a minute.",
+        "expected_code": "RED",
+        "reasoning": "Very slow breathing (under 10) indicates respiratory failure, RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T110",
+        "description": "Young man complaining of a bad headache after an explosion, breathing 28, but he seems dazed and answers very slowly.",
+        "expected_code": "RED",
+        "reasoning": "Altered mental status (slow response) = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T111",
+        "description": "Girl with chest bleeding from a shattered window is breathing okay, but I can\u2019t feel her pulse on her wrist.",
+        "expected_code": "RED",
+        "reasoning": "Absent radial pulse = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T112",
+        "description": "Man found motionless after a bomb blast; he\u2019s not breathing at all, even after we tilted his head.",
+        "expected_code": "BLACK",
+        "reasoning": "No breathing after airway reposition = BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T113",
+        "description": "Woman has burns on her arms from spilled acid, but she\u2019s calm, her skin is red and she\u2019s breathing fine and talking normally.",
+        "expected_code": "GREEN",
+        "reasoning": "Stable and ambulatory = GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T114",
+        "description": "Teen with a metal rod through his leg is breathing 20 and answering my questions, but he refuses to try standing.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable vitals but cannot ambulate = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T115",
+        "description": "Man complaining of dizziness after a collapse, breathing 22, seems confused and gives wrong answers.",
+        "expected_code": "RED",
+        "reasoning": "Confusion (altered mental status) = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T116",
+        "description": "Boy with small chest cuts is walking around and joking.",
+        "expected_code": "GREEN",
+        "reasoning": "Walking wounded = GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T117",
+        "description": "Woman says she inhaled thick smoke, coughing and breathing 32 times a minute.",
+        "expected_code": "RED",
+        "reasoning": "RR>30 from smoke inhalation = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T118",
+        "description": "Man lying in a pool of blood after a crash, not moving, foam around his mouth, he isn\u2019t breathing.",
+        "expected_code": "BLACK",
+        "reasoning": "No breathing after reposition = BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T119",
+        "description": "Little boy doesn\u2019t answer when I call his name, but he\u2019s breathing fine, about 20 times a minute.",
+        "expected_code": "RED",
+        "reasoning": "Not following commands (altered mental status) = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T120",
+        "description": "Teen sprained his ankle, but he\u2019s breathing fine and still standing.",
+        "expected_code": "GREEN",
+        "reasoning": "Stable and ambulatory = GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T121",
+        "description": "Man near a chemical spill is now breathing really hard at 34 and looking pale.",
+        "expected_code": "RED",
+        "reasoning": "RR>30 from chemical exposure = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T122",
+        "description": "Driver ran over a pedestrian; he\u2019s moaning on the ground and breathing normally, but I don\u2019t feel a pulse on his wrist.",
+        "expected_code": "RED",
+        "reasoning": "Absent radial pulse = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T123",
+        "description": "Woman lying on the ground, bleeding badly, breathing 18, pulse present, but looking very shaken.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable vitals with serious injury = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T124",
+        "description": "Teenager gored by a bull is lying down, breathing 17 and motionless below the waist.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable breathing but likely spinal injury = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T125",
+        "description": "Man thrown from his vehicle, leg mangled, breathing very fast, about 40 breaths a minute.",
+        "expected_code": "RED",
+        "reasoning": "RR>30 indicates immediate = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T126",
+        "description": "Man rescued from collapse is breathing normally and can move, but he keeps saying random things and won\u2019t remember where he is.",
+        "expected_code": "RED",
+        "reasoning": "Inability to follow commands (confusion) = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T127",
+        "description": "Child with a cut on her foot is crying but running towards her parents.",
+        "expected_code": "GREEN",
+        "reasoning": "Walking and consolable = GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T128",
+        "description": "Older woman at a fire site is calmly walking away, holding her shoulder.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory and stable = GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T129",
+        "description": "Teen girl with a broken wrist is breathing 25 and following what we say.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory with minor injury = GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T130",
+        "description": "Worker collapsed under debris, gasping then silent after I tilted his head.",
+        "expected_code": "BLACK",
+        "reasoning": "No breathing after airway reposition = BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T131",
+        "description": "Woman with a headache after an explosion is breathing 18 but answers questions slowly, not alert.",
+        "expected_code": "RED",
+        "reasoning": "Altered mental status (slow response) = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T132",
+        "description": "Girl fell off her bike, scraped knee, crying but walking to her mum.",
+        "expected_code": "GREEN",
+        "reasoning": "Walking wounded = GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T133",
+        "description": "Man after a stampede has bruises on his arms, breathing 18, talking normally.",
+        "expected_code": "GREEN",
+        "reasoning": "Stable and ambulatory = GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T134",
+        "description": "Teacher hit by a car, not breathing after I repositioned his head.",
+        "expected_code": "BLACK",
+        "reasoning": "No breathing after airway reposition = BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T135",
+        "description": "Man with a bleeding leg, breathing 16, but I can barely feel his wrist pulse.",
+        "expected_code": "RED",
+        "reasoning": "Absent or weak radial pulse = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T136",
+        "description": "Adult female with a headache after collapse, breathing 16, pulse normal, follows instructions fine.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable vitals and alert = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T137",
+        "description": "Boy screaming in pain with a broken arm, breathing 30 exactly, pulse strong.",
+        "expected_code": "YELLOW",
+        "reasoning": "RR not >30, stable but needs delayed care = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T138",
+        "description": "Elderly man lying on the road, breathing normal, eyes open, but can\u2019t feel or move his legs.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable vitals but likely spinal injury = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T139",
+        "description": "High schooler having a severe asthma attack, breathing 45 times a minute.",
+        "expected_code": "RED",
+        "reasoning": "RR>30 (too rapid) = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T140",
+        "description": "Man jumped from a building, lying there breathing 15, but his wrist has no pulse.",
+        "expected_code": "RED",
+        "reasoning": "Absent radial pulse indicates shock = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T141",
+        "description": "Adult female, building collapse. Non-ambulatory, breathing rapidly at 34 breaths/min. Radial pulse is present and follows commands.",
+        "expected_code": "RED",
+        "reasoning": "A respiratory rate exceeding 30 breaths per minute is an automatic RED classification for adults.",
+        "source": "curated"
+    },
+    {
+        "id": "T142",
+        "description": "Adult male, found in rubble. RR 22, radial pulse is absent, capillary refill is 4 seconds. He is awake and groaning.",
+        "expected_code": "RED",
+        "reasoning": "Absent radial pulse or capillary refill > 2 seconds indicates poor perfusion and necessitates a RED tag.",
+        "source": "curated"
+    },
+    {
+        "id": "T143",
+        "description": "Adult male, unconscious on the ground. RR 16, radial pulse present, but patient does not respond to verbal commands or 'squeeze my hand'.",
+        "expected_code": "RED",
+        "reasoning": "Failure to follow simple commands signifies altered mental status or neurological compromise, triggering a RED tag.",
+        "source": "curated"
+    },
+    {
+        "id": "T144",
+        "description": "Adult female, apneic. After performing a head-tilt/chin-lift maneuver, the patient begins breathing spontaneously at 12 breaths/min.",
+        "expected_code": "RED",
+        "reasoning": "Apneic patients who resume breathing only after the airway is manually opened are categorized as RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T145",
+        "description": "Adult male, massive head trauma. No spontaneous respirations. Airway repositioned, but patient remains apneic.",
+        "expected_code": "BLACK",
+        "reasoning": "Patients who remain apneic after airway repositioning are classified as deceased/expectant in mass casualty settings.",
+        "source": "curated"
+    },
+    {
+        "id": "T146",
+        "description": "Adult male, leg trapped under a vehicle. RR 20, radial pulse present, follows commands, but cannot walk due to entrapment and a suspected femur fracture.",
+        "expected_code": "YELLOW",
+        "reasoning": "Patient is non-ambulatory but has stable RPM (Respiration < 30, Pulse present, Mental status intact), classifying them as YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T147",
+        "description": "Child, 5 years old. Walking toward the medic while crying for her mother. Visible laceration on the forehead with minor bleeding.",
+        "expected_code": "GREEN",
+        "reasoning": "The JumpSTART protocol classifies all ambulatory pediatric patients as GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T148",
+        "description": "Child, 4 years old. RR 52, peripheral pulse present. Patient is not walking and appears very distressed.",
+        "expected_code": "RED",
+        "reasoning": "In JumpSTART, a pediatric respiratory rate > 45 or < 15 breaths per minute is a RED indicator.",
+        "source": "curated"
+    },
+    {
+        "id": "T149",
+        "description": "Child, 6 years old. RR 24, peripheral pulse is absent. Patient is unconscious.",
+        "expected_code": "RED",
+        "reasoning": "The absence of a palpable peripheral pulse in a breathing child is a critical indicator of shock, requiring a RED tag.",
+        "source": "curated"
+    },
+    {
+        "id": "T150",
+        "description": "Child, 3 years old. Not breathing. Peripheral pulse is present. Airway opened, still no breath. 5 rescue breaths given, after which spontaneous breathing resumes.",
+        "expected_code": "RED",
+        "reasoning": "JumpSTART 'ventilatory trial': an apneic child with a pulse who resumes breathing after 5 rescue breaths is tagged RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T151",
+        "description": "Child, 2 years old. Not breathing. Pulse is present. Airway opened, still no breath. 5 rescue breaths given, but patient remains apneic.",
+        "expected_code": "BLACK",
+        "reasoning": "If apnea persists after airway positioning and 5 rescue breaths in a child with a pulse, they are tagged BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T152",
+        "description": "Child, 7 years old. RR 30, pulse present. Does not respond to verbal commands; when given a painful stimulus, he moans and moves in a non-localizing fashion.",
+        "expected_code": "RED",
+        "reasoning": "An 'inappropriate' response to pain (non-localizing or moaning) in a child results in a RED tag under JumpSTART.",
+        "source": "curated"
+    },
+    {
+        "id": "T153",
+        "description": "Adult female, blunt chest trauma. Significant respiratory distress, RR 36. Neck veins appear distended (JVD), and breath sounds are absent on the right side.",
+        "expected_code": "RED",
+        "reasoning": "Clinical signs of tension pneumothorax combined with tachypnea (RR > 30) classify the patient as RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T154",
+        "description": "Adult male, structural collapse. Both legs trapped under a concrete slab for 4 hours. RR 22, pulse present, alert and oriented. Pain is severe.",
+        "expected_code": "YELLOW",
+        "reasoning": "While at risk for crush syndrome, current stable vitals and mental status place the patient in YELLOW for delayed transport.",
+        "source": "curated"
+    },
+    {
+        "id": "T155",
+        "description": "Geriatric female, 82 years old. RR 28, pulse 58, CRT 2 seconds. Patient is confused about the date and location, claiming she is in her own home.",
+        "expected_code": "RED",
+        "reasoning": "Confusion in elderly patients, especially with masked vitals (potential beta-blockers), is a critical neurological indicator for RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T156",
+        "description": "Adult male, fire victim. Deep facial burns, soot noted in the nares and mouth. RR 32, radial pulse present, follows commands.",
+        "expected_code": "RED",
+        "reasoning": "Airway involvement (soot) and a respiratory rate > 30 indicate immediate life-threatening injury.",
+        "source": "curated"
+    },
+    {
+        "id": "T157",
+        "description": "Adult male, neck trauma from flying debris. Profuse bleeding, CRT > 3 seconds, patient is unresponsive.",
+        "expected_code": "RED",
+        "reasoning": "Compromised perfusion (CRT > 2s) and unconsciousness are immediate indicators for RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T158",
+        "description": "Adult female, dazed. Obvious arm deformity/fracture. RR 22, radial pulse present, follows commands, but is too painful to walk.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory but with normal respirations, perfusion, and mental status qualifies as YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T159",
+        "description": "Child, 8 years old. RR 12, peripheral pulse present. Patient is awake but breathing very slowly.",
+        "expected_code": "RED",
+        "reasoning": "In pediatric triage, a respiratory rate below 15 is considered inadequate and triggers a RED tag.",
+        "source": "curated"
+    },
+    {
+        "id": "T160",
+        "description": "Adult female, penetrating chest wound. RR 36, distended neck veins (JVD), and absent breath sounds on the left. Radial pulse is weak and rapid.",
+        "expected_code": "RED",
+        "reasoning": "Clinical signs of tension pneumothorax and $RR > 30$ both mandate a RED tag.",
+        "source": "curated"
+    },
+    {
+        "id": "T161",
+        "description": "Adult male, found dazed. RR 8 per minute, radial pulse present, follows simple commands.",
+        "expected_code": "RED",
+        "reasoning": "Under START, a respiratory rate below 10 or above 30 breaths per minute is an automatic indicator for RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T162",
+        "description": "Geriatric male, 65 years old, complaining of sudden onset chest pain and shortness of breath. RR 28, CRT < 2 seconds, radial pulse present. He is too shaken to stand or walk.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory but currently stable RPM (RR < 30, Pulse present, Mental status intact) classifies as YELLOW, though geriatric chest pain requires high priority for transport.",
+        "source": "curated"
+    },
+    {
+        "id": "T163",
+        "description": "Child, 5 years old. RR 12, peripheral pulse is palpable. He responds to verbal stimuli.",
+        "expected_code": "RED",
+        "reasoning": "In pediatric JumpSTART, a respiratory rate $< 15$ or $> 45$ is a RED indicator.",
+        "source": "curated"
+    },
+    {
+        "id": "T164",
+        "description": "Adult female, open femur fracture with significant arterial bleeding. RR 24. Radial pulse is absent and skin is cool/clammy.",
+        "expected_code": "RED",
+        "reasoning": "Absent radial pulse indicates poor perfusion/shock, triggering a RED tag regardless of other vitals.",
+        "source": "curated"
+    },
+    {
+        "id": "T165",
+        "description": "Adult male, found unconscious with an open head wound. Bleeding is controlled. RR 16, radial pulse 88 and strong.",
+        "expected_code": "RED",
+        "reasoning": "A patient who is unconscious or cannot follow simple commands is categorized as RED under START logic.",
+        "source": "curated"
+    },
+    {
+        "id": "T166",
+        "description": "Child, 3 years old. Apneic after airway repositioning. Peripheral pulse is present. Rescuer provides 5 rescue breaths, but the child remains apneic.",
+        "expected_code": "BLACK",
+        "reasoning": "If a pediatric patient remains apneic after airway opening and a 'ventilatory trial' of 5 breaths, they are tagged BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T167",
+        "description": "Adult male, entrapped under debris for 6 hours. RR 20, pulse present, mental status intact. He notes his urine was 'the color of Coca-Cola' before arrival.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable vitals currently place the patient in YELLOW, though the description of tea-colored urine suggests traumatic rhabdomyolysis and imminent crush syndrome.",
+        "source": "curated"
+    },
+    {
+        "id": "T168",
+        "description": "Adult male, approximately 20% TBSA burns on back and legs. He is walking around the scene asking for water.",
+        "expected_code": "GREEN",
+        "reasoning": "START protocol dictates that all ambulatory ('walking') patients are initially tagged GREEN, though they require close monitoring for deterioration.",
+        "source": "curated"
+    },
+    {
+        "id": "T169",
+        "description": "Adult female, non-ambulatory. RR 32, radial pulse is palpable, follows commands.",
+        "expected_code": "RED",
+        "reasoning": "Any adult with a respiratory rate exceeding 30 breaths per minute is categorized as RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T170",
+        "description": "Adult male, blunt abdominal trauma. RR 22, radial pulse is absent, capillary refill is 3.5 seconds.",
+        "expected_code": "RED",
+        "reasoning": "Absent radial pulse or CRT $> 2$ seconds indicates a circulatory emergency, necessitating a RED tag.",
+        "source": "curated"
+    },
+    {
+        "id": "T171",
+        "description": "Adult female, non-ambulatory. RR 24, radial pulse present, but fails to follow the command to 'squeeze my hand'.",
+        "expected_code": "RED",
+        "reasoning": "Inability to follow simple commands is a criterion for an immediate (RED) classification.",
+        "source": "curated"
+    },
+    {
+        "id": "T172",
+        "description": "Child, 4 years old. RR 25, pulse present. Does not respond to voice; when given a painful stimulus, the child moans and exhibits non-localizing movement.",
+        "expected_code": "RED",
+        "reasoning": "Inappropriate response to pain (non-localizing/moaning) in a pediatric patient triggers a RED tag in JumpSTART.",
+        "source": "curated"
+    },
+    {
+        "id": "T173",
+        "description": "Adult male, massive trauma with exposed brain matter. RR 4 and irregular, radial pulse absent, unresponsive.",
+        "expected_code": "BLACK",
+        "reasoning": "Injuries incompatible with survival or apnea with no pulse after intervention lead to a BLACK tag.",
+        "source": "curated"
+    },
+    {
+        "id": "T174",
+        "description": "Adolescent female, 17 years old. Walking and crying, appearing dazed but following all instructions. Minor abrasions on arms.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory status is the primary indicator for a GREEN tag for both START and JumpSTART.",
+        "source": "curated"
+    },
+    {
+        "id": "T175",
+        "description": "Geriatric female, 82 years old, found sitting. RR 22, pulse 58 (patient takes beta-blockers), CRT is 4 seconds. She is confused about her location.",
+        "expected_code": "RED",
+        "reasoning": "Prolonged capillary refill and altered mental status in an elderly patient are critical indicators, potentially masked by medications.",
+        "source": "curated"
+    },
+    {
+        "id": "T176",
+        "description": "Adult male, neck trauma. Profuse bleeding, CRT 4 seconds. He is not following simple commands.",
+        "expected_code": "RED",
+        "reasoning": "Delayed capillary refill and failure to follow commands confirm an 'Immediate' triage status.",
+        "source": "curated"
+    },
+    {
+        "id": "T177",
+        "description": "Child, 4 years old. Non-ambulatory. RR 50, peripheral pulse present.",
+        "expected_code": "RED",
+        "reasoning": "A pediatric respiratory rate greater than 45 breaths per minute is a JumpSTART RED indicator.",
+        "source": "curated"
+    },
+    {
+        "id": "T178",
+        "description": "Adult male, traumatic asphyxia from structural collapse. Cyanosis of the face and neck, petechiae on the torso. RR 35, radial pulse present.",
+        "expected_code": "RED",
+        "reasoning": "A respiratory rate $> 30$ and signs of traumatic asphyxia require immediate (RED) intervention.",
+        "source": "curated"
+    },
+    {
+        "id": "T179",
+        "description": "Adult male, found in smoke-filled room. RR 24, radial pulse present. He has soot in his mouth and nose and is coughing hoarsely. He is dazed but follows commands.",
+        "expected_code": "RED",
+        "reasoning": "While his RPM vitals are within stable ranges, soot in the airway and hoarseness indicate impending airway obstruction from thermal injury, requiring immediate (RED) intervention.",
+        "source": "curated"
+    },
+    {
+        "id": "T180",
+        "description": "Child, 6 years old. Not breathing. Peripheral pulse is palpable. Airway repositioned, remains apneic. 5 rescue breaths given; patient begins breathing at 20 breaths/min.",
+        "expected_code": "RED",
+        "reasoning": "In JumpSTART, an apneic child with a pulse who resumes breathing after a 'ventilatory trial' of 5 rescue breaths is tagged RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T181",
+        "description": "Adult male, gurgling respirations. Airway is manually opened, and spontaneous respirations resume at 16 breaths/min. Radial pulse is present and he is following commands.",
+        "expected_code": "RED",
+        "reasoning": "Any patient who requires a manual intervention to maintain or open the airway is categorized as RED, even if respirations and pulse stabilize.",
+        "source": "curated"
+    },
+    {
+        "id": "T182",
+        "description": "Geriatric female, 85 years old. Fallen from height. RR 26, radial pulse 60, CRT 1.5 seconds. She is confused about the year and cannot follow the command to 'squeeze my hand'.",
+        "expected_code": "RED",
+        "reasoning": "Failure to follow simple commands is a RED indicator. In geriatric patients, confusion can also signal significant TBI or masked shock.",
+        "source": "curated"
+    },
+    {
+        "id": "T183",
+        "description": "Adult male, blunt chest trauma. RR 34 and shallow. Neck veins are distended (JVD) and the trachea is deviated to the right. Radial pulse is weak and rapid.",
+        "expected_code": "RED",
+        "reasoning": "Clinical presentation of a tension pneumothorax ($RR > 30$, JVD, tracheal deviation) is an immediate life-threat requiring RED classification.",
+        "source": "curated"
+    },
+    {
+        "id": "T184",
+        "description": "Child, 3 years old. Walking toward the triage officer. Multiple abrasions and a minor scalp laceration with controlled bleeding.",
+        "expected_code": "GREEN",
+        "reasoning": "The JumpSTART protocol dictates that all ambulatory ('walking') pediatric patients are initially tagged GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T185",
+        "description": "Adult female, massive abdominal evisceration. RR 22, radial pulse is present, and she is crying but answering all questions appropriately.",
+        "expected_code": "YELLOW",
+        "reasoning": "While the injury is visually severe, the patient currently has stable RPM (RR < 30, Pulse present, Mental status intact), classifying her as YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T186",
+        "description": "Child, 5 years old. RR 48, peripheral pulse is palpable. He responds only to painful stimuli by moaning and moving his arms in a non-localizing fashion.",
+        "expected_code": "RED",
+        "reasoning": "A pediatric respiratory rate greater than 45 ($RR > 45$) and an inappropriate response to pain (non-localizing/moaning) are both JumpSTART RED indicators.",
+        "source": "curated"
+    },
+    {
+        "id": "T187",
+        "description": "Adult male, trapped under heavy debris for 4 hours. RR 20, radial pulse present, follows commands. He reports he cannot feel his legs.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory but stable RPM indicates YELLOW. However, prolonged entrapment mandates high priority for crush syndrome monitoring.",
+        "source": "curated"
+    },
+    {
+        "id": "T188",
+        "description": "Adult female, chest trauma. RR 28, radial pulse is absent, and CRT is 4 seconds. She is dazed but can follow simple commands.",
+        "expected_code": "RED",
+        "reasoning": "The absence of a radial pulse or a capillary refill time $> 2$ seconds signifies impaired perfusion and an immediate RED tag.",
+        "source": "curated"
+    },
+    {
+        "id": "T189",
+        "description": "Child, 4 years old. Apneic. Pulse is absent. Airway opened, remains apneic.",
+        "expected_code": "BLACK",
+        "reasoning": "In JumpSTART, if a child is apneic and has no pulse after airway repositioning, they are tagged BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T190",
+        "description": "Adult male, found unconscious. RR 12, radial pulse present. No response to verbal or painful stimuli.",
+        "expected_code": "RED",
+        "reasoning": "Unconsciousness (failure to follow commands/AVPU 'U') results in an automatic RED tag under START.",
+        "source": "curated"
+    },
+    {
+        "id": "T191",
+        "description": "Adult female, sitting up. Arm fracture obvious. RR 24, radial pulse 110, CRT 1.5 seconds. Follows commands but is too painful to stand.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable RPM vitals in a non-ambulatory patient result in a YELLOW (Delayed) classification.",
+        "source": "curated"
+    },
+    {
+        "id": "T192",
+        "description": "Child, 8 years old. RR 12, pulse present. He is awake and crying.",
+        "expected_code": "RED",
+        "reasoning": "In JumpSTART, a pediatric respiratory rate less than 15 breaths per minute ($RR < 15$) is a RED indicator.",
+        "source": "curated"
+    },
+    {
+        "id": "T193",
+        "description": "Adult male, amputated finger. Walking toward medics. RR 20, pulse present, alert.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory status ('walking wounded') is the primary criterion for a GREEN tag in both START and JumpSTART.",
+        "source": "curated"
+    },
+    {
+        "id": "T194",
+        "description": "Geriatric male, 78 years old. RR 22, pulse 55, CRT 2 seconds. He is dazed and cannot remember where he is or what happened.",
+        "expected_code": "RED",
+        "reasoning": "Altered mental status in an elderly patient, even with seemingly 'normal' vitals, is a significant indicator for RED classification.",
+        "source": "curated"
+    },
+    {
+        "id": "T195",
+        "description": "Adult female, burn victim. 30% TBSA burns. RR 35, pulse present, follows commands.",
+        "expected_code": "RED",
+        "reasoning": "A respiratory rate $> 30$ per minute is a critical indicator of metabolic stress or inhalation injury, requiring RED classification.",
+        "source": "curated"
+    },
+    {
+        "id": "T196",
+        "description": "Child, 5 years old. RR 24, peripheral pulse is absent. The child is conscious but very pale and cool.",
+        "expected_code": "RED",
+        "reasoning": "Absence of a peripheral pulse in a child with spontaneous respirations indicates profound shock and requires a RED tag.",
+        "source": "curated"
+    },
+    {
+        "id": "T197",
+        "description": "Adult male, structural collapse. RR 0, pulse absent. Airway repositioned, remains apneic.",
+        "expected_code": "BLACK",
+        "reasoning": "Failure to resume spontaneous breathing after airway opening in an adult with no pulse results in a BLACK tag.",
+        "source": "curated"
+    },
+    {
+        "id": "T198",
+        "description": "Adult male, severe blunt chest trauma. RR 38, tracheal deviation noted, and distended neck veins. Radial pulse is absent.",
+        "expected_code": "RED",
+        "reasoning": "Tension pneumothorax signs combined with $RR > 30$ and absent radial pulse mandate an immediate RED tag.",
+        "source": "curated"
+    },
+    {
+        "id": "T199",
+        "description": "Child, 2 years old, found apneic. Palpable peripheral pulse present. Airway opened with no result. 5 rescue breaths given; patient remains apneic.",
+        "expected_code": "BLACK",
+        "reasoning": "In JumpSTART, an apneic child with a pulse who fails to breathe after 5 rescue breaths is tagged BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T200",
+        "description": "Geriatric male, 70 years old. Known to be on beta-blockers. RR 24, HR 52, capillary refill is 4 seconds. He appears confused about his location.",
+        "expected_code": "RED",
+        "reasoning": "Delayed capillary refill (> 2s) and altered mental status are RED flags, especially as medications can mask shock-induced tachycardia.",
+        "source": "curated"
+    },
+    {
+        "id": "T201",
+        "description": "Adult female, walking away from the blast site. Complaining of 'ringing in ears' and has minor cuts on her face.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory status ('walking wounded') results in an initial GREEN classification.",
+        "source": "curated"
+    },
+    {
+        "id": "T202",
+        "description": "Child, 7 years old. Breathing rapidly at 50 breaths per minute. Peripheral pulse is strong.",
+        "expected_code": "RED",
+        "reasoning": "In pediatric triage, a respiratory rate $> 45$ is an automatic indicator for a RED tag.",
+        "source": "curated"
+    },
+    {
+        "id": "T203",
+        "description": "Adult male, fire victim. Significant facial burns and soot in the mouth. RR 34, radial pulse present, follows commands.",
+        "expected_code": "RED",
+        "reasoning": "A respiratory rate $> 30$ and evidence of potential inhalation injury (soot/facial burns) require immediate RED prioritization.",
+        "source": "curated"
+    },
+    {
+        "id": "T204",
+        "description": "Adult male, open abdominal wound with minor evisceration. RR 22, radial pulse present, awake and oriented.",
+        "expected_code": "YELLOW",
+        "reasoning": "Despite the severity of the injury, stable RPM (RR < 30, Pulse present, Mental status intact) in a non-ambulatory patient is YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T205",
+        "description": "Adult female, unconscious with deep gurgling. Airway manually opened; spontaneous respirations resume at 14 breaths/min. Pulse is present.",
+        "expected_code": "RED",
+        "reasoning": "Patients who resume breathing only after manual airway maneuvers are categorized as RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T206",
+        "description": "Child, 10 years old, walking while holding a clearly fractured arm. Alert and crying loudly.",
+        "expected_code": "GREEN",
+        "reasoning": "Under JumpSTART, all ambulatory pediatric patients are initially tagged GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T207",
+        "description": "Adult male, massive trauma. Apneic and pulse-less. Airway repositioned with no response.",
+        "expected_code": "BLACK",
+        "reasoning": "Apneic and pulse-less patients after airway repositioning are categorized as deceased in MCIs.",
+        "source": "curated"
+    },
+    {
+        "id": "T208",
+        "description": "Adult male, head injury. RR 18, radial pulse present, but he is unresponsive to verbal or physical stimuli.",
+        "expected_code": "RED",
+        "reasoning": "Inability to follow commands or unresponsiveness results in a RED tag regardless of other vitals.",
+        "source": "curated"
+    },
+    {
+        "id": "T209",
+        "description": "Child, 4 years old. Breathing at 10 breaths per minute. Peripheral pulse is palpable.",
+        "expected_code": "RED",
+        "reasoning": "In pediatric triage, a respiratory rate $< 15$ indicates inadequate ventilation and requires a RED tag.",
+        "source": "curated"
+    },
+    {
+        "id": "T210",
+        "description": "Adult male, found under rubble. RR 36, radial pulse present, follows commands.",
+        "expected_code": "RED",
+        "reasoning": "A respiratory rate $> 30$ in an adult is an immediate indicator for RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T211",
+        "description": "Geriatric female, 88 years old. RR 20, radial pulse present. She responds appropriately to questions but is unable to stand or walk due to hip pain.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory with stable RPM (RR 10-30, Pulse present, follows commands) is YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T212",
+        "description": "Adult female, non-ambulatory. RR 28, radial pulse is absent, capillary refill is 3 seconds.",
+        "expected_code": "RED",
+        "reasoning": "Absent radial pulse or capillary refill $> 2$ seconds indicates a circulatory emergency (RED).",
+        "source": "curated"
+    },
+    {
+        "id": "T213",
+        "description": "Adult male, femoral fracture. RR 24, radial pulse present, alert and follows commands. Bleeding is controlled by a bystander.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory status with stable vitals and mental status meets YELLOW criteria.",
+        "source": "curated"
+    },
+    {
+        "id": "T214",
+        "description": "Child, 5 years old. Unresponsive, no pulse, and not breathing.",
+        "expected_code": "BLACK",
+        "reasoning": "Apneic and pulse-less pediatric patients are tagged BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T215",
+        "description": "Adult female, 40% TBSA burns. She is walking around the scene, crying, and following directions.",
+        "expected_code": "GREEN",
+        "reasoning": "In the START protocol, ambulatory victims are initially GREEN, regardless of burn severity unless they show respiratory distress.",
+        "source": "curated"
+    },
+    {
+        "id": "T216",
+        "description": "Adult male, entrapped by heavy machinery for 5 hours. RR 20, pulse present, alert. He notes his urine is tea-colored.",
+        "expected_code": "YELLOW",
+        "reasoning": "The patient is currently stable (YELLOW) but shows clinical signs of rhabdomyolysis/crush syndrome (tea-colored urine).",
+        "source": "curated"
+    },
+    {
+        "id": "T217",
+        "description": "Adult female, non-ambulatory. RR 28, radial pulse present, follows commands.",
+        "expected_code": "YELLOW",
+        "reasoning": "Normal RPM parameters ($RR < 30$, Pulse present, Mental status intact) in a non-ambulatory adult results in YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T218",
+        "description": "Child, 6 years old. RR 30, pulse present. Does not respond to name; moans and non-localizes when a painful stimulus is applied.",
+        "expected_code": "RED",
+        "reasoning": "An inappropriate response to pain (non-localizing/moaning) in JumpSTART is a RED indicator.",
+        "source": "curated"
+    },
+    {
+        "id": "T219",
+        "description": "Adult male, found in shock. RR 18, radial pulse absent, but carotid pulse is weak. He is awake.",
+        "expected_code": "RED",
+        "reasoning": "The absence of a radial pulse is an immediate indicator for RED status in adults.",
+        "source": "curated"
+    },
+    {
+        "id": "T220",
+        "description": "Adult female, penetrating chest trauma with a 'sucking' chest wound. RR 34, radial pulse present, follows commands.",
+        "expected_code": "RED",
+        "reasoning": "A respiratory rate $> 30$ results in an automatic RED tag.",
+        "source": "curated"
+    },
+    {
+        "id": "T221",
+        "description": "Geriatric male, 80 years old. Found sitting against a wall. RR 16, pulse present, CRT 1.5 seconds. Fails to follow the command 'squeeze my hand'.",
+        "expected_code": "RED",
+        "reasoning": "Failure to follow simple commands is an immediate (RED) triage criterion.",
+        "source": "curated"
+    },
+    {
+        "id": "T222",
+        "description": "Adult male, amputated arm. Walking toward the medic with a tourniquet applied by a bystander. Alert.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory status ('walking') results in a GREEN tag.",
+        "source": "curated"
+    },
+    {
+        "id": "T223",
+        "description": "Child, 3 years old. RR 20, peripheral pulse present. Responds to pain by localizing and pushing the medic's hand away.",
+        "expected_code": "YELLOW",
+        "reasoning": "An 'appropriate' response to pain (localizing/withdrawing) in a breathing child with a pulse is YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T224",
+        "description": "Adult female, found sitting up. RR 10, radial pulse present, alert and follows commands.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable RPM vitals in a non-ambulatory patient result in a YELLOW tag.",
+        "source": "curated"
+    },
+    {
+        "id": "T225",
+        "description": "Adult male, traumatic asphyxia. Cyanosis noted in the face. RR 42, radial pulse present, unresponsive.",
+        "expected_code": "RED",
+        "reasoning": "Both $RR > 30$ and unresponsiveness are immediate RED indicators.",
+        "source": "curated"
+    },
+    {
+        "id": "T226",
+        "description": "Child, 5 years old. No respirations. Pulse present. Airway opened, still no breath. 5 rescue breaths given; breathing resumes at 20/min.",
+        "expected_code": "RED",
+        "reasoning": "Resumption of breathing after a pediatric 'ventilatory trial' (5 rescue breaths) results in a RED tag.",
+        "source": "curated"
+    },
+    {
+        "id": "T227",
+        "description": "Man, maybe 30s, lying still. He's breathing fast, like panting. I can't feel a pulse in his wrist. He opens his eyes when I shout.",
+        "expected_code": "RED",
+        "reasoning": "Respiratory rate > 30 (panting) = RED. Absent radial pulse confirms immediate category.",
+        "source": "curated"
+    },
+    {
+        "id": "T228",
+        "description": "Elderly woman, fell from second floor. She's conscious but confused, doesn't know where she is. Breathing rate 22, radial pulse present, capillary refill normal.",
+        "expected_code": "RED",
+        "reasoning": "Cannot follow commands (confused, disoriented) = RED despite normal vital signs.",
+        "source": "curated"
+    },
+    {
+        "id": "T229",
+        "description": "Kid, about 10 years old. Walking around crying, has a deep cut on his arm but walking fine. No trouble breathing.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN by START protocol. Minor injury does not change priority.",
+        "source": "curated"
+    },
+    {
+        "id": "T230",
+        "description": "Middle-aged man, caught in explosion. He's not breathing after I tilted his head back. No chest rise, no pulse felt.",
+        "expected_code": "BLACK",
+        "reasoning": "Apneic after airway opening maneuver = BLACK. No pulse confirms expectant status.",
+        "source": "curated"
+    },
+    {
+        "id": "T231",
+        "description": "Female, pregnant maybe? Lying on ground, breathing 28 times per minute, radial pulse weak but present, cap refill 3 seconds. She follows my finger with her eyes.",
+        "expected_code": "RED",
+        "reasoning": "Capillary refill > 2 seconds indicates poor perfusion = RED, even with RR < 30 and following commands.",
+        "source": "curated"
+    },
+    {
+        "id": "T232",
+        "description": "He's walking but his arm is mangled. He says he's fine, just wants to sit down. Breathing normal, talking clearly.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Walking independently overrides other injuries in START triage.",
+        "source": "curated"
+    },
+    {
+        "id": "T233",
+        "description": "Unconscious male, struck by debris. Breathing 18 breaths/minute, strong radial pulse, cap refill 1 sec. Not responding to any stimulus.",
+        "expected_code": "RED",
+        "reasoning": "Unconscious / cannot follow commands = RED regardless of normal breathing and perfusion.",
+        "source": "curated"
+    },
+    {
+        "id": "T234",
+        "description": "Adolescent, maybe 14. Sitting up, looking around scared. Breathing a bit fast but I counted 26. Has a radial pulse, skin pink. He answers my questions but seems confused about what happened.",
+        "expected_code": "RED",
+        "reasoning": "Confusion indicates altered mental status = cannot follow commands, so RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T235",
+        "description": "Woman, lying on back, eyes closed. She's breathing 32 times per minute. I can feel a pulse at her wrist. She wakes up when I pinch her but goes back to sleep.",
+        "expected_code": "RED",
+        "reasoning": "Respiratory rate > 30 = RED. Also altered mental status (obtunded) reinforces.",
+        "source": "curated"
+    },
+    {
+        "id": "T236",
+        "description": "Old man, sitting on curb. He says his leg hurts but he can't stand up. Breathing 20, radial pulse present, cap refill 1.5 sec. He knows his name and where he is.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory but RR < 30, perfused, and follows commands = YELLOW (delayed).",
+        "source": "curated"
+    },
+    {
+        "id": "T237",
+        "description": "Child, around 6. Not moving. I tried to open airway, still no breath. No pulse in neck.",
+        "expected_code": "BLACK",
+        "reasoning": "No respirations after airway repositioning = BLACK. Pediatric modification same principle.",
+        "source": "curated"
+    },
+    {
+        "id": "T238",
+        "description": "He's on the ground groaning. Breathing very slow, like 8 times a minute. I feel a radial pulse but it's weak. He pushes my hand away when I touch his belly.",
+        "expected_code": "RED",
+        "reasoning": "Bradypnea (RR 8) in trauma patient suggests severe brain or spinal injury; clinical judgment upgrades to RED despite formal START criteria.",
+        "source": "curated"
+    },
+    {
+        "id": "T239",
+        "description": "Young woman, walking slowly. She has a burn on her arm, says it hurts but she can walk. Breathing normal, talking fine.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Pain does not upgrade triage.",
+        "source": "curated"
+    },
+    {
+        "id": "T240",
+        "description": "Man, lying on stretcher (not his own). Brought in by bystanders. He's breathing 25/min, radial pulse present, cap refill 2 seconds exactly. He follows command to wiggle his toes. He cannot walk due to leg fracture.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory, RR < 30, perfused (cap refill 2 sec borderline but present radial pulse), follows commands = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T241",
+        "description": "Person, gender unknown. Lying face down. I rolled over, they are not breathing. I did head tilt, still no breath. No carotid pulse.",
+        "expected_code": "BLACK",
+        "reasoning": "Apneic and pulseless after airway maneuver = BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T242",
+        "description": "He's walking but has a nail through his hand. He's screaming. No breathing problem. I can see he's alert and oriented.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Severe pain does not change triage category.",
+        "source": "curated"
+    },
+    {
+        "id": "T243",
+        "description": "Elderly female, not walking. Breathing 26, radial pulse absent, cap refill 4 seconds. She shakes her head when I ask if she knows her name.",
+        "expected_code": "RED",
+        "reasoning": "Absent radial pulse (or cap refill >2 sec) indicates shock = RED. Cannot follow commands (shakes head appropriately? Actually shaking head to question may indicate understanding. But absent pulse alone = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T244",
+        "description": "Teenager, lying down. Says he can't walk because his ankle hurts. Breathing 20, radial pulse present, cap refill <2 sec. He knows his name and the date. He follows all commands.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory due to injury but RR <30, perfused, and follows commands = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T245",
+        "description": "He's gasping for air, like 40 breaths per minute. I can't find a wrist pulse. He's not responding to my voice.",
+        "expected_code": "RED",
+        "reasoning": "RR >30 and absent radial pulse = clearly RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T246",
+        "description": "Woman, sitting on the ground. She has a gash on her scalp but is alert. She says she can't stand up because she feels dizzy. Breathing 22, radial pulse present, cap refill 1 sec. She follows commands and knows what happened.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory (dizzy, cannot stand) but normal vitals and mental status = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T247",
+        "description": "He's just lying there, not moving. I think he's breathing but it's really fast, like he just ran a race. His wrist feels cold and I can't find a pulse. He groaned when I shouted.",
+        "expected_code": "RED",
+        "reasoning": "Tachypnea (>30) plus absent radial pulse = RED. Groaning indicates some consciousness but not following commands.",
+        "source": "curated"
+    },
+    {
+        "id": "T248",
+        "description": "Lady sitting up, holding her arm. She says she's fine and wants to help others. She's talking clearly and breathing calmly. No major bleeding.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory and alert with normal breathing = GREEN. Willingness to assist confirms low priority.",
+        "source": "curated"
+    },
+    {
+        "id": "T249",
+        "description": "Infant, about 6 months. Not crying. I opened the airway, chest not moving. No brachial pulse felt.",
+        "expected_code": "BLACK",
+        "reasoning": "Apneic after airway repositioning = BLACK. Pediatric START same rule for no respirations.",
+        "source": "curated"
+    },
+    {
+        "id": "T250",
+        "description": "Man, 50s, pinned under a beam for 10 minutes. He's awake but confused, says his legs are numb. Breathing 24/min, radial pulse weak but present, cap refill 3 seconds.",
+        "expected_code": "RED",
+        "reasoning": "Capillary refill >2 seconds indicates poor perfusion = RED. Confusion adds to severity.",
+        "source": "curated"
+    },
+    {
+        "id": "T251",
+        "description": "He walked out of the building himself. Has a bloody nose and a cut on his forehead but is walking straight. Breathing normally, talking full sentences.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Minor head laceration and epistaxis do not upgrade.",
+        "source": "curated"
+    },
+    {
+        "id": "T252",
+        "description": "Teenage girl, not walking. She's breathing 18/min, radial pulse present, cap refill normal. She follows my finger with her eyes but doesn't speak. She looks scared.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory but RR <30, perfused, and follows commands (visual tracking) = YELLOW. Mutism may be psychological.",
+        "source": "curated"
+    },
+    {
+        "id": "T253",
+        "description": "Elderly man, found under rubble. He's not breathing after I repositioned his head. There's a faint carotid pulse, maybe 40 beats per minute.",
+        "expected_code": "BLACK",
+        "reasoning": "No respirations after airway maneuver = BLACK regardless of pulse. START expectant category.",
+        "source": "curated"
+    },
+    {
+        "id": "T254",
+        "description": "He's walking but dragging one leg. He says he can't feel his foot. Breathing 26, radial pulse strong, cap refill 1 second. He knows his name and the year.",
+        "expected_code": "YELLOW",
+        "reasoning": "Ambulatory? Dragging leg means not truly walking independently, so treat as non-ambulatory. Normal vitals + follows commands = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T255",
+        "description": "Woman, unconscious. Breathing 10 breaths per minute, irregular. Radial pulse present but thready. She doesn't respond to pain.",
+        "expected_code": "RED",
+        "reasoning": "Respiratory rate <10 with irregular pattern indicates respiratory failure. Altered mental status = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T256",
+        "description": "Child, 4 years old. Runs to me crying, holding his arm. He's breathing fast because he's crying but I count 34. He has a radial pulse, skin pink. He stops crying when I talk to him.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory (ran to me) = GREEN. Tachypnea due to crying, not respiratory distress. Follows commands when calmed.",
+        "source": "curated"
+    },
+    {
+        "id": "T257",
+        "description": "He's lying on his back, eyes open but not tracking. Breathing 22, radial pulse present, cap refill 3 seconds. He doesn't move when I rub his sternum.",
+        "expected_code": "RED",
+        "reasoning": "Cap refill >2 sec = RED. Also unresponsive to pain = cannot follow commands.",
+        "source": "curated"
+    },
+    {
+        "id": "T258",
+        "description": "She's sitting on the ground, leaning against a wall. She says her chest hurts but she can move all limbs. Breathing 20, radial pulse present, cap refill 1.5 sec. She follows all commands.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory (sitting, not walking) but normal vitals and mental status = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T259",
+        "description": "Man, maybe 20s, lying in a pool of blood from a leg wound. He's alert, says he's fine. Breathing 28, radial pulse present but weak, cap refill 3 seconds. He follows commands.",
+        "expected_code": "RED",
+        "reasoning": "Capillary refill >2 seconds with weak pulse indicates shock = RED despite following commands.",
+        "source": "curated"
+    },
+    {
+        "id": "T260",
+        "description": "She's walking around, carrying a child. She has a large bruise on her face but is talking normally. Breathing unlabored.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Carrying another person confirms ability to walk.",
+        "source": "curated"
+    },
+    {
+        "id": "T261",
+        "description": "Older man, not walking. He's breathing 32/min, radial pulse absent, cap refill 5 seconds. He squeezes my hand when asked.",
+        "expected_code": "RED",
+        "reasoning": "RR>30 and absent radial pulse = RED. Following commands does not downgrade given poor perfusion and tachypnea.",
+        "source": "curated"
+    },
+    {
+        "id": "T262",
+        "description": "Young man, lying still. I think he's dead because he's not breathing. I opened his airway and still no breath. No pulse.",
+        "expected_code": "BLACK",
+        "reasoning": "Apneic and pulseless after airway opening = BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T263",
+        "description": "She's on the ground, moaning. Breathing 26, radial pulse present, cap refill 2 seconds (borderline). She opens her eyes when I call her name but doesn't squeeze my hand.",
+        "expected_code": "RED",
+        "reasoning": "Cannot follow commands (does not squeeze hand) = RED even with borderline vitals.",
+        "source": "curated"
+    },
+    {
+        "id": "T264",
+        "description": "He's walking, but his clothes are torn and he has glass in his hair. He says he's okay, just wants to go home. Breathing normal.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. No respiratory distress or altered mental status.",
+        "source": "curated"
+    },
+    {
+        "id": "T265",
+        "description": "Woman, trapped in a car. She's conscious, breathing 24, radial pulse present, cap refill 1 sec. She can't get out but follows commands. She's anxious.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory (trapped) but normal vital signs and follows commands = YELLOW. Anxiety is not a triage criterion.",
+        "source": "curated"
+    },
+    {
+        "id": "T266",
+        "description": "He's not moving. I see his chest rising maybe 6 times per minute. No radial pulse found. He doesn't respond to shouting or pain.",
+        "expected_code": "RED",
+        "reasoning": "Severe bradypnea with absent pulse and unresponsiveness = RED (imminent respiratory arrest).",
+        "source": "curated"
+    },
+    {
+        "id": "T267",
+        "description": "He just walked up to me. Says his ear is ringing. Breathing normal, talking fine. No visible injuries.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Minor complaint does not upgrade.",
+        "source": "curated"
+    },
+    {
+        "id": "T268",
+        "description": "Man, lying down. I don't know if he's breathing. I put my cheek near his mouth \u2013 feels like air moving, maybe 20 times a minute. He has a pulse in his wrist. He won't wake up when I shake him.",
+        "expected_code": "RED",
+        "reasoning": "Cannot follow commands (unresponsive) = RED regardless of normal breathing and pulse.",
+        "source": "curated"
+    },
+    {
+        "id": "T269",
+        "description": "Little girl, maybe 5. She's sitting up and crying for her mom. Breathing fast because crying, I counted 36. She has a scrape on her knee. She stops crying when I show her a toy.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory (sitting up, will likely walk) and tachypnea due to crying = GREEN. Follows commands when distracted.",
+        "source": "curated"
+    },
+    {
+        "id": "T270",
+        "description": "Middle-aged man, found in the wreckage. He's making snoring sounds. I tilted his head back and now he's breathing normally, about 18 times a minute. Radial pulse present. He opens his eyes and looks at me but doesn't squeeze my hand.",
+        "expected_code": "RED",
+        "reasoning": "Initial airway obstruction requiring intervention, now breathing but cannot follow commands = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T271",
+        "description": "She's walking but stumbling a bit. She has a cut on her forehead, bleeding a lot but she's holding pressure. Breathing 22, talking in short sentences.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Stumbling may be from blood loss but if she can walk independently, remains GREEN. Re-triage if condition worsens.",
+        "source": "curated"
+    },
+    {
+        "id": "T272",
+        "description": "Elderly man, not moving. His breathing is very shallow, maybe 12 per minute. I feel a weak radial pulse. He doesn't respond when I call his name.",
+        "expected_code": "RED",
+        "reasoning": "Altered mental status (unresponsive) = RED. Shallow breathing with low RR also concerning.",
+        "source": "curated"
+    },
+    {
+        "id": "T273",
+        "description": "Teen boy, says he can't walk because his ankle is twisted. Breathing 18, radial pulse strong, cap refill <2 sec. He knows his name and the date. He follows commands to wiggle his toes on the other foot.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory due to injury, normal vitals and mental status = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T274",
+        "description": "Woman, unconscious. Breathing 30 exactly, radial pulse present but fast. Cap refill 2 seconds. She doesn't respond to sternal rub.",
+        "expected_code": "RED",
+        "reasoning": "RR = 30 meets RED criterion. Also unresponsive = cannot follow commands.",
+        "source": "curated"
+    },
+    {
+        "id": "T275",
+        "description": "He's walking around, but he's confused \u2013 he doesn't know where he is and keeps asking the same question. Breathing normal, walking without limp.",
+        "expected_code": "RED",
+        "reasoning": "Confusion = altered mental status = cannot follow commands = RED despite ambulatory status.",
+        "source": "curated"
+    },
+    {
+        "id": "T276",
+        "description": "Infant, not crying, not moving. I tried to stimulate and open airway \u2013 still no breath. No brachial pulse.",
+        "expected_code": "BLACK",
+        "reasoning": "Apneic after airway opening = BLACK. Pediatric protocol same.",
+        "source": "curated"
+    },
+    {
+        "id": "T277",
+        "description": "Adult male, lying on his side. He's breathing 26/min, radial pulse present, cap refill 2 seconds. He follows my command to squeeze my finger. He says his back hurts and he can't stand up.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory, RR<30, perfused, follows commands = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T278",
+        "description": "She's lying still, eyes open but not tracking. Breathing 28, radial pulse weak but present. She withdraws her hand when I pinch it. No verbal response.",
+        "expected_code": "YELLOW",
+        "reasoning": "Withdrawal to pain = purposeful movement = follows commands? In START, purposeful movement to pain counts as following commands. So RR<30, perfused (weak pulse but present), follows commands = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T279",
+        "description": "Man, about 40s, trapped under a concrete slab. He's screaming for help. Breathing 36/min, radial pulse present but thready. He answers my questions appropriately.",
+        "expected_code": "RED",
+        "reasoning": "RR > 30 = RED regardless of mental status.",
+        "source": "curated"
+    },
+    {
+        "id": "T280",
+        "description": "She's walking, but she's very pale and holding her stomach. Breathing 24, talking in full sentences. She says she feels faint.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Re-triage if she becomes non-ambulatory or vitals deteriorate.",
+        "source": "curated"
+    },
+    {
+        "id": "T281",
+        "description": "Child, 3 years old, not walking. He's crying and clinging to his mother. Breathing 30, radial pulse present, cap refill 1 sec. He follows command to show me his hand.",
+        "expected_code": "RED",
+        "reasoning": "Respiratory rate 30 per minute meets START threshold for RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T282",
+        "description": "Elderly woman, lying in debris. She's not moving. I see chest rise maybe 9 times a minute. No radial pulse felt. She doesn't respond to pain.",
+        "expected_code": "RED",
+        "reasoning": "Severe bradypnea with absent pulse and unresponsiveness = RED (imminent arrest).",
+        "source": "curated"
+    },
+    {
+        "id": "T283",
+        "description": "He's staggering, can barely walk. Slurred speech. He has a laceration on his scalp. Breathing 20, radial pulse present. He knows his name but not the year.",
+        "expected_code": "RED",
+        "reasoning": "Altered mental status (disoriented, slurred speech) = cannot follow commands = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T284",
+        "description": "She's sitting on the ground, crying. She has a broken arm but can wiggle her fingers. Breathing 18, radial pulse present. She follows commands to move her other arm.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory, normal vitals, follows commands = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T285",
+        "description": "Adult male, found face down. Rolled over \u2013 he's breathing 24/min, but with loud gurgling. Radial pulse present. He coughs when I suction his mouth but doesn't follow any commands.",
+        "expected_code": "RED",
+        "reasoning": "Airway compromise (gurgling) with inability to follow commands = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T286",
+        "description": "Young woman, walking slowly, holding her side. She says she was stabbed but the bleeding has stopped. Breathing 22, talking normally. Alert and oriented.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Stab wound that is not bleeding significantly does not upgrade.",
+        "source": "curated"
+    },
+    {
+        "id": "T287",
+        "description": "He's lying on a stretcher. Brought in by bystanders. He has an open skull fracture but is moving all limbs. Breathing 20, radial pulse present, cap refill 1 sec. He follows commands to squeeze my hand.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory, normal vitals, follows commands = YELLOW despite severe injury. START triage is physiologic, not anatomic.",
+        "source": "curated"
+    },
+    {
+        "id": "T288",
+        "description": "Woman, about 30, sitting up but not walking. She's breathing 38/min, radial pulse absent, cap refill 6 seconds. She is alert and answers questions.",
+        "expected_code": "RED",
+        "reasoning": "RR>30 and absent radial pulse = RED even though she follows commands.",
+        "source": "curated"
+    },
+    {
+        "id": "T289",
+        "description": "He's walking but has a deep cut on his thigh, bleeding through a makeshift bandage. He's pale but talking. Breathing 24, radial pulse weak but present. Alert and oriented.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. If bleeding worsens or he becomes non-ambulatory, re-triage.",
+        "source": "curated"
+    },
+    {
+        "id": "T290",
+        "description": "Child, 8 years old. Not breathing after head tilt. I gave two rescue breaths and now he's breathing on his own, about 22/min. Radial pulse present. He follows commands.",
+        "expected_code": "RED",
+        "reasoning": "Apneic requiring rescue breaths = RED. Any intervention to restore breathing upgrades to immediate.",
+        "source": "curated"
+    },
+    {
+        "id": "T291",
+        "description": "Elderly man, curled up on the ground. Breathing 16/min, radial pulse present, cap refill 2 seconds. He's confused, thinks he's at home. He doesn't follow commands.",
+        "expected_code": "RED",
+        "reasoning": "Confusion and cannot follow commands = RED despite normal vitals.",
+        "source": "curated"
+    },
+    {
+        "id": "T292",
+        "description": "He's walking with a limp, using a piece of wood as a crutch. He has a swollen ankle. Breathing normal, talking fine. He knows where he is.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory (with aid) = GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T293",
+        "description": "Woman, lying motionless. No chest rise felt. I open her airway \u2013 still no breath. No carotid pulse. She is cold to touch.",
+        "expected_code": "BLACK",
+        "reasoning": "Apneic and pulseless after airway maneuver = BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T294",
+        "description": "Man, screaming and thrashing. He has a large piece of rebar through his arm. Breathing 40/min, radial pulse present and strong. He pushes me away when I try to examine him.",
+        "expected_code": "RED",
+        "reasoning": "RR > 30 = RED. Pushing away indicates purposeful movement but does not downgrade due to tachypnea.",
+        "source": "curated"
+    },
+    {
+        "id": "T295",
+        "description": "She's sitting on the ground, leaning against a wall. Breathing 14/min, radial pulse present, cap refill 1.5 sec. She follows commands to open her eyes. She says she can't stand up because she's scared.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory due to fear, but normal vitals and follows commands = YELLOW. Psychological reason does not upgrade.",
+        "source": "curated"
+    },
+    {
+        "id": "T296",
+        "description": "Adult male, lying face up. He's not moving. I see his chest rising about 30 times per minute. No radial pulse. He doesn't respond to shouting.",
+        "expected_code": "RED",
+        "reasoning": "RR 30 = RED, absent radial pulse confirms severity.",
+        "source": "curated"
+    },
+    {
+        "id": "T297",
+        "description": "Teenage boy, walking but holding his chest. He says he got hit by a falling pipe. Breathing 24, radial pulse present, cap refill 1 sec. He's alert and joking.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Chest pain without respiratory distress does not upgrade.",
+        "source": "curated"
+    },
+    {
+        "id": "T298",
+        "description": "She's on the ground, not moving. I think she's breathing but very slowly, maybe 8 times a minute. I can feel a pulse in her neck. She moans when I pinch her finger.",
+        "expected_code": "RED",
+        "reasoning": "Bradypnea with moaning only (cannot follow commands) = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T299",
+        "description": "He's walking but seems dazed. He has a bruise on his head. He can tell me his name but doesn't know what happened. Breathing normal.",
+        "expected_code": "RED",
+        "reasoning": "Altered mental status (disoriented to event) = cannot follow commands = RED even though ambulatory.",
+        "source": "curated"
+    },
+    {
+        "id": "T300",
+        "description": "Woman, trapped under a beam. She's awake and talking. Breathing 26, radial pulse present, cap refill 2 sec. She follows commands to wave her hand. She cannot be freed quickly.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory (trapped) but normal vitals and follows commands = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T301",
+        "description": "Elderly woman, lying in the triage area (brought by others). She's not responsive. Breathing 18, radial pulse present. She does not move when I apply sternal pressure.",
+        "expected_code": "RED",
+        "reasoning": "Unresponsive = cannot follow commands = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T302",
+        "description": "He's walking, but with a pronounced limp, holding his leg. He says he twisted his knee. Breathing 20, radial pulse present. Alert and oriented.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Limp does not preclude independent walking.",
+        "source": "curated"
+    },
+    {
+        "id": "T303",
+        "description": "Child, 2 years old, not walking. He's lying still, breathing 32/min, radial pulse present, cap refill 2 sec. He cries when I touch his leg but doesn't reach for me.",
+        "expected_code": "RED",
+        "reasoning": "RR 32 > 30 = RED, regardless of other findings.",
+        "source": "curated"
+    },
+    {
+        "id": "T304",
+        "description": "Man, about 60, sitting on the ground. He says he can't stand up because his hip hurts. Breathing 18, radial pulse present, cap refill <2 sec. He follows commands perfectly. He's calm.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory due to suspected fracture, normal vitals, follows commands = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T305",
+        "description": "She's lying in a pool of blood from a neck wound. She's awake but pale. Breathing 28, radial pulse absent, cap refill not measurable. She follows commands to hold pressure on her neck.",
+        "expected_code": "RED",
+        "reasoning": "Absent radial pulse indicates shock = RED. Following commands does not downgrade given hemodynamic instability.",
+        "source": "curated"
+    },
+    {
+        "id": "T306",
+        "description": "He's not moving. No breathing after checking for 10 seconds. I opened his airway \u2013 still no breath. No pulse felt in neck or wrist. He's warm.",
+        "expected_code": "BLACK",
+        "reasoning": "Apneic and pulseless after airway opening = BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T307",
+        "description": "He crawled out of the building on his hands and knees. Now he's sitting. Breathing hard, maybe 32 a minute. I can feel his pulse in his wrist. He nods when I ask if he knows his name.",
+        "expected_code": "RED",
+        "reasoning": "RR > 30 = RED. Nodding indicates following commands but does not override tachypnea.",
+        "source": "curated"
+    },
+    {
+        "id": "T308",
+        "description": "She's walking but holding her belly. She's pregnant, maybe 7 months. Breathing normal, talking fine. She says she felt a kick recently. No vaginal bleeding.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Pregnancy alone does not upgrade triage in START.",
+        "source": "curated"
+    },
+    {
+        "id": "T309",
+        "description": "Man, lying still. I think he's breathing \u2013 yes, chest moving, about 14 a minute. He has a pulse in his wrist. But he won't open his eyes or move when I shout or shake him.",
+        "expected_code": "RED",
+        "reasoning": "Unresponsive = cannot follow commands = RED despite normal breathing and pulse.",
+        "source": "curated"
+    },
+    {
+        "id": "T310",
+        "description": "Kid, maybe 7. He's walking but crying, arm bent wrong way. Breathing fast because crying \u2013 I counted 38. He stops crying when his mom holds him, and breathing slows. He can tell me his name.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Tachypnea due to crying, not respiratory distress. Slows when calmed.",
+        "source": "curated"
+    },
+    {
+        "id": "T311",
+        "description": "Elderly man, on a backboard brought by others. He's conscious, breathing 26, radial pulse present, cap refill 2 seconds. He squeezes my hand but can't speak due to neck injury. He nods to questions.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory but RR<30, perfused, follows commands (nodding/squeeze) = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T312",
+        "description": "Young woman, found lying face down. I rolled her \u2013 she's not breathing. I tilted head, still no breath. No carotid pulse. She's cold.",
+        "expected_code": "BLACK",
+        "reasoning": "Apneic and pulseless after airway maneuver = BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T313",
+        "description": "He's sitting on the ground, leaning forward, breathing with effort \u2013 I count 28 per minute. He has a radial pulse, skin warm. He follows command to show me his teeth. He says he can't stand because his leg is broken.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory, RR<30, perfused, follows commands = YELLOW. Labored breathing but rate <30 does not upgrade.",
+        "source": "curated"
+    },
+    {
+        "id": "T314",
+        "description": "She's walking in circles, not responding when I call out. She has a cut on her head but no active bleeding. Breathing normal. She looks lost.",
+        "expected_code": "RED",
+        "reasoning": "Altered mental status (disoriented, not responding) = cannot follow commands = RED despite ambulatory.",
+        "source": "curated"
+    },
+    {
+        "id": "T315",
+        "description": "Infant, about 9 months. Not crying, lying still. I see chest movement \u2013 breathing 44/min. Has brachial pulse. He cries when I flick his foot but doesn't follow any command (age-appropriate, but START uses 'follows commands' loosely for infants: crying to stimulus is purposeful). For START pediatric, RR>40 is RED for <1 year? Actually START adult uses RR>30. For child, modified START sometimes uses different cutoffs, but standard START course teaches same adult criteria for all >8 years. For infant, many protocols use RR>60 for RED. But since instruction says \"START triage\" applied universally, I'll stick to adult criteria. RR 44 >30 = RED.",
+        "expected_code": "RED",
+        "reasoning": "Respiratory rate 44 > 30 = RED. Crying to stimulus indicates purposeful but does not downgrade tachypnea.",
+        "source": "curated"
+    },
+    {
+        "id": "T316",
+        "description": "Man, 50s, walking with help from another survivor. He has a deep gash on his forearm, bleeding controlled. Breathing 20, talking normally. Alert and oriented. He says he can walk alone but feels weak.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory (with help still counts as ambulatory if he can walk independently when needed) = GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T317",
+        "description": "She's lying on her back, moaning. Breathing 34, radial pulse present but weak. She opens her eyes when I call her name but doesn't squeeze my hand. She moans louder when I touch her abdomen.",
+        "expected_code": "RED",
+        "reasoning": "RR > 30 = RED. Also cannot follow commands (no hand squeeze).",
+        "source": "curated"
+    },
+    {
+        "id": "T318",
+        "description": "He's sitting upright, complaining of chest pain. Breathing 22, radial pulse present, cap refill 1 sec. He follows all commands. He says he can't walk because he's too dizzy.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory due to dizziness, normal vitals, follows commands = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T319",
+        "description": "Child, 12 years old. Not breathing. I opened airway, still no breath. I feel a carotid pulse, about 50 per minute.",
+        "expected_code": "BLACK",
+        "reasoning": "Apneic after airway repositioning = BLACK regardless of pulse. START expectant.",
+        "source": "curated"
+    },
+    {
+        "id": "T320",
+        "description": "Woman, maybe 40s, lying on her side, eyes open. She's breathing 26, radial pulse present, cap refill 2 seconds. She follows my finger with her eyes and squeezes my hand when asked. She points to her hip and shakes her head (can't walk).",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory, RR<30, perfused, follows commands = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T321",
+        "description": "He's staggering towards me, drunk or head injury? Slurred speech, can't tell me his name. He has a laceration on his scalp. Breathing 18, radial pulse present. He's walking but very unsteady.",
+        "expected_code": "RED",
+        "reasoning": "Altered mental status (disoriented, slurred speech) = cannot follow commands = RED even though ambulatory.",
+        "source": "curated"
+    },
+    {
+        "id": "T322",
+        "description": "She's lying in a corner, not moving at all. I don't see any breathing. I wait 15 seconds \u2013 no chest rise. I tilt her head, still no breath. No pulse felt anywhere.",
+        "expected_code": "BLACK",
+        "reasoning": "Apneic and pulseless after airway opening = BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T323",
+        "description": "Teenage girl, sitting on broken concrete, crying. She has a deep cut on her thigh, bleeding but not spurting. Breathing 24, radial pulse present and strong. She follows commands to apply pressure. She says she can't stand because it hurts.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory due to pain, normal vitals, follows commands = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T324",
+        "description": "Man, about 30, lying on his stomach. I turn him over \u2013 he's breathing, but very fast, like 36 breaths per minute. He has a radial pulse. He opens his eyes when I shout but then closes them. He doesn't move when I pinch his arm.",
+        "expected_code": "RED",
+        "reasoning": "RR > 30 = RED. Also unresponsive to pain (cannot follow commands).",
+        "source": "curated"
+    },
+    {
+        "id": "T325",
+        "description": "She's walking with a cane she found. She has a bruise on her ribs but says she's fine. Breathing normal, talking clearly. She's elderly but alert.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Use of makeshift aid does not change category.",
+        "source": "curated"
+    },
+    {
+        "id": "T326",
+        "description": "He's not walking. He's breathing 28, but with grunting at the end of each breath. Radial pulse present, cap refill 3 seconds. He follows command to raise his hand. He says his stomach hurts.",
+        "expected_code": "RED",
+        "reasoning": "Capillary refill >2 seconds = RED despite following commands and RR<30.",
+        "source": "curated"
+    },
+    {
+        "id": "T327",
+        "description": "Woman, lying in the rubble, only head visible. She's awake and talking. Breathing 22, radial pulse present (arm free). She can follow commands but cannot move due to being trapped. She's calm.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory (trapped) but normal vitals, follows commands = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T328",
+        "description": "Child, 4 years old, lying still. He's breathing 26/min, radial pulse present. He doesn't respond to his name but cries when I touch his arm. He doesn't follow any commands (age-appropriate: crying indicates purposeful). In START, for young children, crying to stimulus is considered 'follows commands'. So YELLOW if non-ambulatory.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory, RR<30, perfused, purposeful movement (crying to stimulus) = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T329",
+        "description": "Elderly man, found sitting against a wall. He's confused, keeps asking where his wife is. He has a cut on his forehead. Breathing 20, radial pulse present. He stands up when I help him but then stumbles. Can he walk? Needs assistance.",
+        "expected_code": "RED",
+        "reasoning": "Confusion = altered mental status = cannot follow commands = RED, regardless of ambulation.",
+        "source": "curated"
+    },
+    {
+        "id": "T330",
+        "description": "He's running towards me, yelling for help for his friend. He has no visible injuries. Breathing fast from running, but after a minute it's normal. He's alert and oriented.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Tachypnea due to exertion resolves with rest.",
+        "source": "curated"
+    },
+    {
+        "id": "T331",
+        "description": "She's lying on her back, eyes closed. Breathing 10/min, very shallow. I feel a weak radial pulse. She does not respond to vigorous shaking or sternal rub.",
+        "expected_code": "RED",
+        "reasoning": "Bradypnea with unresponsiveness = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T332",
+        "description": "Young man, walking but holding his abdomen, which is distended. He's pale and sweaty. Breathing 26, radial pulse weak but present. He follows commands but looks very ill. He says he can walk.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN despite concerning appearance. Re-triage if deteriorates. START triage is based on ambulation, breathing, perfusion, mental status. He passes all except ambulation? He is walking, so GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T333",
+        "description": "Woman, trapped in a car. She's not responding to my voice. Breathing 22, radial pulse present. She doesn't move when I pinch her earlobe. No obvious external bleeding.",
+        "expected_code": "RED",
+        "reasoning": "Unresponsive = cannot follow commands = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T334",
+        "description": "He's lying under a piece of wood. I lift it off him. He's breathing 18, radial pulse present, cap refill 1 sec. He opens his eyes and says, 'Get away from me.' He pushes my hand away. He can't walk because his leg is pinned.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory (pinned), normal vitals, follows commands (pushes away, speaks purposefully) = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T335",
+        "description": "Infant, wrapped in a blanket, not moving. I see no chest rise. I open airway \u2013 still no breath. No brachial or femoral pulse. He's cool.",
+        "expected_code": "BLACK",
+        "reasoning": "Apneic and pulseless after airway maneuver = BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T336",
+        "description": "She's sitting on the ground, rocking back and forth. She has a large burn on her arm. Breathing 28, radial pulse present, cap refill 2 seconds. She stares straight ahead and doesn't respond to my voice or touch. She flinches when I touch the burn.",
+        "expected_code": "RED",
+        "reasoning": "Flinching to pain is purposeful but does she follow commands? She doesn't respond to voice. In START, inability to follow simple verbal command = RED. She stares and does not respond to 'squeeze my hand' so RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T337",
+        "description": "He's lying on the ground, not moving. I think he's breathing but it's really fast, like 40 times a minute. His wrist feels cold and I can't find a pulse. He doesn't respond when I shout.",
+        "expected_code": "RED",
+        "reasoning": "RR > 30 and absent radial pulse = RED. Unresponsiveness consistent.",
+        "source": "curated"
+    },
+    {
+        "id": "T338",
+        "description": "She walked out of the dust cloud holding a baby. The baby is crying. She has a cut on her cheek but seems fine. She's talking normally.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN for both adult and infant (infant crying indicates breathing and perfusion).",
+        "source": "curated"
+    },
+    {
+        "id": "T339",
+        "description": "Middle-aged man, trapped under a beam for an hour. He's awake but confused about what happened. Breathing 24, radial pulse present, cap refill 2 seconds. He tries to push the beam off.",
+        "expected_code": "RED",
+        "reasoning": "Confusion = altered mental status = cannot follow commands = RED despite normal vitals.",
+        "source": "curated"
+    },
+    {
+        "id": "T340",
+        "description": "Elderly woman, lying in the triage area. She was carried in. She's breathing 28, radial pulse present, cap refill 1 sec. She follows commands to squeeze my hand. She says her hip hurts and she can't stand.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory, RR<30, perfused, follows commands = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T341",
+        "description": "Young child, about 3. He's not breathing. I tilted his head and gave two rescue breaths \u2013 now he's breathing on his own, maybe 24 times a minute. He has a brachial pulse. He cries and pulls away when I touch his arm.",
+        "expected_code": "RED",
+        "reasoning": "Apneic requiring rescue breaths = RED. Any intervention to restore breathing upgrades to immediate.",
+        "source": "curated"
+    },
+    {
+        "id": "T342",
+        "description": "He's walking but has a deep gash on his leg, bleeding a lot. He's pale and sweating. Breathing 26, radial pulse thready but present. He's alert and says he's fine.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Pale and thready pulse suggest shock but START triage prioritizes ambulation. Re-triage immediately if he sits down.",
+        "source": "curated"
+    },
+    {
+        "id": "T343",
+        "description": "Woman, lying face down. Rolled over \u2013 she's not breathing. I opened her airway, still no breath. No carotid pulse. She's warm.",
+        "expected_code": "BLACK",
+        "reasoning": "Apneic and pulseless after airway maneuver = BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T344",
+        "description": "Man, about 45, sitting up but not walking. He has a deformed forearm. Breathing 18, radial pulse present, cap refill 1 sec. He follows commands to wiggle his fingers. He says he can't walk because of the pain.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory due to injury, normal vitals, follows commands = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T345",
+        "description": "Teenager, lying still. She's breathing 34 times a minute, radial pulse present but fast. She opens her eyes when I call her name and says 'leave me alone'. She doesn't follow command to squeeze my hand.",
+        "expected_code": "RED",
+        "reasoning": "RR > 30 = RED. Verbal response but not following command also reinforces.",
+        "source": "curated"
+    },
+    {
+        "id": "T346",
+        "description": "He's walking but very slowly, using a wall for support. He has a head laceration. Breathing normal. He knows his name but not the date. He's confused about where he is.",
+        "expected_code": "RED",
+        "reasoning": "Confusion = altered mental status = cannot follow commands = RED despite ambulatory.",
+        "source": "curated"
+    },
+    {
+        "id": "T347",
+        "description": "Infant, crying vigorously. Being held by mother. No visible injuries. Breathing fast because crying but normal when soothed. Mother says infant was in her arms during collapse.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory? Infant is carried but mother is ambulatory. Infant's crying indicates breathing and perfusion. GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T348",
+        "description": "Elderly man, lying on a stretcher from another responder. He's unconscious. Breathing 12/min, irregular. Radial pulse absent. No response to pain.",
+        "expected_code": "RED",
+        "reasoning": "Absent radial pulse and altered mental status = RED. Bradypnea also concerning.",
+        "source": "curated"
+    },
+    {
+        "id": "T349",
+        "description": "She's sitting on the ground, holding her abdomen. She's pregnant and says she felt a contraction. Breathing 20, radial pulse present. She's alert and follows commands. She says she can walk but is scared to.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory (she can walk) = GREEN. Fear does not upgrade.",
+        "source": "curated"
+    },
+    {
+        "id": "T350",
+        "description": "He's lying in a ditch, not moving. I see his chest rising maybe 6 times a minute. No radial pulse. He gurgles when I open his mouth. No response to pain.",
+        "expected_code": "RED",
+        "reasoning": "Severe bradypnea with absent pulse and airway gurgling = RED (imminent arrest).",
+        "source": "curated"
+    },
+    {
+        "id": "T351",
+        "description": "Young man, walking but his arm is mangled from machinery. He's in obvious pain but walking purposefully. Breathing 22, radial pulse present. He's alert and oriented.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Severe injury does not override START ambulation criterion.",
+        "source": "curated"
+    },
+    {
+        "id": "T352",
+        "description": "Woman, about 60, brought in by neighbors on a door. She's conscious but disoriented, doesn't know her name. Breathing 26, radial pulse present, cap refill 2 sec. She follows no commands.",
+        "expected_code": "RED",
+        "reasoning": "Cannot follow commands (disoriented, no response) = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T353",
+        "description": "He's walking but holding his chest, says it hurts to breathe. Breathing 28, radial pulse present. He's alert. He walks slowly but independently.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Chest pain with RR<30 does not upgrade.",
+        "source": "curated"
+    },
+    {
+        "id": "T354",
+        "description": "Child, 8 years old. No respirations after head tilt. Gave two rescue breaths \u2013 chest rises. Now breathing on own, 18/min. Has radial pulse. Follows command to thumb up.",
+        "expected_code": "RED",
+        "reasoning": "Required rescue breaths = RED, even if now breathing and following commands.",
+        "source": "curated"
+    },
+    {
+        "id": "T355",
+        "description": "She's walking but her face is pale and she's sweating profusely. She has a small puncture wound in her chest. Breathing 24, radial pulse weak. She's talking but seems anxious.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Weak pulse and pallor suggest developing shock but START green until non-ambulatory.",
+        "source": "curated"
+    },
+    {
+        "id": "T356",
+        "description": "Man, lying in rubble. He's awake, breathing 18, radial pulse present, cap refill 1 sec. He follows commands to move his feet. He's trapped but says he's fine. Cannot walk due to entrapment.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory (trapped), normal vitals, follows commands = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T357",
+        "description": "Elderly woman, lying still. I see no chest movement. I open airway \u2013 still no breath. I feel a weak carotid pulse, about 30 per minute. She's cold.",
+        "expected_code": "BLACK",
+        "reasoning": "Apneic after airway opening = BLACK regardless of pulse. START expectant.",
+        "source": "curated"
+    },
+    {
+        "id": "T358",
+        "description": "He's staggering towards me, can barely stand. He has a bleeding scalp wound. Breathing 20, radial pulse present. He can tell me his name but not what happened. He tries to walk but falls.",
+        "expected_code": "RED",
+        "reasoning": "Unable to walk independently (falls) = non-ambulatory. Altered mental status = cannot follow commands = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T359",
+        "description": "She's sitting on the ground, leaning against debris. Breathing 16, radial pulse present, cap refill 2.5 seconds. She follows commands to open her eyes. She says her back hurts and she can't move her legs.",
+        "expected_code": "RED",
+        "reasoning": "Capillary refill >2 seconds = RED. Non-ambulatory, but the cap refill drives RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T360",
+        "description": "Teen boy, walking but limping heavily on a sprained ankle. No other injuries. Breathing normal, talking fine. Alert and oriented.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T361",
+        "description": "Woman, lying on her back, eyes open wide, not blinking. She's breathing 32/min, radial pulse present. She doesn't respond to name or touch. She blinks to light but no tracking.",
+        "expected_code": "RED",
+        "reasoning": "RR > 30 = RED. Also unresponsive to verbal/tactile stimuli.",
+        "source": "curated"
+    },
+    {
+        "id": "T362",
+        "description": "He's walking, carrying a small child who is crying. He has soot on his face but no injuries. Breathing normal. He's alert and asking for water.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN for adult. Child crying indicates breathing/perfusion.",
+        "source": "curated"
+    },
+    {
+        "id": "T363",
+        "description": "Middle-aged man, not walking. He's breathing 26, radial pulse absent, cap refill 5 seconds. He is awake and answers questions appropriately but very lethargic.",
+        "expected_code": "RED",
+        "reasoning": "Absent radial pulse (or cap refill>2) = RED even though following commands.",
+        "source": "curated"
+    },
+    {
+        "id": "T364",
+        "description": "She's lying under a collapsed shelf. I move it off her. She's not breathing. I open airway \u2013 still no breath. No pulse. She's warm.",
+        "expected_code": "BLACK",
+        "reasoning": "Apneic and pulseless after airway maneuver = BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T365",
+        "description": "Child, 5 years old. Sitting up, crying, holding a bleeding finger. Breathing fast from crying, 34/min. Stops crying when distracted. Can walk. Radial pulse present.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Tachypnea due to crying.",
+        "source": "curated"
+    },
+    {
+        "id": "T366",
+        "description": "He's lying in the middle of the road. He's conscious, breathing 22, radial pulse present, cap refill 2 sec. He follows commands to squeeze my hand. He says he can't move his legs. No visible injury.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory (paralyzed), normal vitals, follows commands = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T367",
+        "description": "Elderly man, sitting in a wheelchair that was pushed here. He's alert but very confused, thinks it's 1985. Breathing 20, radial pulse present. He can follow simple command to raise his hand.",
+        "expected_code": "RED",
+        "reasoning": "Confusion = altered mental status. In START, confused patients who cannot follow commands appropriately are RED. He raised hand but disoriented to time, likely cannot follow complex commands reliably. Clinical judgment: RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T368",
+        "description": "She's walking unassisted, but she has a large piece of glass sticking out of her thigh. She's not bleeding heavily. Breathing normal, talking clearly. Alert.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Impaled object does not upgrade.",
+        "source": "curated"
+    },
+    {
+        "id": "T369",
+        "description": "He's lying on his side, groaning. Breathing 14/min, radial pulse present, cap refill 1 sec. He opens his eyes when I rub his sternum and mumbles but doesn't squeeze my hand.",
+        "expected_code": "RED",
+        "reasoning": "Cannot follow commands (no hand squeeze, only mumbling) = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T370",
+        "description": "Young woman, walking but holding her stomach, which is hard and distended. She looks very pale. Breathing 28, radial pulse weak but present. She's alert and says she's pregnant.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN despite concerning abdominal exam. Re-triage immediately if she stops walking.",
+        "source": "curated"
+    },
+    {
+        "id": "T371",
+        "description": "Man, 30s, found behind a wall. He's not breathing after airway check. No pulse. He has a penetrating chest wound.",
+        "expected_code": "BLACK",
+        "reasoning": "Apneic and pulseless = BLACK. Mechanism does not change expectant category.",
+        "source": "curated"
+    },
+    {
+        "id": "T372",
+        "description": "He's sitting on the ground, leaning forward, drooling. He has a broken jaw. Breathing 26 but seems labored, using accessory muscles. Radial pulse present. He can nod to commands but cannot speak. He can't stand due to leg injury.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory, RR<30, perfused, follows commands (nodding) = YELLOW. Labored breathing but rate <30 does not upgrade.",
+        "source": "curated"
+    },
+    {
+        "id": "T373",
+        "description": "She's walking, but she's clearly intoxicated or concussed \u2013 she's laughing inappropriately and can't tell me her address. Breathing normal. No visible injuries.",
+        "expected_code": "RED",
+        "reasoning": "Altered mental status = cannot follow commands appropriately = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T374",
+        "description": "Infant, about 12 months. Lying still, not crying. Breathing 50/min, brachial pulse present. He whimpers when I touch his foot. Doesn't follow commands (age-appropriate). For START pediatric, RR 50 > 30 = RED.",
+        "expected_code": "RED",
+        "reasoning": "Respiratory rate 50 > 30 = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T375",
+        "description": "Elderly man, lying on his back. He's awake, breathing 18, radial pulse present, cap refill 1 sec. He follows commands. He says he can't walk because his hip is broken. He's calm.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory, normal vitals, follows commands = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T376",
+        "description": "He's walking but his eyes are glassy and he's not responding to questions. He just keeps walking slowly. Breathing normal. He has a small bruise on his temple.",
+        "expected_code": "RED",
+        "reasoning": "Altered mental status (non-responsive despite ambulatory) = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T377",
+        "description": "She's lying in the corner, covered in dust. I see no breathing. I open airway \u2013 still no breath. No pulse. She's cold to touch.",
+        "expected_code": "BLACK",
+        "reasoning": "Apneic and pulseless after airway opening = BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T378",
+        "description": "Young man, sitting up, holding a bloody towel to his arm. Breathing 20, radial pulse strong. He follows commands to hold pressure. He says he can walk but is too tired. He stands up when I ask, then sits back down.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory (stood up) = GREEN. Fatigue does not upgrade.",
+        "source": "curated"
+    },
+    {
+        "id": "T379",
+        "description": "Woman, about 50, lying on a plastic sheet. She's unconscious. Breathing 8/min, shallow. Radial pulse absent. No response to pain.",
+        "expected_code": "RED",
+        "reasoning": "Absent radial pulse and bradypnea with unresponsiveness = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T380",
+        "description": "He's walking but dragging his left leg. He says he can't feel it. He has no visible injury. Breathing normal, alert and oriented. He walks with a limp but independently.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Neurologic deficit without respiratory compromise or shock.",
+        "source": "curated"
+    },
+    {
+        "id": "T381",
+        "description": "Child, 9 years old. Not moving. I check breathing \u2013 chest rises about 22 times a minute. Has radial pulse. He opens his eyes when I shout but doesn't speak or move. He doesn't follow commands.",
+        "expected_code": "RED",
+        "reasoning": "Cannot follow commands (unresponsive to verbal command) = RED despite normal vitals.",
+        "source": "curated"
+    },
+    {
+        "id": "T382",
+        "description": "She's sitting on the ground, rocking. She has a severe burn on her leg. Breathing 30 exactly, radial pulse present, cap refill 2 seconds. She follows command to squeeze my hand. She says she can't walk because of the pain.",
+        "expected_code": "RED",
+        "reasoning": "RR = 30 meets START threshold for RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T383",
+        "description": "He's walking but has a nail through his foot. He's hopping on one foot, not using the injured foot. He is alert and cursing loudly. Breathing normal.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory (hopping) = GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T384",
+        "description": "Elderly woman, lying on a stretcher. She was pulled from the rubble. She's awake but very confused, thinks she's at church. Breathing 26, radial pulse present, cap refill 1 sec. She doesn't respond to commands consistently.",
+        "expected_code": "RED",
+        "reasoning": "Confusion and inability to follow commands consistently = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T385",
+        "description": "Man, 20s, lying on his stomach. I roll him \u2013 he's not breathing. I open airway, still no breath. No pulse. He has a large head wound.",
+        "expected_code": "BLACK",
+        "reasoning": "Apneic and pulseless = BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T386",
+        "description": "She's walking but clutching her chest, saying it feels like an elephant sitting on her chest. Breathing 22, radial pulse present. She's pale but alert. She walks slowly.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Chest pain concerning but START triage based on ambulation first.",
+        "source": "curated"
+    },
+    {
+        "id": "T387",
+        "description": "He's lying under a collapsed doorway. He's awake, breathing 18, radial pulse present, cap refill 1 sec. He follows commands to move his arms. He cannot move his legs. He says he's fine otherwise. Cannot walk due to entrapment.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory (trapped), normal vitals, follows commands = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T388",
+        "description": "Young child, maybe 2. He's not crying, lying still. I see his chest moving \u2013 breathing 42/min. Has brachial pulse. He cries when I flick his foot and reaches for me. Does he follow commands? At this age, reaching is purposeful. But RR 42 > 30 = RED.",
+        "expected_code": "RED",
+        "reasoning": "Respiratory rate 42 > 30 = RED. Purposeful movement does not downgrade.",
+        "source": "curated"
+    },
+    {
+        "id": "T389",
+        "description": "She's sitting on the ground, looking around. She has a small laceration on her scalp. Breathing 16, radial pulse present. She's alert and oriented. She says she can walk but doesn't want to leave her friend.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory (can walk) = GREEN. Reluctance does not change category.",
+        "source": "curated"
+    },
+    {
+        "id": "T390",
+        "description": "Man, 40s, lying in a pool of blood from a severed arm. He's unconscious, breathing 28, radial pulse absent. He doesn't respond to pain.",
+        "expected_code": "RED",
+        "reasoning": "Absent radial pulse and unresponsiveness = RED. RR 28 <30 not threshold but shock drives RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T391",
+        "description": "He's walking, but his clothes are soaked with blood from a leg wound. He's walking with a limp. Breathing 24, radial pulse weak, cap refill 3 seconds. He's alert and says he's okay.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Cap refill >2 seconds indicates shock but START green until non-ambulatory. Re-triage immediately.",
+        "source": "curated"
+    },
+    {
+        "id": "T392",
+        "description": "Woman, trapped in a car. She's screaming for help. Breathing 36/min, radial pulse present. She answers questions appropriately. Cannot get out due to crushed legs.",
+        "expected_code": "RED",
+        "reasoning": "RR > 30 = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T393",
+        "description": "Elderly man, lying on a blanket. He's not moving. I don't see breathing. After head tilt, still no breath. No pulse. He's warm but mottled.",
+        "expected_code": "BLACK",
+        "reasoning": "Apneic and pulseless = BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T394",
+        "description": "Teenage girl, sitting up, crying. She has a deformed ankle, can't bear weight. Breathing 22, radial pulse present, cap refill 1 sec. She follows commands to move her fingers. She's alert.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory due to injury, normal vitals, follows commands = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T395",
+        "description": "He's walking slowly, looking dazed. He has a bruise on his forehead. He can tell me his name but not where he is. Breathing normal. He walks without help.",
+        "expected_code": "RED",
+        "reasoning": "Confusion/disorientation = altered mental status = RED despite ambulatory.",
+        "source": "curated"
+    },
+    {
+        "id": "T396",
+        "description": "Infant, not crying, lying in debris. I see abdominal breathing at 48/min. Brachial pulse present. He doesn't respond to my voice but cries to pain. Crying is purposeful. RR 48 > 30 = RED.",
+        "expected_code": "RED",
+        "reasoning": "RR > 30 = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T397",
+        "description": "She's sitting on the ground, holding her side. She says she was stabbed. Breathing 20, radial pulse present. She's alert and follows commands. She says she can walk but feels dizzy. She stands up and takes a few steps then sits down.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory (stood and walked) = GREEN. Re-triage if she cannot continue.",
+        "source": "curated"
+    },
+    {
+        "id": "T398",
+        "description": "Man, about 55, lying on his side. He's awake but not moving. Breathing 14, radial pulse present, cap refill 2 seconds. He follows command to open his mouth. He says his back hurts and he can't move his legs. No visible injury.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory (paralyzed), normal vitals, follows commands = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T399",
+        "description": "She's walking, but she has an open skull fracture with brain tissue visible. She's walking and talking normally. Breathing 18, radial pulse present. She's alert and oriented.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Devastating injury but START triage is physiologic; she walks, breathes, perfuses, follows commands.",
+        "source": "curated"
+    },
+    {
+        "id": "T400",
+        "description": "He's lying in a ditch, moaning. Breathing 8/min, shallow. Radial pulse present but very weak. He withdraws his hand when I pinch it. Withdrawal = purposeful movement = follows commands. But bradypnea with weak pulse = RED by clinical judgment.",
+        "expected_code": "RED",
+        "reasoning": "Severe bradypnea (RR 8) indicates respiratory failure = RED despite purposeful movement.",
+        "source": "curated"
+    },
+    {
+        "id": "T401",
+        "description": "Child, 10 years old. Not breathing after head tilt. Gave two breaths \u2013 chest rises. Now breathing 22/min on own. Has radial pulse. Follows command to give thumbs up.",
+        "expected_code": "RED",
+        "reasoning": "Required rescue breaths = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T402",
+        "description": "She's walking, but she's holding her abdomen which is distended and tense. She looks very pale. Breathing 26, radial pulse weak but present. She's alert but says she feels like she's going to faint. She keeps walking.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN despite signs of shock. Immediate re-triage needed.",
+        "source": "curated"
+    },
+    {
+        "id": "T403",
+        "description": "Elderly woman, lying on the ground, eyes closed. Breathing 30, radial pulse present, cap refill 2 sec. She opens her eyes when I call her name but doesn't speak or move. She doesn't follow commands.",
+        "expected_code": "RED",
+        "reasoning": "RR = 30 = RED. Also cannot follow commands.",
+        "source": "curated"
+    },
+    {
+        "id": "T404",
+        "description": "He's walking, but he has a deep cut on his neck. Bleeding is controlled with a cloth. Breathing 20, radial pulse strong. He's alert and talking. He walks normally.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Neck injury with controlled bleeding does not upgrade.",
+        "source": "curated"
+    },
+    {
+        "id": "T405",
+        "description": "Man, 30s, lying on a stretcher from another team. He's unconscious. Breathing 18, radial pulse present. He doesn't respond to pain. No obvious external bleeding.",
+        "expected_code": "RED",
+        "reasoning": "Unresponsive = cannot follow commands = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T406",
+        "description": "She's sitting on the ground, leaning against a wall. She has a deformed femur. Breathing 28, radial pulse present, cap refill 2 sec. She follows commands to squeeze my hand. She's alert but in pain.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory, RR<30, perfused (cap refill 2 sec borderline but acceptable), follows commands = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T407",
+        "description": "Young man, walking but his arm is dislocated. He's holding it. Breathing normal. He's alert and oriented. He walks with a purpose.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T408",
+        "description": "Woman, about 70, lying in rubble. I don't see breathing. I open airway \u2013 still no breath. I feel a faint carotid pulse at 40/min. She's warm.",
+        "expected_code": "BLACK",
+        "reasoning": "Apneic after airway maneuver = BLACK. Pulse does not override.",
+        "source": "curated"
+    },
+    {
+        "id": "T409",
+        "description": "He's lying on his back, eyes open but not tracking. Breathing 22, radial pulse present, cap refill 4 seconds. He doesn't respond to any stimulus.",
+        "expected_code": "RED",
+        "reasoning": "Cap refill >2 seconds = RED. Also unresponsive.",
+        "source": "curated"
+    },
+    {
+        "id": "T410",
+        "description": "She's walking but holding her chest and breathing fast \u2013 32/min. She has a bruise on her ribs. She's alert and says she can walk. Radial pulse present.",
+        "expected_code": "RED",
+        "reasoning": "RR > 30 = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T411",
+        "description": "Child, 6 years old, sitting up and crying. He has a broken arm. Breathing 24, radial pulse present. He follows command to hug his mother. He can walk but is scared. Mother is carrying him.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory (can walk when encouraged) = GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T412",
+        "description": "Man, 40s, lying on a stretcher. He's awake, breathing 26, radial pulse absent, cap refill 4 seconds. He follows commands to squeeze my hand. He says he's fine.",
+        "expected_code": "RED",
+        "reasoning": "Absent radial pulse = shock = RED despite following commands.",
+        "source": "curated"
+    },
+    {
+        "id": "T413",
+        "description": "She's walking but has a deep laceration on her forearm, bleeding heavily. She's holding pressure. Breathing 24, radial pulse present. She's alert and walking quickly.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T414",
+        "description": "Elderly man, lying in the corner. He's not moving. I see no breathing. After head tilt, still no breath. No pulse. He's cold and stiff.",
+        "expected_code": "BLACK",
+        "reasoning": "Apneic and pulseless = BLACK. Rigor confirms.",
+        "source": "curated"
+    },
+    {
+        "id": "T415",
+        "description": "Teenager, lying on his side. He's breathing 18, radial pulse present, cap refill 1 sec. He's unconscious, no response to pain. He has a deformed skull.",
+        "expected_code": "RED",
+        "reasoning": "Unresponsive = cannot follow commands = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T416",
+        "description": "She's sitting on the ground, crying hysterically. She has no visible injuries. Breathing 30 (due to crying), radial pulse present. She follows commands to take deep breaths. She can stand and walk but is too upset.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory (can walk) = GREEN. Tachypnea due to emotional distress.",
+        "source": "curated"
+    },
+    {
+        "id": "T417",
+        "description": "He's walking but has a severe facial injury with swelling. He's having trouble speaking but can say his name. Breathing 20, radial pulse present. He's alert. He walks without help.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN. Airway is patent (talking).",
+        "source": "curated"
+    },
+    {
+        "id": "T418",
+        "description": "Woman, trapped under a fallen tree. She's awake, breathing 28, radial pulse present, cap refill 2 sec. She follows commands to wave. She's calm. Cannot move due to weight on legs.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory (trapped), normal vitals, follows commands = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T419",
+        "description": "Man, about 60, lying on his back. He's awake but confused, doesn't know his name. Breathing 16, radial pulse present, cap refill 1 sec. He follows command to raise his hand.",
+        "expected_code": "RED",
+        "reasoning": "Confusion (disoriented to self) = altered mental status = RED despite following a simple command.",
+        "source": "curated"
+    },
+    {
+        "id": "T420",
+        "description": "Child, 4 years old, walking but crying and holding his ear. No visible trauma. Breathing normal. He's alert and follows commands to point to his nose. He walks independently.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T421",
+        "description": "She's lying in a pool of vomit. She's not moving. I see chest rise at 24/min. Radial pulse present. She gags when I suction her mouth but doesn't follow commands. She has a strong smell of alcohol.",
+        "expected_code": "RED",
+        "reasoning": "Cannot follow commands (gagging is reflex) = RED. Airway protection also concern.",
+        "source": "curated"
+    },
+    {
+        "id": "T422",
+        "description": "He's walking but with a strange gait, like he's drunk. He has a small cut on his forehead. He can tell me his name but says the year is 1999. Breathing normal.",
+        "expected_code": "RED",
+        "reasoning": "Disorientation to time = altered mental status = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T423",
+        "description": "Infant, about 8 months. Lying still, not crying. Breathing 36/min, brachial pulse present. He cries when I touch his foot softly. He doesn't follow commands. RR 36 > 30 = RED.",
+        "expected_code": "RED",
+        "reasoning": "RR > 30 = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T424",
+        "description": "She's sitting on the ground, holding a bloody towel to her abdomen. She's very pale and sweaty. Breathing 28, radial pulse weak but present. She follows commands to hold pressure. She says she can't walk because she's too weak.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory, RR<30, weak pulse but present = still perfused. Follows commands = YELLOW. However, if pulse becomes absent, would be RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T425",
+        "description": "Elderly man, lying on a blanket. He's not breathing after airway check. No pulse. He has a do not resuscitate bracelet, but START triage doesn't consider that. BLACK.",
+        "expected_code": "BLACK",
+        "reasoning": "Apneic and pulseless = BLACK regardless of DNR.",
+        "source": "curated"
+    },
+    {
+        "id": "T426",
+        "description": "He's walking, but he's muttering to himself and doesn't respond when I call out. He has no visible injuries. Breathing normal. He walks past me without acknowledging.",
+        "expected_code": "RED",
+        "reasoning": "Altered mental status (non-responsive) = RED despite ambulatory.",
+        "source": "curated"
+    },
+    {
+        "id": "T427",
+        "description": "Young woman, lying on her side. She's awake, breathing 22, radial pulse present, cap refill 2 sec. She follows commands to move her foot. She says her neck hurts and she can't move. No obvious injury.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory due to possible spinal injury, normal vitals, follows commands = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T428",
+        "description": "Man, 50s, sitting against a wall. He's sweating profusely, clutching his chest. Breathing 30, radial pulse present but irregular. He follows commands to take a deep breath. He says he can't stand because of dizziness.",
+        "expected_code": "RED",
+        "reasoning": "RR = 30 = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T429",
+        "description": "She's walking but has a deep cut on her palm, bleeding. She's holding it up. Breathing normal, talking fine. Alert and oriented.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T430",
+        "description": "Child, 12 years old. Not moving. I see chest rise at 26/min. Radial pulse present. He opens his eyes when I shout but then closes them. He doesn't respond to 'squeeze my hand'. He moans when I pinch his arm.",
+        "expected_code": "RED",
+        "reasoning": "Cannot follow commands (moaning only) = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T431",
+        "description": "He's lying in the rubble, only his head visible. He's awake, breathing 18, radial pulse present (arm free). He follows commands to blink twice. He says he's trapped but feels fine. Cannot walk due to entrapment.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory (trapped), normal vitals, follows commands = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T432",
+        "description": "Elderly woman, sitting in a chair that was pushed here. She's very confused, thinks she's at a bus stop. Breathing 22, radial pulse present. She follows command to raise her hand but cannot tell me her name.",
+        "expected_code": "RED",
+        "reasoning": "Confusion = altered mental status = RED.",
+        "source": "curated"
+    },
+    {
+        "id": "T433",
+        "description": "She's walking but has a large piece of metal embedded in her shoulder. She's not bleeding much. Breathing 24, radial pulse strong. She's alert and walking steadily. She says it hurts but she's fine.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T434",
+        "description": "Man, 30s, lying face down. I roll him \u2013 he's not breathing. I open airway, still no breath. No pulse. He has a traumatic amputation of both legs.",
+        "expected_code": "BLACK",
+        "reasoning": "Apneic and pulseless = BLACK.",
+        "source": "curated"
+    },
+    {
+        "id": "T435",
+        "description": "He's walking but with a severe limp, using a piece of rebar as a crutch. He has a swollen, deformed knee. Breathing normal, alert and oriented. He can walk independently (with aid).",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory (with aid) = GREEN.",
+        "source": "curated"
+    },
+    {
+        "id": "T436",
+        "description": "Teenage girl, lying on a mattress. She's awake, breathing 28, radial pulse present, cap refill 2 sec. She follows commands to wiggle her toes. She says she can't walk because her back hurts. No deformity.",
+        "expected_code": "YELLOW",
+        "reasoning": "Non-ambulatory, RR<30, perfused, follows commands = YELLOW.",
+        "source": "curated"
+    },
+    {
+        "id": "T437",
+        "description": "Adult man scraped his knee in a bike crash. He\u2019s breathing fine and is slowly walking while talking to rescuers.",
+        "expected_code": "GREEN",
+        "reasoning": "Walking wounded (ambulatory) = GREEN",
+        "source": "curated"
+    },
+    {
+        "id": "T438",
+        "description": "Adult woman with bruised chest after a crash. She\u2019s breathing normally but says she can\u2019t stand up yet.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable breathing but non-ambulatory = YELLOW",
+        "source": "curated"
+    },
+    {
+        "id": "T439",
+        "description": "Young construction worker with an injured leg lies on the ground. He\u2019s breathing okay and alert, but he says he can\u2019t move the leg.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable vitals but leg injury prevents ambulation = YELLOW",
+        "source": "curated"
+    },
+    {
+        "id": "T440",
+        "description": "Small boy with a scrape on his forehead, crying but walking toward his mother and breathing fine.",
+        "expected_code": "GREEN",
+        "reasoning": "Walking wounded = GREEN",
+        "source": "curated"
+    },
+    {
+        "id": "T441",
+        "description": "Man trapped under debris, breathing 18, pulse present and he\u2019s awake, but he screams in pain when trying to move his legs.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable vitals, severe leg injury, delayed care = YELLOW",
+        "source": "curated"
+    },
+    {
+        "id": "T442",
+        "description": "Teenage boy with a stab wound to his abdomen. He\u2019s breathing 26 and moaning, and his pulse is very faint.",
+        "expected_code": "RED",
+        "reasoning": "Weak pulse (poor perfusion) = RED",
+        "source": "curated"
+    },
+    {
+        "id": "T443",
+        "description": "Elderly woman hit on the chest, she\u2019s gasping 32 breaths a minute and not answering questions.",
+        "expected_code": "RED",
+        "reasoning": "RR>30 and altered mental status = RED",
+        "source": "curated"
+    },
+    {
+        "id": "T444",
+        "description": "Man crushed under a vehicle, not breathing at all. Even after tilting his head, he\u2019s still not breathing.",
+        "expected_code": "BLACK",
+        "reasoning": "No breathing after airway reposition = BLACK",
+        "source": "curated"
+    },
+    {
+        "id": "T445",
+        "description": "Adult man with burns over his torso is breathing very fast, about 34 breaths a minute, and looks confused.",
+        "expected_code": "RED",
+        "reasoning": "RR>30 (rapid breathing) = RED",
+        "source": "curated"
+    },
+    {
+        "id": "T446",
+        "description": "Older man with bruised back from falling debris, walking around and talking despite pain.",
+        "expected_code": "GREEN",
+        "reasoning": "Stable and ambulatory = GREEN",
+        "source": "curated"
+    },
+    {
+        "id": "T447",
+        "description": "5-year-old girl with a cut on her ear. She\u2019s breathing 20 and answering questions, but she can\u2019t stand up due to dizziness.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable vitals but non-ambulatory = YELLOW",
+        "source": "curated"
+    },
+    {
+        "id": "T448",
+        "description": "Woman with a bandaged arm after a minor fire injury. She\u2019s breathing normally and walking around calmly.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory patient = GREEN",
+        "source": "curated"
+    },
+    {
+        "id": "T449",
+        "description": "Little child pulled from a pool, not breathing even after we tilted their head.",
+        "expected_code": "BLACK",
+        "reasoning": "No breathing after airway reposition = BLACK",
+        "source": "curated"
+    },
+    {
+        "id": "T450",
+        "description": "Woman fell from a height, breathing 39 times a minute and answering questions only partially.",
+        "expected_code": "RED",
+        "reasoning": "RR>30 = RED",
+        "source": "curated"
+    },
+    {
+        "id": "T451",
+        "description": "Teenage boy with a shoulder wound, breathing 22 and says he\u2019s feeling dizzy, but he answers normally.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable breathing and alert (minor dizziness) = YELLOW",
+        "source": "curated"
+    },
+    {
+        "id": "T452",
+        "description": "Man with cuts on his face, but he\u2019s running away from the accident scene saying he\u2019s fine.",
+        "expected_code": "GREEN",
+        "reasoning": "Stable and ambulatory = GREEN",
+        "source": "curated"
+    },
+    {
+        "id": "T453",
+        "description": "Man got shocked by electricity, fell down and isn\u2019t breathing even after we tilted his head.",
+        "expected_code": "BLACK",
+        "reasoning": "No breathing after airway reposition = BLACK",
+        "source": "curated"
+    },
+    {
+        "id": "T454",
+        "description": "Child knocked over by a car, breathing 32 times a minute and confused.",
+        "expected_code": "RED",
+        "reasoning": "RR>30 = RED",
+        "source": "curated"
+    },
+    {
+        "id": "T455",
+        "description": "Woman injured in a car crash, holding her arm, breathing 20, pulse normal, alert and speaking.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable vitals and alert with limb injury = YELLOW",
+        "source": "curated"
+    },
+    {
+        "id": "T456",
+        "description": "Man with a bleeding knee from a fall, but he\u2019s standing and telling the responders he\u2019s okay.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory patient = GREEN",
+        "source": "curated"
+    },
+    {
+        "id": "T457",
+        "description": "Man was hit on the head, he\u2019s breathing fine but not following what we say.",
+        "expected_code": "RED",
+        "reasoning": "Not following commands = RED",
+        "source": "curated"
+    },
+    {
+        "id": "T458",
+        "description": "Elderly woman fell on pavement, breathing fine and pulse strong, groaning in hip pain and cannot stand.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable vitals but injured hip (non-ambulatory) = YELLOW",
+        "source": "curated"
+    },
+    {
+        "id": "T459",
+        "description": "Man with a small cut on his leg, breathing fine and walking while talking with rescuers.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN",
+        "source": "curated"
+    },
+    {
+        "id": "T460",
+        "description": "Young boy under rubble, not breathing at all even after we tilted his head.",
+        "expected_code": "BLACK",
+        "reasoning": "No breathing after airway reposition = BLACK",
+        "source": "curated"
+    },
+    {
+        "id": "T461",
+        "description": "Woman inhaled smoke from a fire, coughing and breathing very fast (about 38 breaths a minute).",
+        "expected_code": "RED",
+        "reasoning": "RR>30 = RED",
+        "source": "curated"
+    },
+    {
+        "id": "T462",
+        "description": "Worker with a leg wound, breathing 22, pulse present, conscious but sitting down quietly.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable breathing and alert = YELLOW",
+        "source": "curated"
+    },
+    {
+        "id": "T463",
+        "description": "Little girl with knee abrasions, breathing normally, walking with her doll.",
+        "expected_code": "GREEN",
+        "reasoning": "Walking wounded = GREEN",
+        "source": "curated"
+    },
+    {
+        "id": "T464",
+        "description": "Man lying after an explosion, we tilted his head and he still isn\u2019t breathing.",
+        "expected_code": "BLACK",
+        "reasoning": "No breathing after airway reposition = BLACK",
+        "source": "curated"
+    },
+    {
+        "id": "T465",
+        "description": "Young man fell from a scaffold, breathing 33 breaths a minute and looks panicked.",
+        "expected_code": "RED",
+        "reasoning": "RR>30 = RED",
+        "source": "curated"
+    },
+    {
+        "id": "T466",
+        "description": "Teenager with a bloody nose after a knock, breathing 18, pulse strong, alert and talking.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable vitals and alert = YELLOW",
+        "source": "curated"
+    },
+    {
+        "id": "T467",
+        "description": "Man with a cut lip and bruises, walking and joking with friends.",
+        "expected_code": "GREEN",
+        "reasoning": "Stable and ambulatory = GREEN",
+        "source": "curated"
+    },
+    {
+        "id": "T468",
+        "description": "Teen boy bleeding from arm, breathing 28, but he\u2019s disoriented and can\u2019t answer simple questions.",
+        "expected_code": "RED",
+        "reasoning": "Not following commands = RED",
+        "source": "curated"
+    },
+    {
+        "id": "T469",
+        "description": "Worker complaining of lower back pain after a collapse, breathing 16, pulse present, awake but says he can\u2019t get up.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable vitals, no immediate threat = YELLOW",
+        "source": "curated"
+    },
+    {
+        "id": "T470",
+        "description": "Person with a small bandage on hand, walking toward the medics waving.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN",
+        "source": "curated"
+    },
+    {
+        "id": "T471",
+        "description": "Man pinned under a truck, not breathing at all even after opening his airway.",
+        "expected_code": "BLACK",
+        "reasoning": "No breathing after airway reposition = BLACK",
+        "source": "curated"
+    },
+    {
+        "id": "T472",
+        "description": "Child screaming and breathing fast at about 36 times a minute.",
+        "expected_code": "RED",
+        "reasoning": "RR>30 = RED",
+        "source": "curated"
+    },
+    {
+        "id": "T473",
+        "description": "Woman splashed with chemical on her leg, breathing 20, pulse present, conscious and calling for help.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable vitals = YELLOW",
+        "source": "curated"
+    },
+    {
+        "id": "T474",
+        "description": "Elderly man with scrapes on his hands, walking with others and waving for attention.",
+        "expected_code": "GREEN",
+        "reasoning": "Walking wounded = GREEN",
+        "source": "curated"
+    },
+    {
+        "id": "T475",
+        "description": "Adult male talking nonsense, breathing 18, pulse present.",
+        "expected_code": "RED",
+        "reasoning": "Not following commands = RED",
+        "source": "curated"
+    },
+    {
+        "id": "T476",
+        "description": "Man with a mangled forearm, bleeding heavily, breathing 22, pulse weak.",
+        "expected_code": "RED",
+        "reasoning": "Severe hemorrhage (poor perfusion) = RED",
+        "source": "curated"
+    },
+    {
+        "id": "T477",
+        "description": "Woman looks pale, breathing normally but I can\u2019t find her pulse on her wrist.",
+        "expected_code": "RED",
+        "reasoning": "Absent radial pulse = RED",
+        "source": "curated"
+    },
+    {
+        "id": "T478",
+        "description": "Man with a twisted ankle, breathing fine and talking, but he\u2019s limping and refuses to walk.",
+        "expected_code": "GREEN",
+        "reasoning": "Stable and ambulatory (even if limping) = GREEN",
+        "source": "curated"
+    },
+    {
+        "id": "T479",
+        "description": "Teen girl with a head cut, breathing 22, pulse present, but she seems dazed and keeps closing her eyes.",
+        "expected_code": "RED",
+        "reasoning": "Altered mental status = RED",
+        "source": "curated"
+    },
+    {
+        "id": "T480",
+        "description": "Man complaining of back pain after collapse, breathing 18, pulse present, awake but says he can\u2019t get up.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable vitals but non-ambulatory = YELLOW",
+        "source": "curated"
+    },
+    {
+        "id": "T481",
+        "description": "Worker with a small burnt hand is walking and laughing, telling everyone he\u2019s fine.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory and stable = GREEN",
+        "source": "curated"
+    },
+    {
+        "id": "T482",
+        "description": "Man with chest bruises from blast, breathing 18, pulse present and alert, saying he feels chest pain.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable vitals and alert = YELLOW",
+        "source": "curated"
+    },
+    {
+        "id": "T483",
+        "description": "Little boy after falling off a bike is breathing 20 but doesn\u2019t answer when I call his name or give commands.",
+        "expected_code": "RED",
+        "reasoning": "Not following commands = RED",
+        "source": "curated"
+    },
+    {
+        "id": "T484",
+        "description": "Woman trapped under rubble, we opened her airway and she still isn\u2019t breathing.",
+        "expected_code": "BLACK",
+        "reasoning": "No breathing after airway reposition = BLACK",
+        "source": "curated"
+    },
+    {
+        "id": "T485",
+        "description": "Woman with a scraped knee is already walking to safety on her own.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN",
+        "source": "curated"
+    },
+    {
+        "id": "T486",
+        "description": "Worker pinned by machinery, breathing 18, pulse present, alert, but he says he can\u2019t move his legs.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable vitals but spinal injury likely = YELLOW",
+        "source": "curated"
+    },
+    {
+        "id": "T487",
+        "description": "Teen sprayed with pepper, gasping at 35 breaths a minute and can't answer me properly.",
+        "expected_code": "RED",
+        "reasoning": "RR>30 = RED",
+        "source": "curated"
+    },
+    {
+        "id": "T488",
+        "description": "Man with a twisted ankle from a fall, breathing 18, pulse present, alert but won\u2019t try to stand.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable vitals but cannot ambulate = YELLOW",
+        "source": "curated"
+    },
+    {
+        "id": "T489",
+        "description": "Man with a small cut on his arm, walking around with his buddies.",
+        "expected_code": "GREEN",
+        "reasoning": "Ambulatory = GREEN",
+        "source": "curated"
+    },
+    {
+        "id": "T490",
+        "description": "Pregnant woman with bruised ribs after collapse, breathing 18, conscious and normal pulse, lying down because of pain.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable vitals but non-ambulatory = YELLOW",
+        "source": "curated"
+    },
+    {
+        "id": "T491",
+        "description": "Elderly man acting confused after a head injury, breathing 20, pulse present, can\u2019t answer simple questions.",
+        "expected_code": "RED",
+        "reasoning": "Altered mental status = RED",
+        "source": "curated"
+    },
+    {
+        "id": "T492",
+        "description": "Adult male lying on the ground, not breathing at all even after we opened his airway.",
+        "expected_code": "BLACK",
+        "reasoning": "No breathing after airway reposition = BLACK",
+        "source": "curated"
+    },
+    {
+        "id": "T493",
+        "description": "Jogger with small bruises on arms and legs, breathing normally and jogging in place.",
+        "expected_code": "GREEN",
+        "reasoning": "Stable and ambulatory = GREEN",
+        "source": "curated"
+    },
+    {
+        "id": "T494",
+        "description": "Teen girl with a fractured leg, breathing 18, pulse fine, alert but refusing to try standing.",
+        "expected_code": "YELLOW",
+        "reasoning": "Stable vitals but non-ambulatory = YELLOW",
+        "source": "curated"
+    },
+    {
+        "id": "T495",
+        "description": "Toddler with a concussion, breathing 18, pulse present, but he just stares blankly and doesn\u2019t respond to questions.",
+        "expected_code": "RED",
+        "reasoning": "Not following commands (unresponsive) = RED",
+        "source": "curated"
+    },
+    {
+        "id": "T496",
+        "description": "Adult rescued from a house fire, breathing 40 and confused.",
+        "expected_code": "RED",
+        "reasoning": "RR>30 = RED",
+        "source": "curated"
+    }
+]
