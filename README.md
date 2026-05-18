@@ -290,9 +290,9 @@ No `INTERNET` permission. No data leaves the device during triage.
 | Name | Expertise | Contributions |
 | --- | --- | --- |
 | **Riya Sharma** | AI / ML Engineer | Dataset design, QLoRA fine-tuning, model evaluation, LiteRT conversion pipeline |
-| **Priyanshu Arya** | AI / ML Expert + Android Engineer | Data collection, fine-tuning pipeline, model integration, Android app (Vibe Coded) — speech pipeline, UI, SMS system, inference engine |
+| **Priyanshu Arya** | AI / ML Engineer | Data collection, fine-tuning pipeline, model integration, Android app (Vibe Coded) — speech pipeline, UI, SMS system, inference engine |
 
-> **Vibe Coding:** The entire Android application was designed and built by Priyanshu using AI-assisted development — rapidly prototyping, iterating, and shipping production-grade Kotlin code with the help of LLM tooling throughout the build process.
+> **Vibe Coding:** The entire Android application was designed and built by Priyanshu using AI-assisted development — rapidly prototping, iterating, and shipping production-grade Kotlin code with the help of LLM tooling throughout the build process.
 
 ---
 
